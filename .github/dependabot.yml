@@ -1,0 +1,25 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    open-pull-requests-limit: 2
+    directory: "/apps/frontend"
+    schedule:
+      interval: "daily"
+      time: "08:00"
+      timezone: "Europe/Paris"
+    target-branch: "development"
+    commit-message:
+      include: scope
+    versioning-strategy: "increase"
+  
+  - package-ecosystem: "composer"
+    open-pull-requests-limit: 2
+    directory: "/apps/backend"
+    schedule:
+      interval: "daily"
+      time: "08:00"
+      timezone: "Europe/Paris"
+    target-branch: "development"
+    commit-message:
+      include: scope
+    versioning-strategy: "increase"

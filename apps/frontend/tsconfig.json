@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
+    "module": "esnext",
+    "target": "esnext",
+    "allowJs": true,
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "baseUrl": "./src",
+    "forceConsistentCasingInFileNames": false,
+    "resolveJsonModule": true,
+    "paths": {
+      "components": ["components"],
+      "hooks": ["hooks"],
+      "styles": ["styles"]
+    }
+  },
+  "include": ["./src", "test/spec/Main.test.tsx"]
+}

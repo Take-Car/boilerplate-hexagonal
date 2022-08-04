@@ -1,0 +1,28 @@
+{
+	"folders": [
+		{
+			"name": "root",
+			"path": "."
+		},
+		{
+			"name": "backend",
+			"path": "apps/backend"
+		},
+		{
+			"name": "frontend",
+			"path": "apps/frontend"
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/.git": true,
+			"**/.svn": true,
+			"**/.hg": true,
+			"**/CVS": true,
+			"**/.DS_Store": true,
+			"**/Thumbs.db": true,
+			"apps/": true
+		},
+		"terminal.integrated.cwd": "."
+	}
+}

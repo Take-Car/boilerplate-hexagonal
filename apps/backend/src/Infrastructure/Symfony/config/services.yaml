@@ -1,0 +1,16 @@
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+    
+    Application\:
+        resource: "../../../Application/"
+
+    Infrastructure\:
+        resource: '../../'
+        exclude:
+            - '../Kernel.php'
+            - './bundles.php'
+            - './preload.php'
