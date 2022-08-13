@@ -1,8 +1,0 @@
-hello:
-    path: /hello
-    controller: Application\Controller\Hello\Get
-    methods: GET
-
-kernel:
-    resource: ../Kernel.php
-    type: annotation

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Infrastructure\Symfony;
 
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -13,6 +11,6 @@ class Kernel extends BaseKernel
 
     private function getConfigDir(): string
     {
-        return $this->getProjectDir().'/src/Infrastructure/Symfony/config';
+        return sprintf('%s/src/Infrastructure/Symfony/config', $this->getProjectDir());
     }
 }
