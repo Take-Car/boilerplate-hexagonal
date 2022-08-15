@@ -13,6 +13,7 @@
         "symfony/flex": "^2",
         "symfony/framework-bundle": "6.1.*",
         "symfony/runtime": "6.1.*",
+        "symfony/uid": "6.0.*",
         "symfony/yaml": "6.1.*"
     },
     "config": {
@@ -31,6 +32,7 @@
     "autoload": {
         "psr-4": {
             "Application\\": "src/Application",
+            "Cache\\GraphQL\\__DEFINITIONS__\\": "var/GraphQL",
             "Domain\\": "src/Domain",
             "Infrastructure\\": "src/Infrastructure"
         }
@@ -64,5 +66,8 @@
             "allow-contrib": false,
             "require": "6.1.*"
         }
+    },
+    "require-dev": {
+        "qossmic/deptrac-shim": "^0.24.0"
     }
 }

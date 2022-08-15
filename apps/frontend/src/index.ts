@@ -1,7 +1,7 @@
 import { createElement } from 'react'
 import { render } from 'react-dom'
-import Main from 'components/Main'
+import App from 'components/App'
 
 import 'styles/index.scss'
 
-render(createElement(Main), document.getElementById('root'))
+render(createElement(App), document.getElementById('root'))

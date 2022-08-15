@@ -1,0 +1,12 @@
+query TodoLists {
+  todoLists {
+    id
+    title
+    length
+    todos {
+      id
+      task
+      isDone
+    }
+  }
+}

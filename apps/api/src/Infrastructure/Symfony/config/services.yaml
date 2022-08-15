@@ -4,8 +4,7 @@ services:
     _defaults:
         autowire: true
         autoconfigure: true
-
-    # Namespace:
-    #     resource: 'path'
-    #     exclude:
-    #         - 'path'
+    
+    Application\GraphQL\Resolver\:
+        public: true
+        resource: '%kernel.project_dir%/src/Application/GraphQL/Resolver'

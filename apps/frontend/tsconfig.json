@@ -14,7 +14,9 @@
       "components": ["components"],
       "hooks": ["hooks"],
       "styles": ["styles"]
-    }
+    },
+    "typeRoots": ["node_modules/@types", "src/@types"]
   },
-  "include": ["./src", "test/spec/Main.test.tsx"]
+  "include": ["./src", "test/spec/Main.test.tsx"],
+  "files": ["src/@types/graphql.d.ts"],
 }

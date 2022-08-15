@@ -11,7 +11,7 @@ const config = {
   },
   devServer: {
     open: true,
-    allowedHosts: 'all' ,
+    allowedHosts: 'all',
     port: 80
   },
   plugins: [
@@ -48,6 +48,11 @@ const config = {
         test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
         type: 'asset',
       },
+      {
+        test: /\.gql$/,
+        exclude: /node_modules/,
+        loader: 'graphql-tag/loader'
+      }
     ],
   },
   resolve: {
@@ -58,7 +63,7 @@ const config = {
       styles: path.resolve(__dirname, 'src/styles/'),
       hooks: path.resolve(__dirname, 'src/hooks/')
     },
-    
+
   },
 }
 

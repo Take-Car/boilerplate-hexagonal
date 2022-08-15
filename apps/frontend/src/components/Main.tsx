@@ -1,19 +1,19 @@
-import useFetch from 'hooks/useFetch'
-import { StrictMode, useState } from 'react'
+import { useTodoListsQuery } from 'hooks/graphql'
+import { FC } from 'react'
+import TodoList from './TodoList/TodoList'
 
-export default function Main() {
-  const [msg, setMsg] = useState()
+const Main: FC = () => {
+  const { data, loading, error } = useTodoListsQuery()
 
-  const fetch = useFetch('hello', 'get')
+  if (loading) return <>Loading...</>
 
-  fetch()
-    .then(({ data }: any) => {
-      setMsg(data.payload)
-    })
-  
-  return (
-    <StrictMode>
-      <p>{msg}</p>
-    </StrictMode>
-  )
+  if (error) {
+    console.error(error)
+
+    return null
+  }
+
+  return <TodoList todoLists={data?.todoLists} />
 }
+
+export default Main

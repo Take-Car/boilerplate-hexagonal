@@ -3,6 +3,11 @@ install:
 	mkcert -cert-file certs/local-cert.pem -key-file certs/local-key.pem "app.localhost" "*.app.localhost" "domain.local" "*.domain.local"
 	docker compose build
 
+.PHONY: compile
+compile:
+	docker compose run --rm php console graphql:compile
+	docker compose run --rm frontend yarn graphql:generate
+
 .PHONY: jest
 jest:
 	docker compose run --rm frontend yarn jest test/spec
