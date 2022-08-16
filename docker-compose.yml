@@ -52,12 +52,12 @@ services:
     build:
       context: ./docker/php
       target: dev
-    env_file: ./apps/api/.env
+    env_file: .env
     volumes:
       - ./apps/api:/app:rw
   
   database:
-    image: mysql:8.0.29
+    image: mysql:${MYSQL_VERSION}
     command: --default-authentication-plugin=mysql_native_password
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
