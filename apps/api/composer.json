@@ -9,11 +9,10 @@
         "ext-iconv": "*",
         "overblog/graphql-bundle": "^0.15.1",
         "symfony/console": "6.1.*",
-        "symfony/dotenv": "6.1.*",
         "symfony/flex": "^2",
         "symfony/framework-bundle": "6.1.*",
         "symfony/runtime": "6.1.*",
-        "symfony/uid": "6.0.*",
+        "symfony/uid": "6.1.*",
         "symfony/yaml": "6.1.*"
     },
     "config": {
@@ -68,6 +67,8 @@
         }
     },
     "require-dev": {
-        "qossmic/deptrac-shim": "^0.24.0"
+        "qossmic/deptrac-shim": "^0.24.0",
+        "symfony/stopwatch": "6.1.*",
+        "symfony/web-profiler-bundle": "6.1.*"
     }
 }
