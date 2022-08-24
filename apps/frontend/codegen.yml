@@ -1,6 +1,6 @@
 overwrite: true
 schema: "http://nginx/graphql/"
-documents: "src/**/*.gql"
+documents: "src/graphql/*.gql"
 generates:
   src/hooks/graphql.ts:
     plugins:
