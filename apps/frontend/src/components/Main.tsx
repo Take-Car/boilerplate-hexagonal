@@ -1,4 +1,4 @@
-import { useTodoListsQuery } from 'hooks/graphql'
+import { useTodoListsQuery } from 'graphql'
 import { FC } from 'react'
 import TodoList from './TodoList'
 

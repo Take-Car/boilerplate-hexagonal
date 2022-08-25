@@ -30,7 +30,7 @@
         }
     },
     "ignorePatterns": [
-        "src/hooks/graphql.ts"
+        "src/graphql/index.ts"
     ],
     "rules": {
         "indent": ["error", 2],
@@ -48,7 +48,7 @@
         "object-curly-newline": ["error",{ "multiline": true }],
         "array-bracket-newline": ["error", { "multiline": true }],
         "eqeqeq": "error",
-        "max-nested-callbacks": ["error", 1],
+        "max-nested-callbacks": ["error", 2],
         "no-alert": "error",
         "no-bitwise": "error",
         "no-console": "warn",

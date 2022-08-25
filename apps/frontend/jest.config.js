@@ -8,5 +8,8 @@ module.exports = {
     '^components(.*)$': '<rootDir>/src/components$1',
     '^styles(.*)$': '<rootDir>/src/styles$1',
     '^hooks(.*)$': '<rootDir>/src/hooks$1'
-  }
-};
+  },
+  testMatch: [
+    '**/*.test.(ts|tsx)'
+  ]
+}

@@ -7,6 +7,21 @@
   "author": "clementvtrd <84911237+clementvtrd@users.noreply.github.com>",
   "license": "MIT",
   "private": true,
+  "dependencies": {
+    "@apollo/client": "^3.6.9",
+    "graphql": "^16.5.0",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
+  },
+  "scripts": {
+    "build": "webpack --mode=production --node-env=production",
+    "build:dev": "webpack --mode=development",
+    "build:prod": "webpack --mode=production --node-env=production",
+    "watch": "webpack --watch",
+    "serve": "webpack serve",
+    "test:spec": "jest --collect-coverage src",
+    "graphql:generate": "graphql-codegen --config codegen.yml"
+  },
   "devDependencies": {
     "@graphql-codegen/cli": "2.11.6",
     "@graphql-codegen/typescript": "2.7.3",
@@ -36,21 +51,5 @@
     "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.7.1"
-  },
-  "dependencies": {
-    "@apollo/client": "^3.6.9",
-    "axios": "^0.27.2",
-    "graphql": "^16.5.0",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0"
-  },
-  "scripts": {
-    "build": "webpack --mode=production --node-env=production",
-    "build:dev": "webpack --mode=development",
-    "build:prod": "webpack --mode=production --node-env=production",
-    "watch": "webpack --watch",
-    "serve": "webpack serve",
-    "test:spec": "jest --collect-coverage --coverage-directory test/coverage test/spec",
-    "graphql:generate": "graphql-codegen --config codegen.yml"
   }
 }
