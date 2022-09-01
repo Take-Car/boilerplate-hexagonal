@@ -22,8 +22,9 @@ parameters:
                     regex: ^Infrastructure\\.*
                     
     ruleset:
-        Infrastructure:
-            - Application
         Application:
             - Domain
-        Domain:
+        Domain: ~
+        Infrastructure:
+            - Application
+            - Domain
