@@ -1,59 +1,30 @@
 version: '3'
 
+silent: true
+output: 'prefixed'
+
+includes:
+  back: ./tasks/back.yaml
+  core: ./tasks/core.yaml
+  docker: ./tasks/docker.yaml
+  front: ./tasks/front.yaml
+
 tasks:
-  certs:
+  default:
     cmds:
-      - mkcert -cert-file certs/local-cert.pem -key-file certs/local-key.pem "app.localhost" "*.app.localhost"
-    status:
-      - test -f certs/local-cert.pem
-      - test -f certs/local-key.pem
-  
-  build:
-    cmds:
-      - docker compose build
-  
+      - task: docker:start
+
   start:
-    deps: [build,certs]
+    desc: Shortcut for docker:start
     cmds:
-      - docker compose up --detach --remove-orphans
+      - task: docker:start
 
   stop:
+    desc: Shortcut for docker:stop
     cmds:
-      - docker compose down
+      - task: docker:stop
 
-  compile-back:
+  restart:
+    desc: Shortcut for docker:restart
     cmds:
-      - docker compose run --rm php console graphql:compile
-    sources:
-      - apps/api/Application/GraphQL/**/*.php
-    generates:
-      - apps/api/var/GraphQL/*.php
-  
-  compile-front:
-    cmds:
-      - docker compose run --rm frontend yarn graphql:generate
-    sources:
-      - apps/api/Application/GraphQL/**/*.php
-    generates:
-      - apps/frontend/src/graphql/index.ts
-  
-  compile:
-    cmds:
-      - task: compile-back
-      - task: compile-front
-  
-  eslint:
-    cmds:
-      - docker compose run --rm frontend yarn eslint --fix
-
-  jest:
-    cmds:
-      - docker compose run --rm frontend yarn test:spec
-  
-  php-cs-fixer:
-    cmds:
-      - docker compose run --rm php bin/php-cs-fixer fix
-
-  phpstan:
-    cmds:
-      - docker compose run --rm php bin/phpstan analyse --level max public config src
+      - task: docker:restart

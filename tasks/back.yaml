@@ -1,0 +1,32 @@
+version: '3'
+
+silent: true
+output: 'prefixed'
+
+tasks:
+  install:
+    desc: Install backend dependencies
+    cmds:
+      - docker compose run --rm php composer install
+    sources:
+      - apps/api/composer.json
+      - apps/api/composer.lock
+
+  compile:
+    desc: Generate GraphQL definitions proxies
+    cmds:
+      - docker compose run --rm php console graphql:compile
+    sources:
+      - apps/api/Application/GraphQL/**/*.php
+    generates:
+      - apps/api/var/GraphQL/*.php
+  
+  php-cs-fixer:
+    desc: Enforce code style
+    cmds:
+      - docker compose run --rm php bin/php-cs-fixer fix
+
+  phpstan:
+    desc: Static analysis
+    cmds:
+      - docker compose run --rm php bin/phpstan analyse --level max public config src

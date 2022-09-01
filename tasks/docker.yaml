@@ -1,0 +1,40 @@
+version: '3'
+
+silent: true
+output: 'prefixed'
+
+includes:
+  back: ./back.yaml
+  core: ./core.yaml
+  front: ./front.yaml
+
+tasks:
+  build:
+    desc: Build container images
+    cmds:
+      - docker compose build
+  
+  install:
+    desc: Install project dependencies
+    deps: ['build']
+    cmds:
+      - task: back:install
+      - task: front:install
+      - task: back:compile
+
+  start:
+    desc: Start containers
+    deps: [core:certs,install]
+    cmds:
+      - docker compose up --detach --remove-orphans
+
+  stop:
+    desc: Stop and remove containers
+    cmds:
+      - docker compose down
+  
+  restart:
+    desc: Restart containers
+    cmds:
+      - task: stop
+      - task: start
