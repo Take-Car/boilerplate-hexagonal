@@ -1,7 +1,7 @@
 import { render as renderReact } from '@testing-library/react'
 import { MockedProvider, MockedResponse } from '@apollo/client/testing'
 import Main from 'components/Main'
-import { TodoListsDocument } from 'graphql'
+import { TodoListsDocument } from 'hooks/graphql'
 
 const mocks: MockedResponse[] = [
   {

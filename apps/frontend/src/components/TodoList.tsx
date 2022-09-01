@@ -1,4 +1,4 @@
-import type { TodoListsQuery } from 'graphql'
+import type { TodoListsQuery } from 'hooks/graphql'
 import { FC } from 'react'
 
 type Props = {

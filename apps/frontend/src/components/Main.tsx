@@ -1,6 +1,6 @@
-import { useTodoListsQuery } from 'graphql'
 import { FC } from 'react'
-import TodoList from './TodoList'
+import { useTodoListsQuery } from 'hooks/graphql'
+import TodoList from 'components/TodoList'
 
 const Main: FC = () => {
   const { data, loading, error } = useTodoListsQuery()
