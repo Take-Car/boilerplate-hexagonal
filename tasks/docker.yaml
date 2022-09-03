@@ -20,7 +20,6 @@ tasks:
     cmds:
       - task: back:install
       - task: front:install
-      - task: back:compile
 
   start:
     desc: Start containers

@@ -15,9 +15,3 @@ tasks:
     status:
       - test -f certs/local-cert.pem
       - test -f certs/local-key.pem
-
-  compile:
-    desc: Generate GraphQL definition proxies and typed hooks
-    cmds:
-      - task: back:compile
-      - task: front:compile
