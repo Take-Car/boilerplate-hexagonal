@@ -12,9 +12,8 @@ use Overblog\GraphQLBundle\Annotation\Type;
 class TodoList extends Identifiable
 {
     public function __construct(
-        private readonly Model\TodoList $todoList 
-    )
-    {
+        private readonly Model\TodoList $todoList
+    ) {
         parent::__construct($todoList);
     }
 
@@ -25,7 +24,7 @@ class TodoList extends Identifiable
     }
 
     /**
-     * @return Todo[] 
+     * @return Todo[]
      */
     #[Field(type: '[Todo!]!')]
     public function todos(): array

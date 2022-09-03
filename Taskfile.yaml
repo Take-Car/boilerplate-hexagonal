@@ -12,10 +12,13 @@ includes:
 tasks:
   default:
     cmds:
-      - task: docker:start
+      - task: start
 
   start:
     desc: Shortcut for docker:start
+    deps:
+      - front:install
+      - back:install
     cmds:
       - task: docker:start
 

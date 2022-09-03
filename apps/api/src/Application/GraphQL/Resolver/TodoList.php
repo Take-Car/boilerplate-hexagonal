@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Application\GraphQL\Resolver;
 
+use Application\GraphQL\Types\TodoList as TodoListType;
 use Domain\Model;
-use Application\GraphQL\Types;
 use Overblog\GraphQLBundle\Annotation as GQL;
 
 #[GQL\Provider(targetQueryTypes: 'Query')]
 class TodoList
 {
     /**
-     * @return todoLists[] 
+     * @return TodoListType[]
      */
     #[GQL\Query(type: '[TodoList!]!')]
     public function todoLists(): array
@@ -21,6 +21,6 @@ class TodoList
         $todoList = new Model\TodoList('Simple example without database');
         $todoList->addTodo($todo);
 
-        return [new Types\TodoList($todoList)];
+        return [new TodoListType($todoList)];
     }
 }

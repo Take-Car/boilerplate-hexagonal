@@ -7,10 +7,9 @@ namespace Domain\Model;
 class Todo extends Identifiable
 {
     public function __construct(
-        private readonly string $task,
-        private readonly bool $done = false
-    )
-    {
+        private string $task,
+        private bool $done = false
+    ) {
         parent::__construct();
     }
 

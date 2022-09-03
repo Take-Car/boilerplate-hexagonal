@@ -15,9 +15,21 @@ tasks:
   php-cs-fixer:
     desc: Enforce code style
     cmds:
-      - docker compose run --rm php bin/php-cs-fixer fix
+      - docker compose run --rm php php-cs-fixer fix
 
   phpstan:
     desc: Static analysis
     cmds:
-      - docker compose run --rm php bin/phpstan analyse --level max public config src
+      - docker compose run --rm php phpstan analyse -c phpstan.neon
+
+  deptrac:
+    desc: Static analysis
+    cmds:
+      - docker compose run --rm php deptrac
+  
+  lint:
+    desc: Enforce code style and analyse code
+    cmds:
+      - task: php-cs-fixer
+      - task: phpstan
+      - task: deptrac

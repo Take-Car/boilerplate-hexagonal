@@ -1,0 +1,7 @@
+parameters:
+  level: max
+  paths:
+    - src
+  ignoreErrors:
+    - message: '#Method Infrastructure\\Symfony\\Kernel::getConfigDir\(\) is unused#'
+      path: src/Infrastructure/Symfony/Kernel.php

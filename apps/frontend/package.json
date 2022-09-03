@@ -1,26 +1,22 @@
 {
-  "name": "react-redux-typescript",
-  "version": "1.0.0",
-  "description": "A boilerplate to quickly start a React app with TypeScript and Redux.",
-  "main": "index.js",
+  "name": "frontend",
   "repository": "git@github.com:clementvtrd/react-redux-typescript.git",
   "author": "clementvtrd <84911237+clementvtrd@users.noreply.github.com>",
   "license": "MIT",
   "private": true,
-  "dependencies": {
-    "@apollo/client": "^3.6.9",
-    "graphql": "^16.5.0",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0"
-  },
   "scripts": {
     "build": "webpack --mode=production --node-env=production",
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch",
     "serve": "webpack serve",
-    "test:spec": "jest --collect-coverage src",
     "graphql:generate": "graphql-codegen --config codegen.yml"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.6.9",
+    "graphql": "^16.5.0",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "2.11.6",
@@ -28,7 +24,6 @@
     "@graphql-codegen/typescript-operations": "2.5.3",
     "@graphql-codegen/typescript-react-apollo": "3.3.3",
     "@testing-library/react": "^13.2.0",
-    "@types/jest": "^27.5.0",
     "@types/react": "^18.0.9",
     "@types/react-dom": "^18.0.3",
     "@types/react-test-renderer": "^18.0.0",
@@ -39,13 +34,10 @@
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-react": "^7.30.1",
     "html-webpack-plugin": "^5.5.0",
-    "jest": "^28.1.0",
-    "jest-environment-jsdom": "^28.1.0",
     "react-test-renderer": "^18.1.0",
     "sass": "^1.45.1",
     "sass-loader": "^12.4.0",
     "style-loader": "^3.3.1",
-    "ts-jest": "^28.0.1",
     "ts-loader": "^9.2.6",
     "typescript": "^4.5.4",
     "webpack": "^5.65.0",

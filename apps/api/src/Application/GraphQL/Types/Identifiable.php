@@ -11,10 +11,9 @@ use Overblog\GraphQLBundle\Annotation\TypeInterface;
 #[TypeInterface(resolveType: '@=query("resolveType", value)')]
 abstract class Identifiable
 {
-    public function __construct (
+    public function __construct(
         protected readonly Model\Identifiable $identifiable
-    )
-    {
+    ) {
     }
 
     #[Field(type: 'ID!')]

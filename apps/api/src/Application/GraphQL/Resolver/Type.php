@@ -12,7 +12,7 @@ use RuntimeException;
 
 class Type implements QueryInterface, AliasedInterface
 {
-    public function resolve($input)
+    public function resolve(object $input): string
     {
         if (!$input instanceof Identifiable) {
             throw new RuntimeException(sprintf('Could not resolve type of %s', $input::class));
@@ -23,6 +23,9 @@ class Type implements QueryInterface, AliasedInterface
         return $reflectedInput->getShortName();
     }
 
+    /**
+     * @return array<string,string>
+     */
     public static function getAliases(): array
     {
         return ['resolve' => 'resolveType'];

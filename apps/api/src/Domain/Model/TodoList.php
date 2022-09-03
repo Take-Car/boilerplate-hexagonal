@@ -7,19 +7,18 @@ namespace Domain\Model;
 class TodoList extends Identifiable
 {
     /**
-     * @var Todo[] 
+     * @var Todo[]
      */
     private array $todos = [];
 
     public function __construct(
         private string $title
-    )
-    {
+    ) {
         parent::__construct();
     }
 
     /**
-     * @return Todo[] 
+     * @return Todo[]
      */
     public function getTodos(): array
     {

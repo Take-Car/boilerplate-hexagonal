@@ -13,7 +13,7 @@ RUN apt update \
     && docker-php-ext-install zip \
     && rm -rf /var/lib/apt/lists/*
 
-ENV PATH "$PATH:/app/bin"
+ENV PATH="$PATH:/app/bin"
 
 WORKDIR /app
 USER 1000:1000

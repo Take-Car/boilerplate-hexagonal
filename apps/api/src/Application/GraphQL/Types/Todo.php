@@ -13,8 +13,7 @@ class Todo extends Identifiable
 {
     public function __construct(
         private readonly Model\Todo $todo
-    )
-    {
+    ) {
         parent::__construct($todo);
     }
 

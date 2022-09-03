@@ -4,26 +4,17 @@ silent: true
 output: 'prefixed'
 
 includes:
-  back: ./back.yaml
   core: ./core.yaml
-  front: ./front.yaml
 
 tasks:
   build:
     desc: Build container images
     cmds:
       - docker compose build
-  
-  install:
-    desc: Install project dependencies
-    deps: ['build']
-    cmds:
-      - task: back:install
-      - task: front:install
 
   start:
     desc: Start containers
-    deps: [core:certs,install]
+    deps: [core:certs]
     cmds:
       - docker compose up --detach --remove-orphans
 
@@ -37,3 +28,13 @@ tasks:
     cmds:
       - task: stop
       - task: start
+
+  run:frontend:
+    desc: Run single command on frontend container
+    cmds:
+      - docker compose run --rm node {{.CLI_ARGS}}
+
+  run:backend:
+    desc: Run single command on backend container
+    cmds:
+      - docker compose run --rm php {{.CLI_ARGS}}

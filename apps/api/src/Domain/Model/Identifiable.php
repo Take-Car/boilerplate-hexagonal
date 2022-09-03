@@ -8,7 +8,7 @@ use Symfony\Component\Uid\Uuid;
 
 abstract class Identifiable
 {
-    protected readonly ?Uuid $id;
+    protected readonly Uuid $id;
 
     public function __construct()
     {

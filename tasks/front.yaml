@@ -3,32 +3,41 @@ version: '3'
 silent: true
 output: 'prefixed'
 
+includes:
+  docker: ./docker.yaml
+
 tasks:
   install:
     desc: Install frontend dependencies
     cmds:
-      - docker compose run --rm frontend yarn install --pure-lockfile
+      - docker compose run --rm node yarn install --pure-lockfile
     sources:
       - apps/frontend/package.json
       - apps/frontend/yarn.lock
     generates:
       - apps/frontend/node_modules/**/*
 
-  compile:
+  graphql:
     desc: Generate typed hooks
     cmds:
-      - docker compose run --rm frontend yarn graphql:generate
+      - docker compose run --rm node yarn graphql:generate
     sources:
       - apps/api/Application/GraphQL/**/*.php
     generates:
       - apps/frontend/src/hooks/graphql.ts
   
   eslint:
-    desc: Enforce code style
+    desc: Run ESLint
     cmds:
-      - docker compose run --rm frontend yarn eslint --fix
-
-  jest:
-    desc: Run unit tests (Jest)
+      - docker compose run --rm node yarn eslint --fix
+  
+  typescript:
+    desc: Check type hinting
     cmds:
-      - docker compose run --rm frontend yarn test:spec
+      - docker compose run --rm node yarn tsc --noEmit
+  
+  lint:
+    desc: Lint files (ESLint, TypeScript)
+    cmds:
+      - task: eslint
+      - task: typescript

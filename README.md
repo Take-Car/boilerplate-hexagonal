@@ -32,14 +32,9 @@ Available tasks for this project:
 
 | commands            |   Description                                           |
 | ------------------- | ------------------------------------------------------- |
-| back:compile        | 	Generate GraphQL definitions proxies                  |
-| back:php-cs-fixer   | 	Enforce code style                                    |
-| back:phpstan        | 	Static analysis                                       |
-| core:certs          |		Generate SSL certificates                             |
-| core:compile        | 	Generate GraphQL definition proxies and typed hooks   |
 | docker:build        | 	Build container images                                |
 | docker:start        | 	Start containers                                      |
 | docker:stop         |   Stop and remove containers                            |
-| front:compile       | 	Generate typed hooks                                  |
-| front:eslint        | 	Enforce code style                                    |
-| front:jest          |   Run unit tests (Jest)                                 |
+| back:lint        | 	Static analysis & enforce code style                  |
+| front:graphql       | 	Generate typed hooks                                  |
+| front:lint          | 	Enforce code style and check type hinting             |

@@ -3,10 +3,6 @@ version: '3'
 silent: true
 output: 'prefixed'
 
-includes:
-  back: ./back.yaml
-  front: ./front.yaml
-
 tasks:
   certs:
     desc: Generate SSL certificates
