@@ -9,6 +9,8 @@ updates:
       timezone: "Europe/Paris"
     target-branch: "development"
     commit-message:
+      prefix: chore
+      prefix-development: chore(dev)
       include: scope
     versioning-strategy: "increase"
   
@@ -21,5 +23,7 @@ updates:
       timezone: "Europe/Paris"
     target-branch: "development"
     commit-message:
+      prefix: chore
+      prefix-development: chore(dev)
       include: scope
     versioning-strategy: "increase"
