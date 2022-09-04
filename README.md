@@ -20,7 +20,7 @@ We will use Docker to make a development environment with 5 services:
 
 ## Installation
 
-Rather than using GNU Make, fancy commands shortcuts are writen with (Taskfile)[https://taskfile.dev/]. You can install it via their website, they also provide a convenient script to install it on Linux based system:
+Rather than using GNU Make, fancy commands shortcuts are writen with [Taskfile](https://taskfile.dev/). You can install it via their website, they also provide a convenient script to install it on Linux based system:
 
 ```sh
 sudo sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin
