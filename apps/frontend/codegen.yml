@@ -1,9 +1,39 @@
 overwrite: true
-schema: "http://nginx/graphql/"
-documents: "src/graphql/*.gql"
+schema: http://nginx/graphql/
+documents: src/**/*.gql
+
 generates:
-  src/hooks/graphql.ts:
+  src/types/graphql.ts:
     plugins:
-      - "typescript"
-      - "typescript-operations"
-      - "typescript-react-apollo"
+      - typescript
+    config:
+      arrayInputCoercion: false
+      avoidOptionals: true
+      immutableTypes: true
+      maybeValue: T | null | undefined
+      declarationKind: interface
+      strictScalars: true
+    hooks:
+      afterOneFileWrite: ['eslint --fix']
+      
+    
+  src/hooks/graphql.ts:
+    preset: near-operation-file
+    plugins:
+      - typescript-operations
+      - typescript-react-apollo
+    presetConfig:
+      extension: .hooks.ts
+      baseTypesPath: ~types/graphql
+    config:
+      arrayInputCoercion: false
+      avoidOptionals: true
+      immutableTypes: true
+      maybeValue: T | null | undefined
+      namingConvention:
+        typeNames: 'change-case-all#pascalCase'
+        enumValues: 'keep'
+      strictScalars: true
+      withHooks: true
+    hooks:
+      afterOneFileWrite: ['eslint --fix']
