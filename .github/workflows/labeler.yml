@@ -9,7 +9,6 @@ jobs:
       pull-requests: write
     runs-on:
       - self-hosted
-      - 2GB
     steps:
       - uses: actions/labeler@v4
         with:

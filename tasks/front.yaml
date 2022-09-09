@@ -23,6 +23,7 @@ tasks:
       - docker compose run --rm node yarn graphql:generate
     sources:
       - apps/api/Application/GraphQL/**/*.php
+      - apps/frontend/codegen.yml
     generates:
       - apps/frontend/src/hooks/graphql.ts
   
