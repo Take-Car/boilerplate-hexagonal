@@ -11,23 +11,15 @@ includes:
 
 tasks:
   default:
-    cmds:
-      - task: start
-
-  start:
-    desc: Shortcut for docker:start
+    desc: Start development
     deps:
-      - front:install
-      - back:install
+      - install
     cmds:
       - task: docker:start
-
-  stop:
-    desc: Shortcut for docker:stop
+  
+  install:
+    desc: Install dependencies
     cmds:
-      - task: docker:stop
-
-  restart:
-    desc: Shortcut for docker:restart
-    cmds:
-      - task: docker:restart
+      - task: docker:build
+      - task: back:install
+      - task: front:install
