@@ -1,0 +1,11 @@
+doctrine_migrations:
+    migrations_paths:
+        'DoctrineMigrations': '%kernel.project_dir%/src/Migration'
+    enable_profiler: false
+    storage:
+        table_storage:
+            table_name: 'migration_version'
+            version_column_name: 'version'
+            executed_at_column_name: 'executed_at'
+    all_or_nothing: false
+    check_database_platform: true
