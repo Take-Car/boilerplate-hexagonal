@@ -33,7 +33,7 @@ class Todo extends Identifiable
         $this->done = true;
     }
 
-    public function undone(): void
+    public function undo(): void
     {
         $this->done = false;
     }
