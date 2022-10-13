@@ -41,6 +41,11 @@
             "Migration\\": "src/Migration"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "spec\\": "spec"
+        }
+    },
     "replace": {
         "symfony/polyfill-ctype": "*",
         "symfony/polyfill-iconv": "*",
@@ -73,6 +78,7 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.11",
+        "phpspec/phpspec": "^7.2",
         "phpstan/phpstan": "^1.8",
         "qossmic/deptrac-shim": "^0.24.0",
         "symfony/stopwatch": "6.1.*",
