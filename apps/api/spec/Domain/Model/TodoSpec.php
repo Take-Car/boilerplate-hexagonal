@@ -41,10 +41,10 @@ class TodoSpec extends ObjectBehavior
         $this->isDone()->shouldReturn(true);
     }
 
-    function it_undone()
+    function it_undo()
     {
         $this->done();
-        $this->undone();
+        $this->undo();
         $this->isDone()->shouldReturn(false);
     }
 }
