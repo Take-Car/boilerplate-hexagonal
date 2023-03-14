@@ -26,13 +26,17 @@ export default function TodoList() {
                           <input
                             type="checkbox"
                             checked={todo.isDone}
+                            onChange={() => {}}
                           />
-                          <input value={todo.task} />
+                          <input
+                            value={todo.task}
+                            onChange={() => {}}
+                          />
                         </span>
                     )
                 }
               </section>
-            </article>  
+            </article>
           )
       }
     </main>
