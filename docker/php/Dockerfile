@@ -1,17 +1,26 @@
-FROM composer:2.3.5 AS composer
+FROM composer:2.5.4 AS composer
 
-FROM php:8.1-fpm AS base
+FROM php:8.2-fpm-alpine3.17 AS base
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
-RUN apt update \
-    && apt install -y --no-install-recommends zlib1g-dev g++ git libicu-dev zip libzip-dev zip \
-    && docker-php-ext-install intl opcache pdo pdo_mysql \
-    && pecl install apcu \
-    && docker-php-ext-enable apcu \
-    && docker-php-ext-configure zip \
-    && docker-php-ext-install zip \
-    && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache \
+    autoconf \
+    bash \
+    git \
+    libzip-dev \
+    icu-dev
+RUN apk add --no-cache --virtual .phpize-deps ${PHPIZE_DEPS}
+RUN pecl install apcu
+RUN docker-php-ext-enable apcu
+RUN docker-php-ext-configure zip
+RUN docker-php-ext-install -j"$(nproc)" \
+        zip \
+        intl \
+        opcache \
+        pdo \
+        pdo_mysql
+RUN apk del --no-network .phpize-deps
 
 ENV PATH="$PATH:/app/bin"
 
