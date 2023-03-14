@@ -1,6 +1,4 @@
-FROM node:16.15
+FROM node:18-alpine3.17
 
 WORKDIR /app
 USER 1000:1000
-
-CMD [ "yarn", "serve" ]
