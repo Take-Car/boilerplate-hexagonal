@@ -1,7 +1,3 @@
-import TodoList from 'components/TodoList'
-
-const Main = () =>
-  <TodoList />
-
+const Main = () => <h1>Hello world</h1>
 
 export default Main

@@ -18,7 +18,6 @@ generates:
       
     
   src/hooks/graphql.ts:
-    preset: near-operation-file
     plugins:
       - typescript-operations
       - typescript-react-apollo
@@ -31,7 +30,7 @@ generates:
       immutableTypes: true
       maybeValue: T | null | undefined
       namingConvention:
-        typeNames: 'change-case-all#pascalCase'
+        typeNames: 'change-case-all#camelCase'
         enumValues: 'keep'
       strictScalars: true
       withHooks: true
