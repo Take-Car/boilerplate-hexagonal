@@ -1,4 +1,5 @@
 {
+  "files": ["src/index.ts"],
   "compilerOptions": {
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
@@ -8,16 +9,12 @@
     "module": "esnext",
     "moduleResolution": "node",
     "noImplicitAny": true,
-    "paths": {
-      "components": ["components"],
-      "graphql": ["graphql"],
-      "hooks": ["hooks"],
-      "styles": ["styles"],
-      "types": ["types"]
-    },
     "resolveJsonModule": true,
     "target": "esnext",
-    "typeRoots": ["node_modules/@types", "@types"]
-  },
-  "include": ["./src"]
+    "typeRoots": ["node_modules/@types", "@types"],
+    "rootDirs": [
+      "./src",
+      "./node_modules"
+    ]
+  }
 }
