@@ -1,0 +1,21 @@
+overwrite: true
+schema: http://nginx/graphql/
+documents: src/**/*.gql
+
+generates:
+  src/graphql/index.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
+    config:
+      arrayInputCoercion: false
+      avoidOptionals: true
+      immutableTypes: true
+      maybeValue: T | null | undefined
+      declarationKind: interface
+      strictScalars: true
+      withHooks: false
+      namingConvention:
+        typeNames: 'change-case-all#pascalCase'
+        enumValues: 'keep'

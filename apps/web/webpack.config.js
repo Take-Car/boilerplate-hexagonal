@@ -58,10 +58,7 @@ const config = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.scss', '.ttf'],
     alias: {
-      components: path.resolve(__dirname, 'src/components/'),
-      fonts: path.resolve(__dirname, 'src/fonts/'),
-      styles: path.resolve(__dirname, 'src/styles/'),
-      hooks: path.resolve(__dirname, 'src/hooks/')
+      '@': path.resolve(__dirname, 'src'),
     },
 
   },

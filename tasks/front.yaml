@@ -12,10 +12,10 @@ tasks:
     cmds:
       - docker compose run --rm node yarn install --pure-lockfile
     sources:
-      - apps/frontend/package.json
-      - apps/frontend/yarn.lock
+      - apps/web/package.json
+      - apps/web/yarn.lock
     generates:
-      - apps/frontend/node_modules/**/*
+      - apps/web/node_modules/**/*
 
   graphql:
     desc: Generate typed hooks
@@ -23,9 +23,9 @@ tasks:
       - docker compose run --rm node yarn graphql:generate
     sources:
       - apps/api/Application/GraphQL/**/*.php
-      - apps/frontend/codegen.yml
+      - apps/web/codegen.yml
     generates:
-      - apps/frontend/src/hooks/graphql.ts
+      - apps/web/src/hooks/graphql.ts
   
   eslint:
     desc: Run ESLint

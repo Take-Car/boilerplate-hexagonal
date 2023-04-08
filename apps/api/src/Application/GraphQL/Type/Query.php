@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Application\GraphQL\Types;
+namespace Application\GraphQL\Type;
 
 use Overblog\GraphQLBundle\Annotation\Type;
 

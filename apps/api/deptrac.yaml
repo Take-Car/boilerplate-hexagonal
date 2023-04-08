@@ -2,25 +2,19 @@ parameters:
     paths:
         - ./src
     layers:
-        -
-            name: Application
-            collectors:
-                -
-                    type: classLike
-                    regex: ^Application\\.*
-        -
-            name: Domain
-            collectors:
-                -
-                    type: classLike
-                    regex: ^Domain\\.*
-        -
-            name: Infrastructure
-            collectors:
-                -
-                    type: classLike
-                    regex: ^Infrastructure\\.*
-                    
+        - name: Application
+          collectors:
+              - type: classLike
+                regex: ^Application\\.*
+        - name: Domain
+          collectors:
+              - type: classLike
+                regex: ^Domain\\.*
+        - name: Infrastructure
+          collectors:
+              - type: classLike
+                regex: ^Infrastructure\\.*
+
     ruleset:
         Application:
             - Domain

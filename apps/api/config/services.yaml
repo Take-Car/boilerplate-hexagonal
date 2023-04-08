@@ -1,0 +1,29 @@
+---
+services:
+  _defaults:
+    public: false
+    autowire: true
+
+  _instanceof:
+    Overblog\GraphQLBundle\Definition\Resolver\QueryInterface:
+      tags: ['overblog_graphql.resolver']
+    Overblog\GraphQLBundle\Definition\Resolver\MutationInterface:
+      tags: ['overblog_graphql.mutation']
+
+  Application\GraphQL\:
+    resource: '%kernel.project_dir%/src/Application/GraphQL/*'
+
+  Application\GraphQL\Resolver\:
+      public: true
+      autoconfigure: true
+      resource: '%kernel.project_dir%/src/Application/GraphQL/Resolver/*'
+  
+  Application\GraphQL\Query\:
+      public: true
+      autoconfigure: true
+      resource: '%kernel.project_dir%/src/Application/GraphQL/Query/*'
+  
+  Application\GraphQL\Mutation\:
+      public: true
+      autoconfigure: true
+      resource: '%kernel.project_dir%/src/Application/GraphQL/Mutation/*'

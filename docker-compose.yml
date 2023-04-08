@@ -17,18 +17,21 @@ services:
     security_opt:
       - no-new-privileges:true
     volumes:
-      - ./docker/traefik/dynamic_conf.yaml:/etc/traefik/dynamic_conf.yaml:ro
-      - ./docker/traefik/traefik.yaml:/etc/traefik/traefik.yaml:ro
+      - ./services/traefik/dynamic_conf.yaml:/etc/traefik/dynamic_conf.yaml:ro
+      - ./services/traefik/traefik.yaml:/etc/traefik/traefik.yaml:ro
       - ./certs:/etc/certs:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
   node:
-    build: ./docker/node
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+      target: base
     restart: unless-stopped
-    env_file: ./apps/frontend/.env
+    env_file: ./apps/web/.env
     command: yarn serve
     volumes:
-      - ./apps/frontend:/app
+      - ./apps/web:/app
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.node.tls=true"
@@ -44,7 +47,7 @@ services:
       - "traefik.http.routers.nginx.rule=Host(`api.app.localhost`)"
       - "traefik.http.services.nginx.loadbalancer.server.port=80"
     volumes:
-      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./services/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
       - ./apps/api:/app:ro
     depends_on:
       - php
@@ -52,7 +55,8 @@ services:
   
   php:
     build:
-      context: ./docker/php
+      context: ./apps/api
+      dockerfile: Dockerfile
       target: dev
     env_file: .env
     volumes:

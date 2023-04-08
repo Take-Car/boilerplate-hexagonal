@@ -18,11 +18,9 @@ doctrine:
         auto_mapping: true
         mappings:
             Model:
-                type: xml
-                is_bundle: false
+                type: attribute
                 dir: '%kernel.project_dir%/src/Domain/Model'
-                prefix: 'Domain\Model'
-                alias: Model
+                prefix: "Domain\\Model"
 
 when@test:
     doctrine:

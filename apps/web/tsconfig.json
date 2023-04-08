@@ -9,12 +9,11 @@
     "module": "esnext",
     "moduleResolution": "node",
     "noImplicitAny": true,
+    "paths": {
+      "@/*": ["./*"]
+    },
     "resolveJsonModule": true,
+    "skipLibCheck": true,
     "target": "esnext",
-    "typeRoots": ["node_modules/@types", "@types"],
-    "rootDirs": [
-      "./src",
-      "./node_modules"
-    ]
   }
 }

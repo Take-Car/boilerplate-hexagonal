@@ -7,12 +7,12 @@
         "php": ">=8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "doctrine/doctrine-bundle": "^2.8.3",
-        "doctrine/doctrine-migrations-bundle": "^3.2.2",
-        "doctrine/orm": "^2.14.1",
-        "overblog/graphql-bundle": "^0.15.2",
+        "doctrine/doctrine-bundle": "2.8.*",
+        "doctrine/doctrine-migrations-bundle": "3.2.*",
+        "doctrine/orm": "2.14.*",
+        "overblog/graphql-bundle": "0.15.*",
         "symfony/console": "6.2.*",
-        "symfony/flex": "^2.2.5",
+        "symfony/flex": "2.2.*",
         "symfony/framework-bundle": "6.2.*",
         "symfony/proxy-manager-bridge": "6.2.*",
         "symfony/runtime": "6.2.*",
@@ -35,7 +35,7 @@
     "autoload": {
         "psr-4": {
             "Application\\": "src/Application",
-            "Cache\\GraphQL\\__DEFINITIONS__\\": "var/GraphQL",
+            "GraphQL\\Definitions\\": "var/GraphQL",
             "Domain\\": "src/Domain",
             "Infrastructure\\": "src/Infrastructure",
             "Migration\\": "src/Migration"
@@ -77,10 +77,10 @@
         }
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.15",
-        "phpspec/phpspec": "^7.3",
-        "phpstan/phpstan": "^1.10.6",
-        "qossmic/deptrac-shim": "^1.0.2",
+        "friendsofphp/php-cs-fixer": "3.*",
+        "phpspec/phpspec": "7.*",
+        "phpstan/phpstan": "1.10.*",
+        "qossmic/deptrac-shim": "1.0.*",
         "symfony/stopwatch": "6.2.*",
         "symfony/web-profiler-bundle": "6.2.*"
     }

@@ -1,0 +1,31 @@
+overblog_graphql:
+    definitions:
+        use_classloader_listener: false
+        auto_compile: true
+        cache_dir: '%kernel.project_dir%/var/GraphQL'
+        class_namespace: "GraphQL\\Definitions"
+        schema:
+            query: Query
+            # mutation: Mutation
+            # subscribtion: Subscribtion
+        mappings:
+            types:
+                - type: attribute
+                  dir: '%kernel.project_dir%/src/Application/GraphQL/Type'
+                  suffix: null
+
+                - type: attribute
+                  dir: '%kernel.project_dir%/src/Application/GraphQL/Resolver'
+                  suffix: null
+
+                - type: attribute
+                  dir: '%kernel.project_dir%/src/Application/GraphQL/Query'
+                  suffix: null
+
+                # - type: attribute
+                #   dir: '%kernel.project_dir%/src/Application/GraphQL/Mutation'
+                #   suffix: null
+
+                # - type: attribute
+                #   dir: '%kernel.project_dir%/src/Application/GraphQL/Subscribtion'
+                #   suffix: null

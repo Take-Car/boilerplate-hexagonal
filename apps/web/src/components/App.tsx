@@ -1,6 +1,6 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 import { StrictMode } from 'react'
-import Main from 'components/Main'
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+import Main from '@/components/Main'
 
 const client = new ApolloClient({
   uri: `${process.env.API_HOST}/graphql/`,
