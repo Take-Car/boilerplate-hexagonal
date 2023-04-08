@@ -16,7 +16,7 @@ updates:
   
   - package-ecosystem: "composer"
     open-pull-requests-limit: 2
-    directory: "/apps/backend"
+    directory: "/apps/api"
     schedule:
       interval: "daily"
       time: "06:00"
@@ -25,5 +25,4 @@ updates:
     commit-message:
       prefix: chore
       prefix-development: chore(dev)
-      include: scope
     versioning-strategy: "increase"
