@@ -2,9 +2,8 @@ version: "3.8"
 
 services:
 
-  reverse-proxy:
+  traefik:
     image: traefik:v2.4.7
-    container_name: traefik
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik=true"
@@ -22,7 +21,7 @@ services:
       - ./certs:/etc/certs:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
-  node:
+  web:
     build:
       context: ./apps/web
       dockerfile: Dockerfile
@@ -38,7 +37,7 @@ services:
       - "traefik.http.routers.node.rule=Host(`frontend.app.localhost`)"
       - "traefik.http.services.node.loadbalancer.server.port=80"
 
-  nginx:
+  api:
     image: nginx:1.20.2-alpine
     restart: unless-stopped
     labels:
@@ -51,8 +50,7 @@ services:
       - ./apps/api:/app:ro
     depends_on:
       - php
-      - database
-  
+
   php:
     build:
       context: ./apps/api
@@ -61,6 +59,10 @@ services:
     env_file: .env
     volumes:
       - ./apps/api:/app
+    depends_on:
+      database:
+        condition: service_healthy
+        restart: true
 
   database:
     image: mysql:${MYSQL_VERSION}
@@ -72,6 +74,12 @@ services:
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
     volumes:
       - mysql:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "--silent"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
 volumes:
   mysql:
