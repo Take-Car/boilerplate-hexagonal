@@ -36,7 +36,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint": "^8.38.0",
     "graphql-tag": "^2.12.6",
-    "html-webpack-plugin": "^5.5.0",
+    "html-webpack-plugin": "^5.5.1",
     "react-test-renderer": "^18.1.0",
     "sass-loader": "^13.2.2",
     "sass": "^1.62.0",
