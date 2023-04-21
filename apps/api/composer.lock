@@ -5312,25 +5312,25 @@
         },
         {
             "name": "phpspec/phpspec",
-            "version": "7.3.0",
+            "version": "7.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "7e44b188e8e01f9c9a8ca6cb0d7aceaabcea2133"
+                "reference": "28faa87d1151a15848166226f33de61cb7107d0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/7e44b188e8e01f9c9a8ca6cb0d7aceaabcea2133",
-                "reference": "7e44b188e8e01f9c9a8ca6cb0d7aceaabcea2133",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/28faa87d1151a15848166226f33de61cb7107d0d",
+                "reference": "28faa87d1151a15848166226f33de61cb7107d0d",
                 "shasum": ""
             },
             "require": {
-                "doctrine/instantiator": "^1.0.5",
+                "doctrine/instantiator": "^1.0.5 || ^2",
                 "ext-tokenizer": "*",
                 "php": "^7.3 || 8.0.* || 8.1.* || 8.2.*",
                 "phpspec/php-diff": "^1.0.0",
                 "phpspec/prophecy": "^1.9",
-                "sebastian/exporter": "^3.0 || ^4.0",
+                "sebastian/exporter": "^3.0 || ^4.0 || ^5.0",
                 "symfony/console": "^3.4 || ^4.4 || ^5.0 || ^6.0",
                 "symfony/event-dispatcher": "^3.4 || ^4.4 || ^5.0 || ^6.0",
                 "symfony/finder": "^3.4 || ^4.4 || ^5.0 || ^6.0",
@@ -5342,9 +5342,9 @@
             },
             "require-dev": {
                 "behat/behat": "^3.3",
-                "phpunit/phpunit": "^8.0 || ^9.0",
+                "phpunit/phpunit": "^8.0 || ^9.0 || ^10.0",
                 "symfony/filesystem": "^3.4 || ^4.0 || ^5.0 || ^6.0",
-                "vimeo/psalm": "^4.3"
+                "vimeo/psalm": "^4.3 || ^5.2"
             },
             "suggest": {
                 "phpspec/nyan-formatters": "Adds Nyan formatters"
@@ -5355,7 +5355,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "7.3.x-dev"
+                    "dev-main": "7.4.x-dev"
                 }
             },
             "autoload": {
@@ -5395,9 +5395,9 @@
             ],
             "support": {
                 "issues": "https://github.com/phpspec/phpspec/issues",
-                "source": "https://github.com/phpspec/phpspec/tree/7.3.0"
+                "source": "https://github.com/phpspec/phpspec/tree/7.4.0"
             },
-            "time": "2022-12-14T16:15:59+00:00"
+            "time": "2023-04-21T13:17:48+00:00"
         },
         {
             "name": "phpspec/prophecy",
