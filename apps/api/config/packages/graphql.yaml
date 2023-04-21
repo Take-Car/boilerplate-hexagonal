@@ -5,9 +5,8 @@ overblog_graphql:
         cache_dir: '%kernel.project_dir%/var/GraphQL'
         class_namespace: "GraphQL\\Definitions"
         schema:
-            query: Query
+            # query: Query
             # mutation: Mutation
-            # subscribtion: Subscribtion
         mappings:
             types:
                 - type: attribute
@@ -22,10 +21,6 @@ overblog_graphql:
                   dir: '%kernel.project_dir%/src/Application/GraphQL/Query'
                   suffix: null
 
-                # - type: attribute
-                #   dir: '%kernel.project_dir%/src/Application/GraphQL/Mutation'
-                #   suffix: null
-
-                # - type: attribute
-                #   dir: '%kernel.project_dir%/src/Application/GraphQL/Subscribtion'
-                #   suffix: null
+                - type: attribute
+                  dir: '%kernel.project_dir%/src/Application/GraphQL/Mutation'
+                  suffix: null
