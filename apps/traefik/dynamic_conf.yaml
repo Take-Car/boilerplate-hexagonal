@@ -8,9 +8,6 @@ http:
           - main: "app.localhost"
             sans:
               - "*.app.localhost"
-          - main: "domain.local"
-            sans:
-              - "*.domain.local"
 
 tls:
   certificates:

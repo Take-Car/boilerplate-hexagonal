@@ -3,7 +3,7 @@ version: "3.8"
 services:
 
   traefik:
-    image: traefik:v2.4.7
+    build: ./apps/traefik
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik=true"
@@ -16,8 +16,6 @@ services:
     security_opt:
       - no-new-privileges:true
     volumes:
-      - ./services/traefik/dynamic_conf.yaml:/etc/traefik/dynamic_conf.yaml:ro
-      - ./services/traefik/traefik.yaml:/etc/traefik/traefik.yaml:ro
       - ./certs:/etc/certs:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
@@ -38,7 +36,7 @@ services:
       - "traefik.http.services.node.loadbalancer.server.port=80"
 
   api:
-    image: nginx:1.20.2-alpine
+    build: ./apps/nginx
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
@@ -46,7 +44,6 @@ services:
       - "traefik.http.routers.nginx.rule=Host(`api.app.localhost`)"
       - "traefik.http.services.nginx.loadbalancer.server.port=80"
     volumes:
-      - ./services/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
       - ./apps/api:/app:ro
     depends_on:
       - php
@@ -65,8 +62,7 @@ services:
         restart: true
 
   database:
-    image: mysql:${MYSQL_VERSION}
-    command: --default-authentication-plugin=mysql_native_password
+    build: ./apps/mysql
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
@@ -76,10 +72,10 @@ services:
       - mysql:/var/lib/mysql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "--silent"]
-      interval: 15s
+      interval: 1s
       timeout: 5s
       retries: 5
-      start_period: 30s
+      start_period: 5s
 
 volumes:
   mysql:

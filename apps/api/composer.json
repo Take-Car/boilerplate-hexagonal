@@ -29,8 +29,7 @@
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true,
-        "bin-dir": "bin/"
+        "sort-packages": true
     },
     "autoload": {
         "psr-4": {

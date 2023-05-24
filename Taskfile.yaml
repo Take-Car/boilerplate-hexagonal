@@ -1,24 +1,51 @@
 version: '3'
 
-silent: true
-
-includes:
-  back: ./tasks/back.yaml
-  core: ./tasks/core.yaml
-  docker: ./tasks/docker.yaml
-  front: ./tasks/front.yaml
-
 tasks:
   default:
-    desc: Start development
     deps:
-      - install
+      - bootstrap
+      - ssl
     cmds:
-      - task: docker:start
-  
-  install:
-    desc: Install dependencies
+      - docker compose up --detach --remove-orphans
+
+  stop:
+    aliases:
+      - down
     cmds:
-      - task: docker:build
-      - task: back:install
-      - task: front:install
+      - docker compose down
+
+  ssl:
+    desc: Generate local SSL certificates
+    cmds:
+      - mkcert -key-file certs/local-key.pem -cert-file certs/local-cert.pem *.app.localhost app.localhost
+    status:
+      - test -f certs/local-cert.pem
+      - test -f certs/local-key.pem
+
+  bootstrap:
+    internal: true
+    cmds:
+      - docker compose pull
+      - docker compose build
+      - task: yarn
+      - task: composer
+
+  yarn:
+    internal: true
+    cmds:
+      - docker compose run --rm web yarn install --pure-lockfile
+    sources:
+      - ./apps/web/package.json
+      - ./apps/web/yarn.lock
+    generates:
+      - ./apps/web/node_modules/**/*
+
+  composer:
+    internal: true
+    cmds:
+      - docker compose run --rm php composer install
+    sources:
+      - ./apps/api/composer.json
+      - ./apps/api/composer.lock
+    generates:
+      - ./apps/api/vendor/**/*
