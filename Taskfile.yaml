@@ -1,7 +1,10 @@
 version: '3'
 
 tasks:
-  default:
+  dev:
+    desc: Build and start the Docker containers
+    aliases:
+      - default
     deps:
       - bootstrap
       - ssl
@@ -9,6 +12,7 @@ tasks:
       - docker compose up --detach --remove-orphans
 
   stop:
+    desc: Stop and remove the Docker containers
     aliases:
       - down
     cmds:
@@ -18,6 +22,7 @@ tasks:
     desc: Generate local SSL certificates
     cmds:
       - mkcert -key-file certs/local-key.pem -cert-file certs/local-cert.pem *.app.localhost app.localhost
+      - mkcert -install
     status:
       - test -f certs/local-cert.pem
       - test -f certs/local-key.pem
