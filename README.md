@@ -1,10 +1,13 @@
 # Hexagonal boilerplate
-
-This template project aim to start a new project with the hexagonal architecture.
-
 ## Hexagonal architecture
 
-The hexagonal architecture intends to separate an application: user-side ; business logic ; server-side. The application depends on the business logic and the architecture, but the business logic can't depends on something else than itself.
+The hexagonal architecture is a software architectural pattern that promotes a clear separation of concerns and decoupling of components. It emphasizes the idea of organizing an application into concentric layers, with the core business logic at the center, surrounded by layers representing external interfaces, such as UI, databases, and external services.
+
+In the hexagonal architecture, the core business logic is independent of the external infrastructure and frameworks. It is encapsulated within the innermost layer and is unaware of how the application interacts with external systems. Instead, the external systems are abstracted through interfaces called "ports." Adapters are responsible for implementing these ports and bridging the gap between the core business logic and the external systems.
+
+This architecture enables better testability, maintainability, and flexibility. It allows for easy swapping of external components, as long as they adhere to the defined ports' interfaces. Changes in the external systems do not impact the core business logic, making the application more resilient to modifications and evolutions.
+
+Overall, the hexagonal architecture promotes a modular, clean, and adaptable design by separating concerns and dependencies, leading to a more robust and maintainable software system.
 
 ## Stack
 
@@ -27,9 +30,10 @@ sudo sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/lo
 ```
 
 Available tasks for this project:
-* dev:        Build and start the Docker containers      (aliases: default)
-* ssl:        Generate local SSL certificates
-* stop:       Stop and remove the Docker containers      (aliases: down)
+
+- dev: Build and start the Docker containers (aliases: default)
+- ssl: Generate local SSL certificates
+- stop: Stop and remove the Docker containers (aliases: down)
 
 ## Start development
 
