@@ -38,7 +38,7 @@
     "graphql-tag": "^2.12.6",
     "html-webpack-plugin": "^5.5.1",
     "react-test-renderer": "^18.1.0",
-    "sass-loader": "^13.2.2",
+    "sass-loader": "^13.3.0",
     "sass": "^1.62.1",
     "style-loader": "^3.3.3",
     "ts-loader": "^9.4.3",
