@@ -12,11 +12,11 @@ This boilerplate is built with React and Symfony for learning purpose. You can r
 
 We will use Docker to make a development environment with 5 services:
 
-- NodeJS to build the frontend
-- PHP 8.1 as interpreter for the backend stack
-- Nginx as HTTP Server
-- MySQL as DBMS
-- Traefik as reverse proxy (to replace 127.0.0.1 or localhost with local hostname)
+- NodeJS
+- PHP 8.2
+- Nginx
+- MySQL
+- Traefik
 
 ## Installation
 
@@ -26,15 +26,15 @@ Rather than using GNU Make, fancy commands shortcuts are writen with [Taskfile](
 sudo sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin
 ```
 
-Once done, you can simply use `task` to start containers, lint files and run tests.
-
 Available tasks for this project:
+* dev:        Build and start the Docker containers      (aliases: default)
+* ssl:        Generate local SSL certificates
+* stop:       Stop and remove the Docker containers      (aliases: down)
 
-| commands            |   Description                                           |
-| ------------------- | ------------------------------------------------------- |
-| docker:build        | 	Build container images                                |
-| docker:start        | 	Start containers                                      |
-| docker:stop         |   Stop and remove containers                            |
-| back:lint        | 	Static analysis & enforce code style                  |
-| front:graphql       | 	Generate typed hooks                                  |
-| front:lint          | 	Enforce code style and check type hinting             |
+## Start development
+
+Simply run `task` in a terminal (or `task dev`). Once the command is done, you can open your browser on the following URLs:
+
+- [Traefik dashboard](https://traefik.app.localhost)
+- [Frontend](https://frontend.app.localhost)
+- [Symfony Profiler](https://api.app.localhost/_profiler)
