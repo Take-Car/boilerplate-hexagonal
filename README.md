@@ -1,4 +1,7 @@
 # Hexagonal boilerplate
+
+> This repository is archived. It will no more receive updates.
+
 ## Hexagonal architecture
 
 The hexagonal architecture is a software architectural pattern that promotes a clear separation of concerns and decoupling of components. It emphasizes the idea of organizing an application into concentric layers, with the core business logic at the center, surrounded by layers representing external interfaces, such as UI, databases, and external services.
