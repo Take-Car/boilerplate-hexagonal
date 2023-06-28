@@ -13,7 +13,7 @@
     "graphql:generate": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
-    "@apollo/client": "^3.7.15",
+    "@apollo/client": "^3.7.16",
     "graphql": "^16.5.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0"
