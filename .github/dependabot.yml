@@ -25,21 +25,21 @@ updates:
       time: '06:00'
       timezone: UTC
 
-  - directory: /apps/mysql
+  - directory: /services/mysql
     package-ecosystem: docker
     schedule:
       interval: daily
       time: '06:00'
       timezone: UTC
 
-  - directory: /apps/nginx
+  - directory: /services/nginx
     package-ecosystem: docker
     schedule:
       interval: daily
       time: '06:00'
       timezone: UTC
 
-  - directory: /apps/traefik
+  - directory: /services/traefik
     package-ecosystem: docker
     schedule:
       interval: daily
