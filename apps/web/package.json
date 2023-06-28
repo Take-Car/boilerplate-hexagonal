@@ -22,7 +22,7 @@
     "@graphql-codegen/cli": "4.0.1",
     "@graphql-codegen/near-operation-file-preset": "^2.4.3",
     "@graphql-codegen/typescript": "4.0.1",
-    "@graphql-codegen/typescript-operations": "4.0.0",
+    "@graphql-codegen/typescript-operations": "4.0.1",
     "@graphql-codegen/typescript-react-apollo": "3.3.7",
     "@testing-library/react": "^14.0.0",
     "@types/node": "^18.16.18",
