@@ -38,7 +38,7 @@ tasks:
   yarn:
     internal: true
     cmds:
-      - docker compose run --rm web yarn install --pure-lockfile
+      - docker compose run --rm web yarn install --immutable
     sources:
       - ./apps/web/package.json
       - ./apps/web/yarn.lock
