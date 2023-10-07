@@ -6,5 +6,7 @@ RUN apk add --no-cache \
   gcc=~12.2 \
   g++=~12.2
 
+RUN yarn set version berry
+
 WORKDIR /app
 USER 1000:1000
