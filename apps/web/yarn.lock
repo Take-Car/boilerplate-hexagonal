@@ -916,19 +916,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/near-operation-file-preset@npm:^2.4.3":
-  version: 2.5.0
-  resolution: "@graphql-codegen/near-operation-file-preset@npm:2.5.0"
+"@graphql-codegen/near-operation-file-preset@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@graphql-codegen/near-operation-file-preset@npm:3.0.0"
   dependencies:
     "@graphql-codegen/add": ^3.2.1
-    "@graphql-codegen/plugin-helpers": ^2.7.2
+    "@graphql-codegen/plugin-helpers": ^3.0.0
     "@graphql-codegen/visitor-plugin-common": 2.13.1
-    "@graphql-tools/utils": ^8.8.0
+    "@graphql-tools/utils": ^10.0.0
     parse-filepath: ^1.0.2
-    tslib: ~2.4.0
+    tslib: ~2.6.0
   peerDependencies:
     graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
-  checksum: 4d66e1e3df6530d561b5bc1eb2a9341f96c1c77b3247fb4bb03e2694e2da73d64ec97249a9c3c47416e1eaca2f15b189ec108e19a599076b27f2088fcbf4daf8
+  checksum: e72ef7e80b9ba8f66bc31526cd94555eafed85003d36bfb345c1e5a8dec5c7cc5bf908061f6f7d57a4708e8e88cb7d5cd2dd79bd6603efbb5d22225f7230fb12
   languageName: node
   linkType: hard
 
@@ -4713,7 +4713,7 @@ __metadata:
   dependencies:
     "@apollo/client": ^3.8.4
     "@graphql-codegen/cli": 5.0.0
-    "@graphql-codegen/near-operation-file-preset": ^2.4.3
+    "@graphql-codegen/near-operation-file-preset": ^3.0.0
     "@graphql-codegen/typescript": 4.0.1
     "@graphql-codegen/typescript-operations": 4.0.1
     "@graphql-codegen/typescript-react-apollo": 4.0.0
