@@ -26,14 +26,14 @@ services:
       target: base
     restart: unless-stopped
     env_file: ./apps/web/.env
-    command: yarn serve
+    command: yarn dev
     volumes:
       - ./apps/web:/app
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.node.tls=true"
       - "traefik.http.routers.node.rule=Host(`frontend.app.localhost`)"
-      - "traefik.http.services.node.loadbalancer.server.port=80"
+      - "traefik.http.services.node.loadbalancer.server.port=3000"
 
   api:
     build: ./services/nginx
