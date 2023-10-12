@@ -10,15 +10,15 @@
   },
   "dependencies": {
     "next": "13.5.4",
-    "react": "^18",
-    "react-dom": "^18"
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
+    "@types/node": "20.8.4",
+    "@types/react": "18.2.25",
+    "@types/react-dom": "18.2.11",
+    "eslint": "8.51.0",
     "eslint-config-next": "13.5.4",
-    "typescript": "^5"
+    "typescript": "5.2.2"
   }
 }
