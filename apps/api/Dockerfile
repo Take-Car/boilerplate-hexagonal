@@ -9,6 +9,7 @@ RUN apk add --no-cache \
     bash \
     git \
     libzip-dev \
+    postgresql15-dev \
     icu-dev
 RUN apk add --no-cache --virtual .phpize-deps ${PHPIZE_DEPS}
 RUN pecl install apcu
@@ -19,12 +20,11 @@ RUN docker-php-ext-install -j"$(nproc)" \
     intl \
     opcache \
     pdo \
-    pdo_mysql
+    pdo_pgsql
 RUN apk del --no-network .phpize-deps
 
 ENV PATH="$PATH:/app/bin"
 
 WORKDIR /app
-USER 1000:1000
 
 FROM base AS dev

@@ -24,8 +24,9 @@ services:
       context: ./apps/web
       dockerfile: Dockerfile
       target: base
+    env_file:
+      - apps/web/.env
     restart: unless-stopped
-    env_file: ./apps/web/.env
     command: yarn dev
     volumes:
       - ./apps/web:/app
@@ -53,29 +54,32 @@ services:
       context: ./apps/api
       dockerfile: Dockerfile
       target: dev
-    env_file: .env
+    env_file:
+      - apps/api/.env
     volumes:
       - ./apps/api:/app
+      - var:/app/var
     depends_on:
       database:
         condition: service_healthy
         restart: true
 
   database:
-    build: ./services/mysql
+    build: ./services/postgres
+    restart: unless-stopped
     environment:
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=app
     volumes:
-      - mysql:/var/lib/mysql
+      - postgres:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "--silent"]
-      interval: 1s
-      timeout: 5s
+      test: ["CMD", "pg_isready", "-d", "app", "-U", "user", "-t", "30"]
+      interval: 15s
+      timeout: 30s
       retries: 5
-      start_period: 5s
+      start_period: 30s
 
 volumes:
-  mysql:
+  postgres:
+  var:
