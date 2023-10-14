@@ -1,7 +1,16 @@
-version: "3.8"
+name: localhost
+
+include:
+  - path: ./apps/api/docker-compose.yml
+    env_file: ./apps/api/.env
+    project_directory: ./apps/api
+
+  - path: ./apps/web/docker-compose.yml
+    env_file: ./apps/web/.env
+    project_directory: ./apps/web
+
 
 services:
-
   traefik:
     build: ./services/traefik
     labels:
@@ -18,66 +27,3 @@ services:
     volumes:
       - ./certs:/etc/certs:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-
-  web:
-    build:
-      context: ./apps/web
-      dockerfile: Dockerfile
-      target: base
-    env_file:
-      - apps/web/.env
-    restart: unless-stopped
-    command: yarn dev
-    volumes:
-      - ./apps/web:/app
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.node.tls=true"
-      - "traefik.http.routers.node.rule=Host(`frontend.app.localhost`)"
-      - "traefik.http.services.node.loadbalancer.server.port=3000"
-
-  api:
-    build: ./services/nginx
-    restart: unless-stopped
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.nginx.tls=true"
-      - "traefik.http.routers.nginx.rule=Host(`api.app.localhost`)"
-      - "traefik.http.services.nginx.loadbalancer.server.port=80"
-    volumes:
-      - ./apps/api:/app:ro
-
-  php:
-    build:
-      context: ./apps/api
-      dockerfile: Dockerfile
-      target: dev
-    env_file:
-      - apps/api/.env
-    volumes:
-      - ./apps/api:/app
-      - var:/app/var
-    depends_on:
-      database:
-        condition: service_healthy
-        restart: true
-
-  database:
-    image: postgres:16-alpine
-    restart: unless-stopped
-    environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=app
-    volumes:
-      - postgres:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD", "pg_isready", "-d", "app", "-U", "user", "-t", "30"]
-      interval: 15s
-      timeout: 30s
-      retries: 5
-      start_period: 30s
-
-volumes:
-  postgres:
-  var:

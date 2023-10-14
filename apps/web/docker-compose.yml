@@ -1,0 +1,19 @@
+name: web
+
+services:
+  web:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: base
+    env_file:
+      - ./.env
+    restart: unless-stopped
+    command: yarn dev
+    volumes:
+      - ./:/app
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.node.tls=true"
+      - "traefik.http.routers.node.rule=Host(`frontend.app.localhost`)"
+      - "traefik.http.services.node.loadbalancer.server.port=3000"
