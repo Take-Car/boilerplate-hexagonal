@@ -1,0 +1,31 @@
+services:
+  _defaults:
+    public: false
+    autowire: true
+
+  Domain\Command\:
+    resource: '%kernel.project_dir%/src/Domain/Command/**/Handler.php'
+
+  Domain\Event\:
+    resource: '%kernel.project_dir%/src/Domain/Event/**/Handler.php'
+
+  Domain\Query\:
+    resource: '%kernel.project_dir%/src/Domain/Query/**/Handler.php'
+
+  Domain\Queue\CommandBus: '@Infrastructure\Messenger\Queue\CommandBus'
+
+  Domain\Queue\EventBus: '@Infrastructure\Messenger\Queue\EventBus'
+
+  Domain\Queue\QueryBus: '@Infrastructure\Messenger\Queue\QueryBus'
+
+  Infrastructure\Messenger\Queue\CommandBus:
+    arguments:
+      - '@command.bus'
+
+  Infrastructure\Messenger\Queue\EventBus:
+    arguments:
+      - '@event.bus'
+
+  Infrastructure\Messenger\Queue\QueryBus:
+    arguments:
+      - '@query.bus'

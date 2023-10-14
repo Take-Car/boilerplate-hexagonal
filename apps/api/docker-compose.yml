@@ -43,6 +43,15 @@ services:
       retries: 5
       start_period: 30s
 
+  rabbitmq:
+    image: rabbitmq:3.12-management-alpine
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.rabbitmq.tls=true"
+      - "traefik.http.routers.rabbitmq.rule=Host(`rabbitmq.app.localhost`)"
+      - "traefik.http.services.rabbitmq.loadbalancer.server.port=15672"
+
 volumes:
   postgres:
   var:

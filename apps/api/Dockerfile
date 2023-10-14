@@ -10,10 +10,11 @@ RUN apk add --no-cache \
     git \
     libzip-dev \
     postgresql15-dev \
-    icu-dev
+    icu-dev \
+    rabbitmq-c-dev
 RUN apk add --no-cache --virtual .phpize-deps ${PHPIZE_DEPS}
-RUN pecl install apcu
-RUN docker-php-ext-enable apcu
+RUN pecl install apcu amqp
+RUN docker-php-ext-enable apcu amqp
 RUN docker-php-ext-configure zip
 RUN docker-php-ext-install -j"$(nproc)" \
     zip \
