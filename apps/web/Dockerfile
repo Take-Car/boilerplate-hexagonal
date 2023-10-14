@@ -9,4 +9,3 @@ RUN apk add --no-cache \
 RUN yarn set version berry
 
 WORKDIR /app
-USER 1000:1000
