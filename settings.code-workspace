@@ -23,7 +23,8 @@
     },
     "search.exclude": {
       "**/.yarn": true,
-      "**/.pnp.*": true
+      "**/.pnp.*": true,
+      "**/vendor": false,
     },
     "eslint.nodePath": "web/.yarn/sdks",
     "typescript.tsdk": "web/.yarn/sdks/typescript/lib",

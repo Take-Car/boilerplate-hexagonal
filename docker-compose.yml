@@ -1,7 +1,16 @@
-version: "3.8"
+name: localhost
+
+include:
+  - path: ./apps/api/docker-compose.yml
+    env_file: ./apps/api/.env
+    project_directory: ./apps/api
+
+  - path: ./apps/web/docker-compose.yml
+    env_file: ./apps/web/.env
+    project_directory: ./apps/web
+
 
 services:
-
   traefik:
     build: ./services/traefik
     labels:
@@ -18,64 +27,3 @@ services:
     volumes:
       - ./certs:/etc/certs:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-
-  web:
-    build:
-      context: ./apps/web
-      dockerfile: Dockerfile
-      target: base
-    restart: unless-stopped
-    env_file: ./apps/web/.env
-    command: yarn dev
-    volumes:
-      - ./apps/web:/app
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.node.tls=true"
-      - "traefik.http.routers.node.rule=Host(`frontend.app.localhost`)"
-      - "traefik.http.services.node.loadbalancer.server.port=3000"
-
-  api:
-    build: ./services/nginx
-    restart: unless-stopped
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.nginx.tls=true"
-      - "traefik.http.routers.nginx.rule=Host(`api.app.localhost`)"
-      - "traefik.http.services.nginx.loadbalancer.server.port=80"
-    volumes:
-      - ./apps/api:/app:ro
-    depends_on:
-      - php
-
-  php:
-    build:
-      context: ./apps/api
-      dockerfile: Dockerfile
-      target: dev
-    env_file: .env
-    volumes:
-      - ./apps/api:/app
-    depends_on:
-      database:
-        condition: service_healthy
-        restart: true
-
-  database:
-    build: ./services/mysql
-    environment:
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-      - MYSQL_RANDOM_ROOT_PASSWORD=yes
-    volumes:
-      - mysql:/var/lib/mysql
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "--silent"]
-      interval: 1s
-      timeout: 5s
-      retries: 5
-      start_period: 5s
-
-volumes:
-  mysql:

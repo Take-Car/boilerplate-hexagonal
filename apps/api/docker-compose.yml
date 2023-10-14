@@ -1,0 +1,48 @@
+name: api
+
+services:
+  api:
+    build: ./services/nginx
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx.tls=true"
+      - "traefik.http.routers.nginx.rule=Host(`api.app.localhost`)"
+      - "traefik.http.services.nginx.loadbalancer.server.port=80"
+    volumes:
+      - ./:/app:ro
+
+  php:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: dev
+    env_file:
+      - ./.env
+    volumes:
+      - ./:/app
+      - var:/app/var
+    depends_on:
+      database:
+        condition: service_healthy
+        restart: true
+
+  database:
+    image: postgres:${DATABASE_VERSION}-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_DB=${DATABASE_NAME}
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-d", "app", "-U", "user", "-t", "30"]
+      interval: 15s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  postgres:
+  var:
