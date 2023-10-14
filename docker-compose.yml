@@ -46,8 +46,6 @@ services:
       - "traefik.http.services.nginx.loadbalancer.server.port=80"
     volumes:
       - ./apps/api:/app:ro
-    depends_on:
-      - php
 
   php:
     build:
@@ -65,7 +63,7 @@ services:
         restart: true
 
   database:
-    build: ./services/postgres
+    image: postgres:16-alpine
     restart: unless-stopped
     environment:
       - POSTGRES_USER=user
