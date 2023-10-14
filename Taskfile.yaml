@@ -42,8 +42,11 @@ tasks:
     sources:
       - ./apps/web/package.json
       - ./apps/web/yarn.lock
+      - ./apps/web/.yarnrc.yml
     generates:
-      - ./apps/web/node_modules/**/*
+      - ./apps/web/.yarn/**/*
+      - ./apps/web/.pnp.cjs
+      - ./apps/web/.pnp.loader.mjs
 
   composer:
     internal: true
