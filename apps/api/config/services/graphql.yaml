@@ -1,4 +1,3 @@
----
 services:
   _defaults:
     public: false
@@ -17,12 +16,12 @@ services:
       public: true
       autoconfigure: true
       resource: '%kernel.project_dir%/src/Application/GraphQL/Resolver/*'
-  
+
   Application\GraphQL\Query\:
       public: true
       autoconfigure: true
       resource: '%kernel.project_dir%/src/Application/GraphQL/Query/*'
-  
+
   Application\GraphQL\Mutation\:
       public: true
       autoconfigure: true

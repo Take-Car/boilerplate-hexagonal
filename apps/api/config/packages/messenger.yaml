@@ -1,0 +1,39 @@
+framework:
+    messenger:
+        failure_transport: failed
+
+        transports:
+            async: '%env(resolve:MESSENGER_TRANSPORT_DSN)%'
+            failed: 'doctrine://default?table_name=messenger_failed_events'
+            sync: 'sync://'
+
+        default_bus: command.bus
+
+        buses:
+            command.bus:
+                middleware:
+                    - add_bus_name_stamp_middleware
+                    - doctrine_close_connection
+                    - doctrine_transaction
+
+            query.bus:
+                middleware:
+                    - add_bus_name_stamp_middleware
+                    - doctrine_close_connection
+
+            event.bus:
+                default_middleware:
+                    enabled: true
+                    allow_no_handlers: true
+                    allow_no_senders: true
+
+        routing:
+            Domain\Command\CommandInterface: sync
+            Domain\Query\QueryInterface: sync
+            Domain\Event\EventInterface: async
+
+when@test:
+   framework:
+       messenger:
+           transports:
+               async: 'in-memory://'
