@@ -16,12 +16,11 @@ This boilerplate is built with React and Symfony for learning purpose. You can r
 
 We will use Docker to make a development environment with 5 services:
 
-- Traefik
-- Nginx
-- PHP 8.2
-- PostgreSQL 16
-- RabbitMQ
-- NodeJS 21
+- Traefik: as a reverse proxy
+- Nginx + PHP 8.2: serves the Symfony API
+- PostgreSQL 16: to store our data
+- RabbitMQ: messaging queue system (in pair with Symfony Messenger)
+- NodeJS 21: to build the frontend with NextJS
 
 ## Installation
 
