@@ -7,6 +7,15 @@ updates:
       time: '06:00'
       timezone: UTC
     versioning-strategy: increase
+    groups:
+      next:
+        patterns:
+          - "@types/react*"
+          - next
+          - react*
+      eslint:
+        patterns:
+          - "eslint*"
 
   - package-ecosystem: composer
     directory: /apps/api
@@ -15,6 +24,13 @@ updates:
       time: '06:00'
       timezone: UTC
     versioning-strategy: increase
+    groups:
+      symfony:
+        patterns:
+          - symfony/*
+      doctrine:
+        patterns:
+          - doctrine/*
 
   ### DOCKERFILES ###
 
