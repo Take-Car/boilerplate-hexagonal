@@ -56,7 +56,7 @@ Available tasks for this project:
 
 ## Start development
 
-Simply run `task` in a terminal (or `task dev`). Once the command is done, you can open your browser on the following URLs:
+Simply run `task` in a terminal (or `task up`). Once the command is done, you can open your browser on the following URLs:
 
 - [Frontend](https://app.localhost)
 - [Symfony API](https://api.app.localhost)
