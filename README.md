@@ -1,7 +1,5 @@
 # Hexagonal boilerplate
 
-> This repository is archived. It will no more receive updates.
-
 ## Hexagonal architecture
 
 The hexagonal architecture is a software architectural pattern that promotes a clear separation of concerns and decoupling of components. It emphasizes the idea of organizing an application into concentric layers, with the core business logic at the center, surrounded by layers representing external interfaces, such as UI, databases, and external services.
@@ -18,30 +16,49 @@ This boilerplate is built with React and Symfony for learning purpose. You can r
 
 We will use Docker to make a development environment with 5 services:
 
-- NodeJS
-- PHP 8.2
-- Nginx
-- MySQL
 - Traefik
+- Nginx
+- PHP 8.2
+- PostgreSQL 16
+- RabbitMQ
+- NodeJS 21
 
 ## Installation
 
 Rather than using GNU Make, fancy commands shortcuts are writen with [Taskfile](https://taskfile.dev/). You can install it via their website, they also provide a convenient script to install it on Linux based system:
 
+### Linux
+
 ```sh
 sudo sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin
 ```
 
+### MacOS
+
+```sh
+brew install go-task
+```
+
+### Windows
+
+```sh
+winget install Task.Task
+```
+
+> Note: you need to logout/login
+
+---
+
 Available tasks for this project:
 
-- dev: Build and start the Docker containers (aliases: default)
-- ssl: Generate local SSL certificates
-- stop: Stop and remove the Docker containers (aliases: down)
+- up: Build and start the Docker containers
+- down: Stop and remove the Docker containers
 
 ## Start development
 
 Simply run `task` in a terminal (or `task dev`). Once the command is done, you can open your browser on the following URLs:
 
+- [Frontend](https://app.localhost)
+- [Symfony API](https://api.app.localhost)
 - [Traefik dashboard](https://traefik.app.localhost)
-- [Frontend](https://frontend.app.localhost)
-- [Symfony Profiler](https://api.app.localhost/_profiler)
+- [Rabbit MQ monitor](https://rabbitmq.app.localhost)

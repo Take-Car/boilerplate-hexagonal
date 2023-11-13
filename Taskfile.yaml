@@ -1,7 +1,7 @@
 version: '3'
 
 tasks:
-  dev:
+  up:
     desc: Build and start the Docker containers
     aliases:
       - default
@@ -11,15 +11,13 @@ tasks:
     cmds:
       - docker compose up --detach --remove-orphans
 
-  stop:
+  down:
     desc: Stop and remove the Docker containers
-    aliases:
-      - down
     cmds:
       - docker compose down
 
   ssl:
-    desc: Generate local SSL certificates
+    internal: true
     cmds:
       - mkcert -key-file certs/local-key.pem -cert-file certs/local-cert.pem *.app.localhost app.localhost
       - mkcert -install
@@ -38,7 +36,7 @@ tasks:
   yarn:
     internal: true
     cmds:
-      - docker compose run --rm web yarn install --immutable
+      - docker compose run --rm web yarn install
     sources:
       - ./apps/web/package.json
       - ./apps/web/yarn.lock
