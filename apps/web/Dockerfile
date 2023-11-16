@@ -1,4 +1,4 @@
-FROM --platform=amd64 node:21.1.0-alpine3.17 AS base
+FROM --platform=amd64 node:21.2.0-alpine3.17 AS base
 
 RUN apk add --no-cache \
   python3=~3.10 \
