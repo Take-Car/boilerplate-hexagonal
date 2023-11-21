@@ -24,38 +24,40 @@ We will use Docker to make a development environment with 5 services:
 
 ## Installation
 
+### Taskfile
+
 Rather than using GNU Make, fancy commands shortcuts are writen with [Taskfile](https://taskfile.dev/). You can install it via their website, they also provide a convenient script to install it on Linux based system:
 
-### Linux
+#### Linux
 
 ```sh
 sudo sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin
+task
 ```
 
-### MacOS
+#### MacOS
 
 ```sh
 brew install go-task
+task
 ```
 
-### Windows
+#### Windows
 
 ```sh
-winget install Task.Task
+winget install Task.Task # you may need to restart your session
+task
 ```
 
-> Note: you need to logout/login
+## Commands
 
----
+| Task    | Description                                               |
+|---------|-----------------------------------------------------------|
+| start   | Start the Docker containers detached                      |
+| stop    | Stop the Docker containers                                |
+| install | Build and pull images, setup SSL and install dependencies |
 
-Available tasks for this project:
-
-- up: Build and start the Docker containers
-- down: Stop and remove the Docker containers
-
-## Start development
-
-Simply run `task` in a terminal (or `task up`). Once the command is done, you can open your browser on the following URLs:
+## URLs
 
 - [Frontend](https://app.localhost)
 - [Symfony API](https://api.app.localhost)

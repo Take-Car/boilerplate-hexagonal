@@ -1,7 +1,7 @@
 version: '3'
 
 tasks:
-  up:
+  install:
     desc: Build and start the Docker containers
     aliases:
       - default
@@ -9,10 +9,16 @@ tasks:
       - bootstrap
       - ssl
     cmds:
-      - docker compose up --detach --remove-orphans
+      - docker compose build
+      - docker compose pull
 
-  down:
-    desc: Stop and remove the Docker containers
+  start:
+    desc: Start the Docker containers
+    cmds:
+      - docker compose up -d
+
+  stop:
+    desc: Stop the Docker containers
     cmds:
       - docker compose down
 
