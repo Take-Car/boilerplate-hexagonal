@@ -1,4 +1,4 @@
-name: localhost
+name: ${APP_NAME:-app}
 
 services:
   traefik:
@@ -61,7 +61,7 @@ services:
         restart: true
 
   database:
-    image: postgres:16-alpine
+    build: ./services/postgres
     restart: unless-stopped
     environment:
       - POSTGRES_USER=user
@@ -79,7 +79,7 @@ services:
       start_period: 30s
 
   rabbitmq:
-    image: rabbitmq:3.12-management-alpine
+    build: ./services/rabbitmq
     restart: unless-stopped
     labels:
       - "traefik.enable=true"

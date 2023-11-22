@@ -42,7 +42,7 @@ tasks:
   yarn:
     internal: true
     cmds:
-      - docker compose run --rm web yarn install
+      - docker compose run --rm --no-deps web yarn install
     sources:
       - ./apps/web/package.json
       - ./apps/web/yarn.lock
@@ -55,7 +55,7 @@ tasks:
   composer:
     internal: true
     cmds:
-      - docker compose run --rm php composer install
+      - docker compose run --rm --no-deps php composer install
     sources:
       - ./apps/api/composer.json
       - ./apps/api/composer.lock
