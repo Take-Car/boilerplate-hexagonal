@@ -14,6 +14,9 @@ class Kernel extends BaseKernel
 
     private const CONFIG_EXTS = '.{yml,yaml}';
 
+    /**
+     * @throws \Exception
+     */
     private function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
         $container->addResource(new FileResource($this->getConfigDir().'/bundles.php'));

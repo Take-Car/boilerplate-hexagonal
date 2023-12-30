@@ -1,0 +1,6 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Method Infrastructure\\\\Symfony\\\\Kernel\\:\\:configureContainer\\(\\) is unused\\.$#"
+			count: 1
+			path: src/Infrastructure/Symfony/Kernel.php

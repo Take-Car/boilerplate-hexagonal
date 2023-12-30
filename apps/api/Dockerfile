@@ -9,7 +9,6 @@ RUN apk add --no-cache \
     bash \
     git \
     libzip-dev \
-    postgresql15-dev \
     icu-dev \
     rabbitmq-c-dev
 RUN apk add --no-cache --virtual .phpize-deps ${PHPIZE_DEPS}
@@ -21,7 +20,7 @@ RUN docker-php-ext-install -j"$(nproc)" \
     intl \
     opcache \
     pdo \
-    pdo_pgsql
+    pdo_mysql
 RUN apk del --no-network .phpize-deps
 
 ENV PATH="$PATH:/app/bin"

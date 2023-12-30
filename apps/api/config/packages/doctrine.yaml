@@ -7,7 +7,7 @@ doctrine:
         password: '%env(resolve:DATABASE_PASSWORD)%'
         charset: '%env(resolve:DATABASE_CHARSET)%'
         server_version: '%env(resolve:DATABASE_VERSION)%'
-        driver: pdo_pgsql
+        driver: pdo_mysql
         profiling_collect_backtrace: '%kernel.debug%'
     orm:
         auto_generate_proxy_classes: true
@@ -18,10 +18,10 @@ doctrine:
         auto_mapping: true
         mappings:
             Model:
+                type: xml
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/Domain/Model'
+                dir: '%kernel.project_dir%/src/Infrastructure/Doctrine/ORM/Model'
                 prefix: 'Domain\Model'
-                alias: Model
 
 when@test:
     doctrine:

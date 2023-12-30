@@ -1,0 +1,28 @@
+name: app-tools
+
+services:
+  cs-fixer:
+    build:
+      context: ./tools/cs-fixer
+      dockerfile: Dockerfile
+    volumes:
+      - ./apps/api:/opt/code
+    entrypoint: php-cs-fixer
+    command: check
+
+  deptrac:
+    build:
+      context: ./tools/deptrac
+      dockerfile: Dockerfile
+    volumes:
+      - ./apps/api:/opt/code
+    entrypoint: deptrac
+    command: --report-uncovered
+
+  phpstan:
+    build:
+      context: ./tools/phpstan
+      dockerfile: Dockerfile
+    volumes:
+      - ./apps/api:/opt/code
+    entrypoint: phpstan

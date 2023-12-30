@@ -1,10 +1,7 @@
 framework:
     messenger:
-        failure_transport: failed
-
         transports:
             async: '%env(resolve:MESSENGER_TRANSPORT_DSN)%'
-            failed: 'doctrine://default?table_name=messenger_failed_events'
             sync: 'sync://'
 
         default_bus: command.bus
@@ -28,9 +25,9 @@ framework:
                     allow_no_senders: true
 
         routing:
-            Domain\Command\CommandInterface: sync
-            Domain\Query\QueryInterface: sync
-            Domain\Event\EventInterface: async
+            Domain\Queue\Command\CommandInterface: sync
+            Domain\Queue\Query\QueryInterface: sync
+            Domain\Queue\Event\EventInterface: async
 
 when@test:
    framework:

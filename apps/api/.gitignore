@@ -16,11 +16,6 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
-###> qossmic/deptrac-shim ###
 /.deptrac.cache
-###< qossmic/deptrac-shim ###
-
-###> friendsofphp/php-cs-fixer ###
 /.php-cs-fixer.php
 /.php-cs-fixer.cache
-###< friendsofphp/php-cs-fixer ###

@@ -8,9 +8,6 @@ tasks:
     deps:
       - bootstrap
       - ssl
-    cmds:
-      - docker compose build
-      - docker compose pull
 
   start:
     desc: Start the Docker containers
@@ -34,23 +31,20 @@ tasks:
   bootstrap:
     internal: true
     cmds:
-      - docker compose pull
-      - docker compose build
+      - docker compose -f docker-compose.yml -f docker-compose.tools.yml build
+      - docker compose -f docker-compose.yml -f docker-compose.tools.yml pull
       - task: yarn
       - task: composer
 
   yarn:
     internal: true
     cmds:
-      - docker compose run --rm --no-deps web yarn install
+      - docker compose run --rm --no-deps web npm install
     sources:
       - ./apps/web/package.json
-      - ./apps/web/yarn.lock
-      - ./apps/web/.yarnrc.yml
+      - ./apps/web/package-lock.json
     generates:
-      - ./apps/web/.yarn/**/*
-      - ./apps/web/.pnp.cjs
-      - ./apps/web/.pnp.loader.mjs
+      - ./apps/web/node_modules/**/*
 
   composer:
     internal: true
@@ -61,3 +55,15 @@ tasks:
       - ./apps/api/composer.lock
     generates:
       - ./apps/api/vendor/**/*
+
+  phpstan:
+    cmds:
+      - docker compose -f docker-compose.tools.yml up -d phpstan
+
+  deptrac:
+    cmds:
+      - docker compose -f docker-compose.tools.yml up -d deptrac
+
+  cs-fixer:
+    cmds:
+      - docker compose -f docker-compose.tools.yml up -d cs-fixer

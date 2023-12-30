@@ -1,8 +1,10 @@
+includes:
+	- phpstan-baseline.neon
+
 parameters:
     level: max
     paths:
         - src
-        - migrations
         - tests
         - config
         - public

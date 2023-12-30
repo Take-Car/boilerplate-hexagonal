@@ -1,6 +1,6 @@
 doctrine_migrations:
     migrations_paths:
-        'DoctrineMigrations': '%kernel.project_dir%/migrations'
+        'Infrastructure\Doctrine\Migrations': '%kernel.project_dir%/src/Infrastructure/Doctrine/Migrations'
     enable_profiler: false
     storage:
         table_storage:
