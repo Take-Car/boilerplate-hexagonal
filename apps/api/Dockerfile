@@ -2,8 +2,6 @@ FROM composer:2.6.5 AS composer
 
 FROM php:8.3-fpm-alpine3.17 AS base
 
-COPY --from=composer /usr/bin/composer /usr/bin/composer
-
 RUN apk add --no-cache \
     autoconf \
     bash \
@@ -28,3 +26,10 @@ ENV PATH="$PATH:/app/bin"
 WORKDIR /app
 
 FROM base AS dev
+
+FROM base AS cli
+
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+RUN apk add --no-cache bash \
+  && curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.alpine.sh' | bash \
+  && apk add --no-cache symfony-cli

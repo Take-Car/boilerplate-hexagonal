@@ -3,14 +3,13 @@ version: '3'
 tasks:
   install:
     desc: Build and start the Docker containers
-    aliases:
-      - default
     deps:
       - bootstrap
       - ssl
 
   start:
     desc: Start the Docker containers
+
     cmds:
       - docker compose up -d
 
@@ -31,39 +30,46 @@ tasks:
   bootstrap:
     internal: true
     cmds:
-      - docker compose -f docker-compose.yml -f docker-compose.tools.yml build
-      - docker compose -f docker-compose.yml -f docker-compose.tools.yml pull
-      - task: yarn
-      - task: composer
+      - docker compose build
+      - docker compose pull
+      - task: composer_install
 
-  yarn:
+  composer_install:
     internal: true
     cmds:
-      - docker compose run --rm --no-deps web npm install
-    sources:
-      - ./apps/web/package.json
-      - ./apps/web/package-lock.json
-    generates:
-      - ./apps/web/node_modules/**/*
-
-  composer:
-    internal: true
-    cmds:
-      - docker compose run --rm --no-deps php composer install
+      - task composer -- install --no-interaction --no-progress --no-suggest --no-scripts --prefer-dist
     sources:
       - ./apps/api/composer.json
       - ./apps/api/composer.lock
     generates:
       - ./apps/api/vendor/**/*
 
-  phpstan:
+  symfony:
+    desc: Shortcut to run Symfony CLI
     cmds:
-      - docker compose -f docker-compose.tools.yml up -d phpstan
+      - docker compose run --rm --no-deps symfony {{.CLI_ARGS}}
+
+  composer:
+    desc: Shortcut to run Composer CLI
+    cmds:
+      - docker compose run --rm --no-deps composer {{.CLI_ARGS}}
+
+  console:
+    desc: Shortcut to run Symfony console
+    cmds:
+      - docker compose run --rm --no-deps console {{.CLI_ARGS}}
+
+  phpstan:
+    desc: Shortcut to run PHPStan
+    cmds:
+      - docker compose up -d phpstan {{.CLI_ARGS}}
 
   deptrac:
+    desc: Shortcut to run Deptrac
     cmds:
-      - docker compose -f docker-compose.tools.yml up -d deptrac
+      - docker compose up -d deptrac {{.CLI_ARGS}}
 
   cs-fixer:
+    desc: Shortcut to run PHP CS Fixer
     cmds:
-      - docker compose -f docker-compose.tools.yml up -d cs-fixer
+      - docker compose up -d cs-fixer {{.CLI_ARGS}}

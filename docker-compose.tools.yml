@@ -1,6 +1,22 @@
-name: app-tools
-
 services:
+  symfony:
+    build:
+      context: apps/api
+      dockerfile: Dockerfile
+      target: cli
+    volumes:
+      - ./apps/api:/app
+    entrypoint: ["symfony"]
+
+  composer:
+    extends: symfony
+    entrypoint: ["symfony", "composer"]
+
+  console:
+    extends:
+      service: symfony
+    entrypoint: ["symfony", "console"]
+
   cs-fixer:
     build:
       context: ./tools/cs-fixer
