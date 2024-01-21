@@ -9,23 +9,25 @@ RUN apk add --no-cache \
     libzip-dev \
     icu-dev \
     rabbitmq-c-dev
+
 RUN apk add --no-cache --virtual .phpize-deps ${PHPIZE_DEPS}
-RUN pecl install apcu amqp
-RUN docker-php-ext-enable apcu amqp
-RUN docker-php-ext-configure zip
-RUN docker-php-ext-install -j"$(nproc)" \
+
+RUN pecl install apcu amqp && docker-php-ext-enable apcu amqp
+
+RUN docker-php-ext-configure zip && docker-php-ext-install -j"$(nproc)" \
     zip \
     intl \
     opcache \
     pdo \
     pdo_mysql
+
 RUN apk del --no-network .phpize-deps
+
+COPY php.ini /usr/local/etc/php/php.ini
 
 ENV PATH="$PATH:/app/bin"
 
 WORKDIR /app
-
-FROM base AS dev
 
 FROM base AS cli
 
@@ -33,3 +35,12 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN apk add --no-cache bash \
   && curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.alpine.sh' | bash \
   && apk add --no-cache symfony-cli
+
+
+FROM base AS dev
+
+COPY php/conf.d-dev/* /usr/local/etc/php/conf.d/
+
+FROM base AS prod
+
+COPY php/conf.d/* /usr/local/etc/php/conf.d/
