@@ -1,28 +1,13 @@
-Back:
-  - "apps/api/**/*"
-Front:
-  - "apps/web/**/*"
 Dependencies:
-  - "apps/web/package.json"
-  - "apps/web/yarn.lock"
-  - "tools/playwright/package.json"
-  - "tools/playwright/yarn.lock"
-  - "apps/api/composer.json"
-  - "apps/api/composer.lock"
+  - 'apps/api/composer.json'
+  - 'apps/api/composer.lock'
 Docker:
-  - "**/*/Dockerfile"
-  - "docker-compose*.yml"
-TypeScript:
-  - "**/*.ts"
-  - "**/*.tsx"
+  - '**/*/Dockerfile'
+  - 'docker-compose*.yml'
 Documentation:
-  - "README.md"
-  - "doc/**/*"
-JavaScript:
-  - "**/*.js"
+  - 'README.md'
+  - 'doc/**/*'
 PHP:
-  - "**/*.php"
+  - '**/*.php'
 Test:
-  - "**/*.spec.*"
-  - "**/*Spec.*"
-  - "**/*.test.*"
+  - 'apps/api/tests/**/*'
