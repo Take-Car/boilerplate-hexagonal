@@ -51,15 +51,20 @@ task
 
 ## Commands
 
-| Task    | Description                                               |
-|---------|-----------------------------------------------------------|
-| start   | Start the Docker containers detached                      |
-| stop    | Stop the Docker containers                                |
-| install | Build and pull images, setup SSL and install dependencies |
+| Task     | Description                                               |
+|----------|-----------------------------------------------------------|
+| start    | Start the Docker containers detached                      |
+| stop     | Stop the Docker containers                                |
+| install  | Build and pull images, setup SSL and install dependencies |
+| symfony  | Shortcut to interact with Symfony CLI                     |
+| composer | Shortcut to run Composer commands                         |
+| console  | Shortcut to interact with bin/console script              |
+| phpstan  | Shortcut to run PHP Stan                                  |
+| deptrac  | Shortcut to run Deptrac                                   |
+| cs-fixer | Shortcut to run PHP CS Fixer                              |
 
 ## URLs
 
-- [Frontend](https://app.localhost)
 - [Symfony API](https://api.app.localhost)
 - [Traefik dashboard](https://traefik.app.localhost)
 - [Rabbit MQ monitor](https://rabbitmq.app.localhost)
