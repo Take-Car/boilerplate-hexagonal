@@ -5,43 +5,11 @@
     },
     {
       "path": "apps/api"
-    },
-    {
-      "path": "apps/web"
     }
   ],
-  "extensions": {
-    "recommendations": [
-      "alexkrechik.cucumberautocomplete",
-      "arcanis.vscode-zipfs",
-      "bmewburn.vscode-intelephense-client",
-      "dbaeumer.vscode-eslint",
-      "EditorConfig.EditorConfig",
-      "GraphQL.vscode-graphql-syntax",
-      "mblode.twig-language-2",
-      "mtxr.sqltools-driver-pg",
-      "mtxr.sqltools",
-      "redhat.vscode-yaml",
-      "task.vscode-task"
-    ]
-  },
   "settings": {
     "files.exclude": {
-      "**/.DS_Store": true,
-      "**/.git": true,
-      "**/.hg": true,
-      "**/.svn": true,
-      "**/CVS": true,
-      "**/Thumbs.db": true,
       "apps": true
-    },
-    "search.exclude": {
-      "**/.yarn": true,
-      "**/.pnp.*": true,
-      "**/vendor": false
-    },
-    "eslint.nodePath": "web/.yarn/sdks",
-    "typescript.tsdk": "web/.yarn/sdks/typescript/lib",
-    "typescript.enablePromptUseWorkspaceTsdk": true
+    }
   }
 }
