@@ -1,0 +1,32 @@
+name: PHP Code Quality
+
+on:
+  push: ~
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  code_quality:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        command: [cs-fixer, phpstan, deptrac]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Task
+        uses: arduino/setup-task@v1
+        with:
+          version: 3.x
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        run: task bootstrap
+
+      - name: Run ${{ matrix.command }}
+        run: task ${{ matrix.command }}

@@ -28,7 +28,6 @@ tasks:
       - test -f certs/local-key.pem
 
   bootstrap:
-    internal: true
     cmds:
       - docker compose build
       - docker compose pull
