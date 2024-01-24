@@ -19,8 +19,9 @@ services:
 
   cs-fixer:
     build:
-      context: ./tools/cs-fixer
+      context: ./tools
       dockerfile: Dockerfile
+      target: cs-fixer
     volumes:
       - ./apps/api:/opt/code
     entrypoint: php-cs-fixer
@@ -28,8 +29,9 @@ services:
 
   deptrac:
     build:
-      context: ./tools/deptrac
+      context: ./tools
       dockerfile: Dockerfile
+      target: deptrac
     volumes:
       - ./apps/api:/opt/code
     entrypoint: deptrac
@@ -37,16 +39,18 @@ services:
 
   phpstan:
     build:
-      context: ./tools/phpstan
+      context: ./tools
       dockerfile: Dockerfile
+      target: phpstan
     volumes:
       - ./apps/api:/opt/code
     entrypoint: phpstan
 
   rector:
     build:
-      context: ./tools/rector
+      context: ./tools
       dockerfile: Dockerfile
+      target: rector
     volumes:
       - ./apps/api:/opt/code
     entrypoint: rector --config /opt/rector/rector.php
