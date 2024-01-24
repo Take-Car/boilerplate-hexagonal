@@ -5,25 +5,25 @@ updates:
     schedule:
       day: monday
       interval: weekly
-      time: 06:00
+      time: '06:00'
       timezone: Europe/Paris
     versioning-strategy: increase
     groups:
       next:
         patterns:
-          - "@types/react*"
+          - '@types/react*'
           - next
           - react*
       eslint:
         patterns:
-          - "eslint*"
+          - 'eslint*'
 
   - package-ecosystem: composer
     directory: /apps/api
     schedule:
       day: monday
       interval: weekly
-      time: 06:00
+      time: '06:00'
       timezone: Europe/Paris
     versioning-strategy: increase
     groups:
@@ -39,7 +39,7 @@ updates:
     schedule:
       day: monday
       interval: weekly
-      time: 06:00
+      time: '06:00'
       timezone: Europe/Paris
     versioning-strategy: increase
 
@@ -48,7 +48,7 @@ updates:
     schedule:
       day: monday
       interval: weekly
-      time: 06:00
+      time: '06:00'
       timezone: Europe/Paris
     versioning-strategy: increase
 
@@ -57,7 +57,7 @@ updates:
     schedule:
       day: monday
       interval: weekly
-      time: 06:00
+      time: '06:00'
       timezone: Europe/Paris
     versioning-strategy: increase
 
@@ -68,7 +68,7 @@ updates:
     schedule:
       day: monday
       interval: weekly
-      time: 06:00
+      time: '06:00'
       timezone: Europe/Paris
 
   - directory: /apps/web
@@ -76,7 +76,7 @@ updates:
     schedule:
       day: monday
       interval: weekly
-      time: 06:00
+      time: '06:00'
       timezone: Europe/Paris
 
   - directory: /services/mysql
@@ -84,7 +84,7 @@ updates:
     schedule:
       day: monday
       interval: weekly
-      time: 06:00
+      time: '06:00'
       timezone: Europe/Paris
 
   - directory: /services/nginx
@@ -92,7 +92,7 @@ updates:
     schedule:
       day: monday
       interval: weekly
-      time: 06:00
+      time: '06:00'
       timezone: Europe/Paris
 
   - directory: /services/traefik
@@ -100,7 +100,7 @@ updates:
     schedule:
       day: monday
       interval: weekly
-      time: 06:00
+      time: '06:00'
       timezone: Europe/Paris
 
   - directory: /tools/cs-fixer
@@ -108,7 +108,7 @@ updates:
     schedule:
       day: monday
       interval: weekly
-      time: 06:00
+      time: '06:00'
       timezone: Europe/Paris
 
   - directory: /tools/deptrac
@@ -116,7 +116,7 @@ updates:
     schedule:
       day: monday
       interval: weekly
-      time: 06:00
+      time: '06:00'
       timezone: Europe/Paris
 
   - directory: /tools/phpstan
@@ -124,5 +124,13 @@ updates:
     schedule:
       day: monday
       interval: weekly
-      time: 06:00
+      time: '06:00'
+      timezone: Europe/Paris
+
+  - directory: /tools/rector
+    package-ecosystem: docker
+    schedule:
+      day: monday
+      interval: weekly
+      time: '06:00'
       timezone: Europe/Paris

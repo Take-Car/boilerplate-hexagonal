@@ -19,6 +19,7 @@ class Bus implements BusInterface
     ) {
     }
 
+    #[\Override]
     public function ask(QueryInterface $query): mixed
     {
         $envelope = $this->queryBus->dispatch($query);
@@ -27,12 +28,14 @@ class Bus implements BusInterface
         return $handledStamp->getResult();
     }
 
+    #[\Override]
     public function dispatch(CommandInterface $command): void
     {
         $envelope = $this->commandBus->dispatch($command);
         $this->assertSingleHandler($envelope);
     }
 
+    #[\Override]
     public function emit(EventInterface $event): void
     {
         $this->eventBus->dispatch($event);

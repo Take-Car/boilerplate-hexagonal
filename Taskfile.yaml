@@ -28,7 +28,6 @@ tasks:
       - test -f certs/local-key.pem
 
   bootstrap:
-    internal: true
     cmds:
       - docker compose build
       - docker compose pull
@@ -73,3 +72,8 @@ tasks:
     desc: Shortcut to run PHP CS Fixer
     cmds:
       - docker compose -f docker-compose.tools.yml run --rm cs-fixer {{.CLI_ARGS}}
+
+  rector:
+    desc: Shortcut to run Rector
+    cmds:
+      - docker compose -f docker-compose.tools.yml run --rm rector {{.CLI_ARGS}}
