@@ -1,3 +1,5 @@
+[![PHP Code Quality](https://github.com/clementvtrd/boilerplate-graphql/actions/workflows/api.yaml/badge.svg?branch=develop)](https://github.com/clementvtrd/boilerplate-graphql/actions/workflows/api.yaml)
+
 # Hexagonal boilerplate
 
 ## Hexagonal architecture
