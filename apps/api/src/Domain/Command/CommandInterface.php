@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Queue\Command;
+namespace Domain\Command;
 
 interface CommandInterface
 {
