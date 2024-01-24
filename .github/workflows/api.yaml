@@ -26,8 +26,8 @@ jobs:
           version: 3.x
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install dependencies
-        run: task bootstrap
+      - name: Build ${{ matrix.command }}
+        run: docker compose -f docker-compose.tools.yml build ${{ matrix.command }}
 
       - name: Run ${{ matrix.command }}
         run: task ${{ matrix.command }}
