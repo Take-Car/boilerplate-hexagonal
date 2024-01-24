@@ -6,6 +6,8 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 WORKDIR /opt/code
 
+ENV PATH="${PATH}:/usr/bin/composer"
+
 FROM base AS rector
 
 RUN mkdir -p /opt/rector

@@ -29,10 +29,10 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build ${{ matrix.command }}
-        run: docker compose -f docker-compose.tools.yml build composer ${{ matrix.command }}
+        run: docker compose -f docker-compose.tools.yml build ${{ matrix.command }}
 
       - name: Install dependencies
-        run: docker compose -f docker-compose.tools.yml run --rm composer install --no-interaction --no-progress --no-suggest --no-scripts --prefer-dist
+        run: docker compose -f docker-compose.tools.yml run --entrypoint composer --rm ${{ matrix.command }} install --no-scripts --ignore-platform-reqs --no-scripts --prefer-dist
 
       - name: Run ${{ matrix.command }}
         run: task ${{ matrix.command }}
