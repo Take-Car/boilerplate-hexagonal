@@ -11,12 +11,12 @@ updates:
     groups:
       next:
         patterns:
-          - "@types/react*"
+          - '@types/react*'
           - next
           - react*
       eslint:
         patterns:
-          - "eslint*"
+          - 'eslint*'
 
   - package-ecosystem: composer
     directory: /apps/api
@@ -120,6 +120,14 @@ updates:
       timezone: Europe/Paris
 
   - directory: /tools/phpstan
+    package-ecosystem: docker
+    schedule:
+      day: monday
+      interval: weekly
+      time: 06:00
+      timezone: Europe/Paris
+
+  - directory: /tools/rector
     package-ecosystem: docker
     schedule:
       day: monday

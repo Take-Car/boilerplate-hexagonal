@@ -42,3 +42,11 @@ services:
     volumes:
       - ./apps/api:/opt/code
     entrypoint: phpstan
+
+  rector:
+    build:
+      context: ./tools/rector
+      dockerfile: Dockerfile
+    volumes:
+      - ./apps/api:/opt/code
+    entrypoint: rector --config /opt/rector/rector.php
