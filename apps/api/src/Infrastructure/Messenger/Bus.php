@@ -2,10 +2,10 @@
 
 namespace Infrastructure\Messenger;
 
-use Domain\Queue\BusInterface;
-use Domain\Queue\Command\CommandInterface;
-use Domain\Queue\Event\EventInterface;
-use Domain\Queue\Query\QueryInterface;
+use Domain\BusInterface;
+use Domain\Command\CommandInterface;
+use Domain\Event\EventInterface;
+use Domain\Query\QueryInterface;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
@@ -19,17 +19,6 @@ class Bus implements BusInterface
     ) {
     }
 
-    public function dispatch(CommandInterface|EventInterface $command): void
-    {
-        $bus = match (true) {
-            $command instanceof CommandInterface => $this->commandBus,
-            $command instanceof EventInterface => $this->eventBus
-        };
-
-        $envelope = $bus->dispatch($command);
-        $this->assertSingleHandler($envelope);
-    }
-
     public function ask(QueryInterface $query): mixed
     {
         $envelope = $this->queryBus->dispatch($query);
@@ -38,19 +27,32 @@ class Bus implements BusInterface
         return $handledStamp->getResult();
     }
 
+    public function dispatch(CommandInterface $command): void
+    {
+        $envelope = $this->commandBus->dispatch($command);
+        $this->assertSingleHandler($envelope);
+    }
+
+    public function emit(EventInterface $event): void
+    {
+        $this->eventBus->dispatch($event);
+    }
+
     private function assertSingleHandler(Envelope $envelope): HandledStamp
     {
         /** @var HandledStamp[] $handledStamps */
         $handledStamps = $envelope->all(HandledStamp::class);
 
         if (!$handledStamps) {
-            throw new \LogicException(sprintf('Message of type "%s" was handled zero times. Exactly one handler is expected when using "%s::%s()".', get_debug_type($envelope->getMessage()), static::class, __FUNCTION__));
+            $className = get_class($envelope->getMessage());
+            throw new \LogicException("Message {$className} was not handled. Did you forget to add a handler for it?");
         }
 
         if (\count($handledStamps) > 1) {
+            $className = get_class($envelope->getMessage());
             $handlers = implode(', ', array_map(fn (HandledStamp $stamp): string => sprintf('"%s"', $stamp->getHandlerName()), $handledStamps));
 
-            throw new \LogicException(sprintf('Message of type "%s" was handled multiple times. Only one handler is expected when using "%s::%s()", got %d: %s.', get_debug_type($envelope->getMessage()), static::class, __FUNCTION__, \count($handledStamps), $handlers));
+            throw new \LogicException("Message {$className} was handled by multiple handlers: {$handlers}. Only one handler per message is supported.");
         }
 
         return $handledStamps[0];

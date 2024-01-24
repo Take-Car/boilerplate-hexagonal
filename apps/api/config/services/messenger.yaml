@@ -12,20 +12,10 @@ services:
   Domain\Query\:
     resource: '%kernel.project_dir%/src/Domain/Query/**/Handler.php'
 
-  Domain\Queue\CommandBus: '@Infrastructure\Messenger\Queue\CommandBus'
+  Domain\BusInterface: '@Infrastructure\Messenger\Bus'
 
-  Domain\Queue\EventBus: '@Infrastructure\Messenger\Queue\EventBus'
-
-  Domain\Queue\QueryBus: '@Infrastructure\Messenger\Queue\QueryBus'
-
-  Infrastructure\Messenger\Queue\CommandBus:
+  Infrastructure\Messenger\Bus:
     arguments:
-      - '@command.bus'
-
-  Infrastructure\Messenger\Queue\EventBus:
-    arguments:
-      - '@event.bus'
-
-  Infrastructure\Messenger\Queue\QueryBus:
-    arguments:
-      - '@query.bus'
+      $commandBus: '@messenger.command.bus'
+      $queryBus: '@messenger.query.bus'
+      $eventBus: '@messenger.event.bus'

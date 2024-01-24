@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Queue\Event;
+namespace Domain\Event;
 
 interface EventInterface
 {
