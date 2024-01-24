@@ -22,7 +22,6 @@ We will use Docker to make a development environment with 5 services:
 - Nginx + PHP 8.2: serves the Symfony API
 - PostgreSQL 16: to store our data
 - RabbitMQ: messaging queue system (in pair with Symfony Messenger)
-- NodeJS 21: to build the frontend with NextJS
 
 ## Installation
 
@@ -64,6 +63,7 @@ task
 | phpstan  | Shortcut to run PHP Stan                                  |
 | deptrac  | Shortcut to run Deptrac                                   |
 | cs-fixer | Shortcut to run PHP CS Fixer                              |
+| rector   | Shortcut to run Rector                                    |
 
 ## URLs
 
