@@ -1,4 +1,4 @@
-[![PHP Code Quality](https://github.com/clementvtrd/boilerplate-graphql/actions/workflows/api.yaml/badge.svg?branch=develop)](https://github.com/clementvtrd/boilerplate-graphql/actions/workflows/api.yaml)
+[![PHP Code Quality](https://github.com/clementvtrd/boilerplate-hexagonal/actions/workflows/api.yaml/badge.svg?branch=develop)](https://github.com/clementvtrd/boilerplate-hexagonal/actions/workflows/api.yaml)
 
 # Hexagonal boilerplate
 
@@ -19,8 +19,8 @@ This boilerplate is built with React and Symfony for learning purpose. You can r
 We will use Docker to make a development environment with 5 services:
 
 - Traefik: as a reverse proxy
-- Nginx + PHP 8.2: serves the Symfony API
-- PostgreSQL 16: to store our data
+- Nginx + PHP: serves the Symfony API
+- PostgreSQL: to store our data
 - RabbitMQ: messaging queue system (in pair with Symfony Messenger)
 
 ## Installation
