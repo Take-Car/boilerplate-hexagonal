@@ -1,7 +1,6 @@
 parameters:
   paths:
     - ./src
-    - ./vendor
 
   layers:
     - name: Application
@@ -21,11 +20,6 @@ parameters:
         - type: classLike
           regex: ^Infrastructure\\.*
 
-    - name: OverblogGraphQLBundle
-      collectors:
-        - type: classLike
-          regex: ^Overblog\\GraphQLBundle\\.*
-
     - name: Vendor
       collectors:
         - type: bool
@@ -36,16 +30,11 @@ parameters:
               layer: Domain
             - type: layer
               layer: Infrastructure
-            - type: layer
-              layer: OverblogGraphQLBundle
 
   ruleset:
     Domain: ~
     Application:
       - +Domain
-      - OverblogGraphQLBundle
     Infrastructure:
       - +Application
-      - Vendor
-    OverblogGraphQLBundle:
       - Vendor
