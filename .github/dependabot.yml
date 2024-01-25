@@ -1,23 +1,5 @@
 version: 2
 updates:
-  - package-ecosystem: npm
-    directory: /apps/web
-    schedule:
-      day: monday
-      interval: weekly
-      time: '06:00'
-      timezone: Europe/Paris
-    versioning-strategy: increase
-    groups:
-      next:
-        patterns:
-          - '@types/react*'
-          - next
-          - react*
-      eslint:
-        patterns:
-          - 'eslint*'
-
   - package-ecosystem: composer
     directory: /apps/api
     schedule:
@@ -61,17 +43,18 @@ updates:
       timezone: Europe/Paris
     versioning-strategy: increase
 
-  ### DOCKERFILES ###
-
-  - directory: /apps/api
-    package-ecosystem: docker
+  - package-ecosystem: composer
+    directory: /tools/rector
     schedule:
       day: monday
       interval: weekly
       time: '06:00'
       timezone: Europe/Paris
+    versioning-strategy: increase
 
-  - directory: /apps/web
+  ### DOCKERFILES ###
+
+  - directory: /apps/api
     package-ecosystem: docker
     schedule:
       day: monday
@@ -103,31 +86,7 @@ updates:
       time: '06:00'
       timezone: Europe/Paris
 
-  - directory: /tools/cs-fixer
-    package-ecosystem: docker
-    schedule:
-      day: monday
-      interval: weekly
-      time: '06:00'
-      timezone: Europe/Paris
-
-  - directory: /tools/deptrac
-    package-ecosystem: docker
-    schedule:
-      day: monday
-      interval: weekly
-      time: '06:00'
-      timezone: Europe/Paris
-
-  - directory: /tools/phpstan
-    package-ecosystem: docker
-    schedule:
-      day: monday
-      interval: weekly
-      time: '06:00'
-      timezone: Europe/Paris
-
-  - directory: /tools/rector
+  - directory: /tools
     package-ecosystem: docker
     schedule:
       day: monday
