@@ -14,7 +14,7 @@ Overall, the hexagonal architecture promotes a modular, clean, and adaptable des
 
 ## Stack
 
-This boilerplate is built with React and Symfony for learning purpose. You can replace each part at your convenience.
+This boilerplate is built with Symfony for learning purpose. You can replace each part at your convenience.
 
 We will use Docker to make a development environment with 5 services:
 
