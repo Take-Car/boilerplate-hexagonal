@@ -19,7 +19,7 @@ class Workflow implements WorkflowInterface
     }
 
     #[\Override]
-    public function handle(\Closure $task): mixed
+    public function run(\Closure $task): mixed
     {
         $this->entityManager->beginTransaction();
 

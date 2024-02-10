@@ -9,5 +9,5 @@ interface WorkflowInterface
     /**
      * @param \Closure(BusInterface): mixed $task
      */
-    public function handle(\Closure $task): mixed;
+    public function run(\Closure $task): mixed;
 }
