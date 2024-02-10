@@ -12,8 +12,6 @@ parameters:
       collectors:
         - type: classLike
           regex: ^Domain\\.*
-        - type: php_internal
-          value: '*'
 
     - name: Infrastructure
       collectors:
@@ -22,19 +20,17 @@ parameters:
 
     - name: Vendor
       collectors:
-        - type: bool
-          must_not:
-            - type: layer
-              layer: Application
-            - type: layer
-              layer: Domain
-            - type: layer
-              layer: Infrastructure
+        - type: classLike
+          regex: ^Symfony\\.*
+        - type: classLike
+          regex: ^Doctrine\\.*
 
   ruleset:
     Domain: ~
     Application:
-      - +Domain
+      - Domain
+      - Vendor
     Infrastructure:
-      - +Application
+      - Application
+      - Domain
       - Vendor
