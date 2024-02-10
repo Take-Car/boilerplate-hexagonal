@@ -11,11 +11,3 @@ services:
 
   Domain\Query\:
     resource: '%kernel.project_dir%/src/Domain/Query/**/Handler.php'
-
-  Domain\BusInterface: '@Infrastructure\Messenger\Bus'
-
-  Infrastructure\Messenger\Bus:
-    arguments:
-      $commandBus: '@messenger.command.bus'
-      $queryBus: '@messenger.query.bus'
-      $eventBus: '@messenger.event.bus'

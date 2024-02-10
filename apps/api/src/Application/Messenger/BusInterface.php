@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain;
+namespace Application\Messenger;
 
 use Domain\Command\CommandInterface;
 use Domain\Event\EventInterface;
