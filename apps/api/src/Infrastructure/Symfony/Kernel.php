@@ -17,7 +17,7 @@ class Kernel extends BaseKernel
         $container->addResource(new FileResource($this->getConfigDir().'/bundles.php'));
         $confDir = $this->getConfigDir();
 
-        $loader->load($confDir.'/packages/*.yaml', 'glob');
-        $loader->load($confDir.'/services/*.yaml', 'glob');
+        $loader->load($confDir.'/packages/*.php', 'glob');
+        $loader->load($confDir.'/services/*.php', 'glob');
     }
 }

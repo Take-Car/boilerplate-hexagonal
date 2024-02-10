@@ -7,7 +7,7 @@ return function (ContainerConfigurator $container, string $env): void {
         'web_profiler',
         [
             'toolbar' => 'dev' === $env,
-            'intercept_redirects' => 'dev' === $env,
+            'intercept_redirects' => false,
         ]
     );
 
