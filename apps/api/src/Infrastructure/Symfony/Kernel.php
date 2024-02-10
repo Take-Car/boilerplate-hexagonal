@@ -12,17 +12,12 @@ class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
-    private const string CONFIG_EXTS = '.{yml,yaml}';
-
-    /**
-     * @throws \Exception
-     */
     private function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
         $container->addResource(new FileResource($this->getConfigDir().'/bundles.php'));
         $confDir = $this->getConfigDir();
 
-        $loader->load($confDir.'/{packages}/*'.self::CONFIG_EXTS, 'glob');
-        $loader->load($confDir.'/{services}'.self::CONFIG_EXTS, 'glob');
+        $loader->load($confDir.'/packages/*.yaml', 'glob');
+        $loader->load($confDir.'/services/*.yaml', 'glob');
     }
 }
