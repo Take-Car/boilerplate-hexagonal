@@ -1,9 +1,0 @@
-controllers:
-  resource:
-    path: ../../src/Application/Controller/
-    namespace: Application\Controller
-  type: attribute
-
-kernel:
-  resource: Infrastructure\Symfony\Kernel
-  type: attribute
