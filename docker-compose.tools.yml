@@ -4,6 +4,8 @@ services:
       context: apps/api
       dockerfile: Dockerfile
       target: cli
+    env_file:
+      - ./apps/api/.env
     volumes:
       - ./apps/api:/app
     entrypoint: ["symfony"]
