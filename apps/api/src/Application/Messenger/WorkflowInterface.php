@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Application\Messenger;
 
-use Closure;
-
 interface WorkflowInterface
 {
     /**
-     * @param Closure(BusInterface) mixed
+     * @param \Closure(BusInterface): mixed $task
      */
     public function handle(\Closure $task): mixed;
 }

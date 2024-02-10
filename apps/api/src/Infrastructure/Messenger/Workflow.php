@@ -15,23 +15,25 @@ class Workflow implements WorkflowInterface
     public function __construct(
         private readonly BusInterface $bus,
         private readonly EntityManagerInterface $entityManager,
-    ) {}
+    ) {
+    }
 
-    /**
-     * @inheritdoc
-     */
+    #[\Override]
     public function handle(\Closure $task): mixed
     {
         $this->entityManager->beginTransaction();
 
         try {
-            $task($this->bus);
+            $output = $task($this->bus);
         } catch (\Throwable $e) {
             $this->entityManager->rollback();
+
+            throw $e;
         }
 
         $this->entityManager->flush();
         $this->entityManager->commit();
-    }
 
+        return $output;
+    }
 }
