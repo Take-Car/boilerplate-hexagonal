@@ -1,12 +1,12 @@
 doctrine:
     dbal:
-        dbname: '%env(resolve:DATABASE_NAME)%'
-        host: '%env(resolve:DATABASE_HOST)%'
-        port: '%env(resolve:DATABASE_PORT)%'
-        user: '%env(resolve:DATABASE_USER)%'
-        password: '%env(resolve:DATABASE_PASSWORD)%'
-        charset: '%env(resolve:DATABASE_CHARSET)%'
-        server_version: '%env(resolve:DATABASE_VERSION)%'
+        dbname: '%env(DATABASE_NAME)%'
+        host: '%env(DATABASE_HOST)%'
+        port: '%env(DATABASE_PORT)%'
+        user: '%env(DATABASE_USER)%'
+        password: '%env(DATABASE_PASSWORD)%'
+        charset: '%env(DATABASE_CHARSET)%'
+        server_version: '%env(DATABASE_VERSION)%'
         driver: pdo_mysql
         profiling_collect_backtrace: '%kernel.debug%'
     orm:

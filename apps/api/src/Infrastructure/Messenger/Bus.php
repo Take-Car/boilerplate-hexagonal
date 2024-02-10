@@ -2,27 +2,31 @@
 
 namespace Infrastructure\Messenger;
 
-use Domain\BusInterface;
+use Application\Messenger\BusInterface;
 use Domain\Command\CommandInterface;
 use Domain\Event\EventInterface;
 use Domain\Query\QueryInterface;
+use Symfony\Component\DependencyInjection\Attribute\AsAlias;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 
+#[AsAlias]
 class Bus implements BusInterface
 {
     public function __construct(
-        private MessageBusInterface $commandBus,
-        private MessageBusInterface $queryBus,
-        private MessageBusInterface $eventBus
+        #[Autowire(service: 'messenger.transactional.bus')]
+        private MessageBusInterface $transactionnalBus,
+        #[Autowire(service: 'messenger.simple.bus')]
+        private MessageBusInterface $simpleBus,
     ) {
     }
 
     #[\Override]
     public function ask(QueryInterface $query): mixed
     {
-        $envelope = $this->queryBus->dispatch($query);
+        $envelope = $this->simpleBus->dispatch($query);
         $handledStamp = $this->assertSingleHandler($envelope);
 
         return $handledStamp->getResult();
@@ -31,14 +35,14 @@ class Bus implements BusInterface
     #[\Override]
     public function dispatch(CommandInterface $command): void
     {
-        $envelope = $this->commandBus->dispatch($command);
+        $envelope = $this->transactionnalBus->dispatch($command);
         $this->assertSingleHandler($envelope);
     }
 
     #[\Override]
     public function emit(EventInterface $event): void
     {
-        $this->eventBus->dispatch($event);
+        $this->simpleBus->dispatch($event);
     }
 
     private function assertSingleHandler(Envelope $envelope): HandledStamp
