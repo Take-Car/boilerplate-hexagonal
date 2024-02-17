@@ -32,6 +32,7 @@ jobs:
         run: docker compose -f docker-compose.tools.yml build ${{ matrix.command }}
 
       - name: Install dependencies
+        if: matrix.command == 'phpstan'
         run: docker compose -f docker-compose.tools.yml run --entrypoint composer --rm ${{ matrix.command }} install --no-scripts --ignore-platform-reqs --no-scripts --prefer-dist
 
       - name: Run ${{ matrix.command }}
@@ -42,7 +43,8 @@ jobs:
         uses: actions/configure-pages@v4
 
       - name: Upload ${{ matrix.command }} report
-#        if: github.ref == 'refs/heads/develop' && matrix.command == 'phpspec'
+        #        if: github.ref == 'refs/heads/develop' && matrix.command == 'phpspec'
+        if: matrix.command == 'phpspec'
         uses: actions/upload-pages-artifact@v3
         with:
           name: ${{ matrix.command }}-report
