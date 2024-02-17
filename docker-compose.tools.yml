@@ -65,3 +65,4 @@ services:
     volumes:
       - ./apps/api:/opt/code
     entrypoint: phpspec
+    command: run
