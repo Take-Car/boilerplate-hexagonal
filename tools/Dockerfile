@@ -12,10 +12,6 @@ FROM base AS rector
 
 RUN mkdir -p /opt/rector
 
-RUN chown -R 1000:1000 /opt/rector
-
-USER 1000
-
 COPY ./rector/composer.json ./rector/composer.lock ./rector/rector.php /opt/rector/
 
 RUN composer install --no-progress --no-interaction --no-plugins --no-scripts --prefer-dist --no-cache --working-dir=/opt/rector
@@ -25,10 +21,6 @@ ENV PATH="${PATH}:/opt/rector/vendor/bin"
 FROM base AS phpstan
 
 RUN mkdir -p /opt/phpstan
-
-RUN chown -R 1000:1000 /opt/phpstan
-
-USER 1000
 
 COPY ./phpstan/composer.json ./phpstan/composer.lock /opt/phpstan/
 
@@ -40,10 +32,6 @@ FROM base AS deptrac
 
 RUN mkdir -p /opt/deptrac
 
-RUN chown -R 1000:1000 /opt/deptrac
-
-USER 1000
-
 COPY ./deptrac/composer.json ./deptrac/composer.lock /opt/deptrac/
 
 RUN composer install --no-progress --no-interaction --no-plugins --no-scripts --prefer-dist --no-cache --working-dir=/opt/deptrac
@@ -53,10 +41,6 @@ ENV PATH="${PATH}:/opt/deptrac/vendor/bin"
 FROM base AS cs-fixer
 
 RUN mkdir -p /opt/cs-fixer
-
-RUN chown -R 1000:1000 /opt/cs-fixer
-
-USER 1000
 
 COPY ./cs-fixer/composer.json ./cs-fixer/composer.lock /opt/cs-fixer/
 
@@ -74,10 +58,6 @@ RUN apk add --no-cache gcc g++ make autoconf linux-headers \
     && apk del --no-network gcc g++ make autoconf linux-headers
 
 RUN mkdir -p /opt/phpspec
-
-RUN chown -R 1000:1000 /opt/phpspec
-
-USER 1000
 
 COPY ./phpspec/composer.json ./phpspec/composer.lock /opt/phpspec/
 
