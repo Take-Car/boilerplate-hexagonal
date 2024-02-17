@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Domain\Model;
 
-class Movie
+readonly class Movie
 {
     public readonly string $uuid;
 
@@ -21,28 +21,13 @@ class Movie
         return $this->title;
     }
 
-    public function setTitle(string $title): void
-    {
-        $this->title = $title;
-    }
-
     public function getReleaseDate(): \DateTimeImmutable
     {
         return $this->releaseDate;
     }
 
-    public function setReleaseDate(\DateTimeInterface $releaseDate): void
-    {
-        $this->releaseDate = \DateTimeImmutable::createFromInterface($releaseDate);
-    }
-
     public function getDescription(): string
     {
         return $this->description;
-    }
-
-    public function setDescription(string $description): void
-    {
-        $this->description = $description;
     }
 }

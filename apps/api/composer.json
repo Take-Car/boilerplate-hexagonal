@@ -11,6 +11,11 @@
             "Tools\\": "tools"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "specs\\": "tests/specs"
+        }
+    },
     "config": {
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
