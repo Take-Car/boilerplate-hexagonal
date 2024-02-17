@@ -51,12 +51,14 @@ final readonly class Movies implements CollectionMovies
     public function all(): iterable
     {
         /**
-         * @var iterable<Movie>
+         * @var iterable<Movie> $iterable
          */
-        return $this->repository->createQueryBuilder('movie')
+        $iterable = $this->repository->createQueryBuilder('movie')
             ->orderBy('movie.releaseDate', 'DESC')
             ->getQuery()
             ->toIterable()
         ;
+
+        return $iterable;
     }
 }

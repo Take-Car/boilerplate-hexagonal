@@ -11,12 +11,12 @@ use Prophecy\Argument;
 
 class HandlerSpec extends ObjectBehavior
 {
-    function let(Movies $movies)
+    public function let(Movies $movies)
     {
         $this->beConstructedWith($movies);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(Handler::class);
     }
@@ -25,7 +25,7 @@ class HandlerSpec extends ObjectBehavior
     {
         $input = new Input('The Matrix', 'Welcome to the Real World', new \DateTimeImmutable('1999-03-31'));
         $this->__invoke($input);
-        $movies->add(Argument::that(static function(Movie $movie) {
+        $movies->add(Argument::that(static function (Movie $movie) {
             return 'The Matrix' === $movie->getTitle()
                 && 'Welcome to the Real World' === $movie->getDescription()
                 && '1999-03-31' === $movie->getReleaseDate()->format('Y-m-d');

@@ -7,16 +7,15 @@ use Domain\Command\Movie\Delete\Handler;
 use Domain\Command\Movie\Delete\Input;
 use Domain\Model\Movie;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class HandlerSpec extends ObjectBehavior
 {
-    function let(Movies $movies)
+    public function let(Movies $movies)
     {
         $this->beConstructedWith($movies);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(Handler::class);
     }
