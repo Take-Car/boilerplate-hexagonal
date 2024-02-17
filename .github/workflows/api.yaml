@@ -11,10 +11,9 @@ jobs:
   code_quality:
     runs-on: ubuntu-latest
 
-    strategy:
-      fail-fast: false
-      matrix:
-        command: [cs-fixer, phpstan, deptrac, rector, phpspec]
+    permissions:
+      id-token: write
+      pages: write
 
     steps:
       - name: Checkout code
@@ -28,29 +27,39 @@ jobs:
           version: 3.x
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build ${{ matrix.command }}
-        run: docker compose -f docker-compose.tools.yml build ${{ matrix.command }}
+      - name: Build images
+        run: docker compose -f docker-compose.tools.yml build
 
       - name: Install dependencies
-        if: matrix.command == 'phpstan'
-        run: docker compose -f docker-compose.tools.yml run --entrypoint composer --rm ${{ matrix.command }} install --no-scripts --ignore-platform-reqs --no-scripts --prefer-dist
+        run: docker compose -f docker-compose.tools.yml run --entrypoint composer --rm composer install --no-scripts --ignore-platform-reqs --no-scripts --prefer-dist
+      # cs-fixer, phpstan, deptrac, rector, phpspec\
 
-      - name: Run ${{ matrix.command }}
-        run: task ${{ matrix.command }}
+      - name: Run PHP CS Fixer
+        run: task cs-fixer
+
+      - name: Run PHPStan
+        run: task phpstan
+
+      - name: Run Deptrac
+        run: task deptrac
+
+      - name: Run Rector
+        run: task rector
+
+      - name: Run PHP Spec
+        run: task phpspec
 
       - name: Setup Pages
-#        if: github.ref == 'refs/heads/develop'
+        if: github.ref == 'refs/heads/develop'
         uses: actions/configure-pages@v4
 
-      - name: Upload ${{ matrix.command }} report
-        #        if: github.ref == 'refs/heads/develop' && matrix.command == 'phpspec'
-        if: matrix.command == 'phpspec'
+      - name: Upload coverages
+        if: github.ref == 'refs/heads/develop'
         uses: actions/upload-pages-artifact@v3
         with:
-          name: ${{ matrix.command }}-report
-          path: 'coverage/${{ matrix.command }}'
+          path: apps/api/coverage
 
       - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/develop'
         id: deployment
-#        if: github.ref == 'refs/heads/develop'
         uses: actions/deploy-pages@v4
