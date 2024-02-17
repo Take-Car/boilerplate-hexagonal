@@ -1,0 +1,11 @@
+suites:
+  Domain:
+    namespace: Domain
+    spec_path: tests
+    spec_prefix: specs
+
+extensions:
+  FriendsOfPhpSpec\PhpSpec\CodeCoverage\CodeCoverageExtension:
+    format: [html]
+    output:
+      html: tests/specs/coverage
