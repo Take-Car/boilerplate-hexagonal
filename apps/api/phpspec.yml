@@ -8,4 +8,4 @@ extensions:
   FriendsOfPhpSpec\PhpSpec\CodeCoverage\CodeCoverageExtension:
     format: [html]
     output:
-      html: tests/specs/coverage
+      html: coverage/phpspec

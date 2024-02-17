@@ -36,3 +36,19 @@ jobs:
 
       - name: Run ${{ matrix.command }}
         run: task ${{ matrix.command }}
+
+      - name: Setup Pages
+#        if: github.ref == 'refs/heads/develop'
+        uses: actions/configure-pages@v4
+
+      - name: Upload ${{ matrix.command }} report
+#        if: github.ref == 'refs/heads/develop' && matrix.command == 'phpspec'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          name: ${{ matrix.command }}-report
+          path: 'coverage/${{ matrix.command }}'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+#        if: github.ref == 'refs/heads/develop'
+        uses: actions/deploy-pages@v4
