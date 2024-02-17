@@ -8,3 +8,8 @@ parameters:
         - tests
         - config
         - public
+
+services:
+    - class: Tools\TypeResolver\QueryOutputTypeResolver
+      tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension

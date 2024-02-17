@@ -50,6 +50,9 @@ final readonly class Movies implements CollectionMovies
     #[\Override]
     public function all(): iterable
     {
+        /**
+         * @var iterable<Movie>
+         */
         return $this->repository->createQueryBuilder('movie')
             ->orderBy('movie.releaseDate', 'DESC')
             ->getQuery()

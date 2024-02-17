@@ -46,7 +46,7 @@ final class MovieController
     #[Route('/{uuid}', name: 'show', methods: Request::METHOD_GET)]
     public function show(Movies $movies, string $uuid): Response
     {
-        return new JsonResponse($movies->get($uuid)->toArray());
+        return new JsonResponse($movies->get($uuid));
     }
 
     #[Route('/{uuid}', name: 'delete', methods: Request::METHOD_DELETE)]
