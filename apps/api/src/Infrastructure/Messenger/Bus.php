@@ -2,23 +2,18 @@
 
 namespace Infrastructure\Messenger;
 
-use Application\Messenger\BusInterface;
+use Application\BusInterface;
 use Domain\Command\CommandInterface;
 use Domain\Event\EventInterface;
 use Domain\Query\QueryInterface;
-use Symfony\Component\DependencyInjection\Attribute\AsAlias;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 
-#[AsAlias]
-class Bus implements BusInterface
+final readonly class Bus implements BusInterface
 {
     public function __construct(
-        #[Autowire(service: 'messenger.transactional.bus')]
-        private MessageBusInterface $transactionnalBus,
-        #[Autowire(service: 'messenger.simple.bus')]
+        private MessageBusInterface $transactionalBus,
         private MessageBusInterface $simpleBus,
     ) {
     }
@@ -35,7 +30,7 @@ class Bus implements BusInterface
     #[\Override]
     public function dispatch(CommandInterface $command): void
     {
-        $envelope = $this->transactionnalBus->dispatch($command);
+        $envelope = $this->transactionalBus->dispatch($command);
         $this->assertSingleHandler($envelope);
     }
 

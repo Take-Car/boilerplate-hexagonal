@@ -4,39 +4,41 @@ declare(strict_types=1);
 
 namespace Application\Controller;
 
-use Doctrine\ORM\EntityManagerInterface;
+use Application\BusInterface;
 use Domain\Collection\Movies;
+use Domain\Command\Movie\Create;
+use Domain\Command\Movie\Delete;
 use Domain\Model\Movie as ModelMovie;
+use Domain\Query\Movie\All;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\StreamedJsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/movie', 'movie_')]
-class MovieController
+final class MovieController
 {
     #[Route(name: 'index', methods: Request::METHOD_GET)]
-    public function index(Movies $movies): Response
+    public function index(BusInterface $bus): Response
     {
-        return new JsonResponse(
-            array_map(
-                fn (ModelMovie $movie) => $movie->toArray(),
-                $movies->all()
-            )
-        );
+        $movies = $bus->ask(new All\Input())->movies;
+
+        return new StreamedJsonResponse($movies);
     }
 
     #[Route(name: 'create', methods: Request::METHOD_POST)]
-    public function create(EntityManagerInterface $em, Movies $movies): Response
+    public function create(BusInterface $bus): Response
     {
-        $movie = new ModelMovie(
-            'The Shawshank Redemption',
-            'Frank Darabont',
-            new \DateTimeImmutable('1994-10-14')
-        );
-
-        $movies->add($movie);
-        $em->flush();
+        try {
+            $bus->dispatch(new Create\Input(
+                'The Shawshank Redemption',
+                'Frank Darabont',
+                new \DateTimeImmutable('1994-10-14')
+            ));
+        } catch (\Throwable $e) {
+            return new JsonResponse(['message' => $e->getMessage()], Response::HTTP_BAD_REQUEST);
+        }
 
         return new JsonResponse(['message' => 'Movie created'], Response::HTTP_CREATED);
     }
@@ -48,11 +50,9 @@ class MovieController
     }
 
     #[Route('/{uuid}', name: 'delete', methods: Request::METHOD_DELETE)]
-    public function delete(EntityManagerInterface $em, Movies $movies, string $uuid): Response
+    public function delete(BusInterface $bus, string $uuid): Response
     {
-        $movie = $movies->get($uuid);
-        $movies->remove($movie);
-        $em->flush();
+        $bus->dispatch(new Delete\Input($uuid));
 
         return new JsonResponse(['message' => 'Movie deleted']);
     }

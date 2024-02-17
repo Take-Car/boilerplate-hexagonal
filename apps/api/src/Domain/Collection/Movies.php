@@ -15,7 +15,7 @@ interface Movies
     public function get(string $uuid): Movie;
 
     /**
-     * @return Movie[]
+     * @return iterable<Movie>
      */
-    public function all(): array;
+    public function all(): iterable;
 }

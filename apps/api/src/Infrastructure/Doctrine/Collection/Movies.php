@@ -11,9 +11,9 @@ use Infrastructure\Doctrine\Repository\MovieRepository;
 use Symfony\Component\DependencyInjection\Attribute\AsAlias;
 
 #[AsAlias]
-class Movies implements CollectionMovies
+final readonly class Movies implements CollectionMovies
 {
-    public function __construct(private readonly MovieRepository $repository)
+    public function __construct(private MovieRepository $repository)
     {
     }
 
@@ -29,6 +29,9 @@ class Movies implements CollectionMovies
         $this->repository->remove($movie);
     }
 
+    /**
+     * @throws EntityNotFoundException
+     */
     #[\Override]
     public function get(string $uuid): Movie
     {
@@ -42,11 +45,15 @@ class Movies implements CollectionMovies
     }
 
     /**
-     * @return Movie[]
+     * @return iterable<Movie>
      */
     #[\Override]
-    public function all(): array
+    public function all(): iterable
     {
-        return $this->repository->findAll();
+        return $this->repository->createQueryBuilder('movie')
+            ->orderBy('movie.releaseDate', 'DESC')
+            ->getQuery()
+            ->toIterable()
+        ;
     }
 }

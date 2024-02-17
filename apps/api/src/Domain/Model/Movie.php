@@ -31,7 +31,7 @@ class Movie
         return $this->releaseDate;
     }
 
-    public function setYear(\DateTimeInterface $releaseDate): void
+    public function setReleaseDate(\DateTimeInterface $releaseDate): void
     {
         $this->releaseDate = \DateTimeImmutable::createFromInterface($releaseDate);
     }
@@ -44,18 +44,5 @@ class Movie
     public function setDescription(string $description): void
     {
         $this->description = $description;
-    }
-
-    /**
-     * @return array<string,string>
-     */
-    public function toArray(): array
-    {
-        return [
-            'uuid' => $this->uuid,
-            'title' => $this->title,
-            'description' => $this->description,
-            'releaseDate' => $this->releaseDate->format('Y-m-d'),
-        ];
     }
 }
