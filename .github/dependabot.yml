@@ -1,5 +1,11 @@
 version: 2
 updates:
+  - package-ecosystem: github-actions
+    directory: ./
+    schedule:
+      interval: daily
+      time: '06:00'
+      timezone: Europe/Paris
   - package-ecosystem: composer
     directory: /apps/api
     schedule:
