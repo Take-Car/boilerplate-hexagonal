@@ -18,7 +18,9 @@ Overall, the hexagonal architecture promotes a modular, clean, and adaptable des
 
 The coverage of the code is done with [PHPSpec](https://www.phpspec.net/). It is a tool to drive emergent design by specification. It is used to describe the behavior of the code, and it is less concerned with the actual implementation.
 
-You can find the coverage report at [clementvtrd.github.io/boilerplate-hexagonal/phpspec](https://clementvtrd.github.io/boilerplate-hexagonal/phpspec/index.html). 
+You can find the coverage report at [clementvtrd.github.io/boilerplate-hexagonal/phpspec](https://clementvtrd.github.io/boilerplate-hexagonal/phpspec/index.html).
+
+> Remember to update this link with your actual repository
 
 ## Stack
 
@@ -72,6 +74,7 @@ task
 | deptrac  | Shortcut to run Deptrac                                   |
 | cs-fixer | Shortcut to run PHP CS Fixer                              |
 | rector   | Shortcut to run Rector                                    |
+| phpspec  | Shortcut to run PHP Spec                                  |
 
 ## URLs
 
