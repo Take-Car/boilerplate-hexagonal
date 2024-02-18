@@ -12,6 +12,14 @@ This architecture enables better testability, maintainability, and flexibility. 
 
 Overall, the hexagonal architecture promotes a modular, clean, and adaptable design by separating concerns and dependencies, leading to a more robust and maintainable software system.
 
+## Code coverage
+
+### PHP Spec
+
+The coverage of the code is done with [PHPSpec](https://www.phpspec.net/). It is a tool to drive emergent design by specification. It is used to describe the behavior of the code, and it is less concerned with the actual implementation.
+
+You can find the coverage report at [clementvtrd.github.io/boilerplate-hexagonal/phpspec](https://clementvtrd.github.io/boilerplate-hexagonal/phpspec/index.html). 
+
 ## Stack
 
 This boilerplate is built with Symfony for learning purpose. You can replace each part at your convenience.

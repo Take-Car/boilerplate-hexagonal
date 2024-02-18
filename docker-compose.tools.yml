@@ -56,3 +56,13 @@ services:
     volumes:
       - ./apps/api:/opt/code
     entrypoint: rector --config /opt/rector/rector.php
+
+  phpspec:
+    build:
+      context: ./tools
+      dockerfile: Dockerfile
+      target: phpspec
+    volumes:
+      - ./apps/api:/opt/code
+    entrypoint: phpspec
+    command: run

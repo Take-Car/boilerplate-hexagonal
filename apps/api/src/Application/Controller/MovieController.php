@@ -8,7 +8,6 @@ use Application\BusInterface;
 use Domain\Collection\Movies;
 use Domain\Command\Movie\Create;
 use Domain\Command\Movie\Delete;
-use Domain\Model\Movie as ModelMovie;
 use Domain\Query\Movie\All;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

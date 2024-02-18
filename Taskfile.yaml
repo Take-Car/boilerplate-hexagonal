@@ -11,12 +11,12 @@ tasks:
     desc: Start the Docker containers
 
     cmds:
-      - docker compose up -d
+      - docker -l ERROR compose up -d
 
   stop:
     desc: Stop the Docker containers
     cmds:
-      - docker compose down
+      - docker -l ERROR compose down
 
   ssl:
     internal: true
@@ -29,8 +29,8 @@ tasks:
 
   bootstrap:
     cmds:
-      - docker compose build
-      - docker compose pull
+      - docker -l ERROR compose build
+      - docker -l ERROR compose pull
       - task: composer_install
 
   composer_install:
@@ -46,34 +46,39 @@ tasks:
   symfony:
     desc: Shortcut to run Symfony CLI
     cmds:
-      - docker compose -f docker-compose.tools.yml run --rm symfony {{.CLI_ARGS}}
+      - docker -l ERROR compose -f docker-compose.tools.yml run --rm symfony {{.CLI_ARGS}}
 
   composer:
     desc: Shortcut to run Composer CLI
     cmds:
-      - docker compose -f docker-compose.tools.yml run --rm composer {{.CLI_ARGS}}
+      - docker -l ERROR compose -f docker-compose.tools.yml run --rm composer {{.CLI_ARGS}}
 
   console:
     desc: Shortcut to run Symfony console
     cmds:
-      - docker compose -f docker-compose.tools.yml run --rm console {{.CLI_ARGS}}
+      - docker -l ERROR compose -f docker-compose.tools.yml run --rm console {{.CLI_ARGS}}
 
   phpstan:
     desc: Shortcut to run PHPStan
     cmds:
-      - docker compose -f docker-compose.tools.yml run --rm phpstan {{.CLI_ARGS}}
+      - docker -l ERROR compose -f docker-compose.tools.yml run --rm phpstan {{.CLI_ARGS}}
 
   deptrac:
     desc: Shortcut to run Deptrac
     cmds:
-      - docker compose -f docker-compose.tools.yml run --rm deptrac {{.CLI_ARGS}}
+      - docker -l ERROR compose -f docker-compose.tools.yml run --rm deptrac {{.CLI_ARGS}}
 
   cs-fixer:
     desc: Shortcut to run PHP CS Fixer
     cmds:
-      - docker compose -f docker-compose.tools.yml run --rm cs-fixer {{.CLI_ARGS}}
+      - docker -l ERROR compose -f docker-compose.tools.yml run --rm cs-fixer {{.CLI_ARGS}}
 
   rector:
     desc: Shortcut to run Rector
     cmds:
-      - docker compose -f docker-compose.tools.yml run --rm rector {{.CLI_ARGS}}
+      - docker -l ERROR compose -f docker-compose.tools.yml run --rm rector {{.CLI_ARGS}}
+
+  phpspec:
+    desc: Shortcut to run PHP Spec
+    cmds:
+      - docker -l ERROR compose -f docker-compose.tools.yml run --rm phpspec {{.CLI_ARGS}}

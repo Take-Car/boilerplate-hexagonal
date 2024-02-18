@@ -41,6 +41,11 @@ FROM base AS dev
 
 COPY php/conf.d-dev/* /usr/local/etc/php/conf.d/
 
+RUN apk add --no-cache gcc g++ make autoconf linux-headers \
+    && pecl install xdebug \
+    && docker-php-ext-enable xdebug \
+    && apk del --no-network gcc g++ make autoconf linux-headers
+
 FROM base AS prod
 
 COPY php/conf.d/* /usr/local/etc/php/conf.d/
