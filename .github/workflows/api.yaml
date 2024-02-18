@@ -32,7 +32,6 @@ jobs:
 
       - name: Install dependencies
         run: docker compose -f docker-compose.tools.yml run --entrypoint composer --rm composer install --no-scripts --ignore-platform-reqs --no-scripts --prefer-dist
-      # cs-fixer, phpstan, deptrac, rector, phpspec\
 
       - name: Run PHP CS Fixer
         run: task cs-fixer
