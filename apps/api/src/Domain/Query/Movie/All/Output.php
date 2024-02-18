@@ -4,6 +4,9 @@ namespace Domain\Query\Movie\All;
 
 use Domain\Model\Movie;
 
+/**
+ * TODO: remove this file after forking the project
+ */
 final readonly class Output
 {
     /**

@@ -60,6 +60,11 @@ winget install Task.Task # you may need to restart your session
 task
 ```
 
+### Clean the project
+
+After forking the project, you can clean the project from existing entity, migration, etc. by removing all the files
+with the following comment: `TODO: remove this file after forking the project`.
+
 ## Commands
 
 | Task     | Description                                               |

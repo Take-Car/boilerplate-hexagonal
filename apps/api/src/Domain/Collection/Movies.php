@@ -6,6 +6,9 @@ namespace Domain\Collection;
 
 use Domain\Model\Movie;
 
+/**
+ * TODO: remove this file after forking the project
+ */
 interface Movies
 {
     public function add(Movie $movie): void;

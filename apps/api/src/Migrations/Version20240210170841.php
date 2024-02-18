@@ -7,6 +7,9 @@ namespace Migrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
+/**
+ * TODO: remove this file after forking the project
+ */
 final class Version20240210170841 extends AbstractMigration
 {
     #[\Override]
