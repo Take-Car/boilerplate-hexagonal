@@ -9,3 +9,5 @@ extensions:
     format: [html]
     output:
       html: coverage/phpspec
+    whitelist:
+      - src/Domain
