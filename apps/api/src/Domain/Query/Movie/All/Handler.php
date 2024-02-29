@@ -5,7 +5,7 @@ namespace Domain\Query\Movie\All;
 use Domain\Collection\Movies;
 
 /**
- * TODO: remove this file after forking the project
+ * TODO: remove this file after forking the project.
  */
 final readonly class Handler
 {

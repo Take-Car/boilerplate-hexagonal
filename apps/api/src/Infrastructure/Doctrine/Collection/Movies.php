@@ -11,7 +11,7 @@ use Infrastructure\Doctrine\Repository\MovieRepository;
 use Symfony\Component\DependencyInjection\Attribute\AsAlias;
 
 /**
- * TODO: remove this file after forking the project
+ * TODO: remove this file after forking the project.
  */
 #[AsAlias]
 final readonly class Movies implements CollectionMovies

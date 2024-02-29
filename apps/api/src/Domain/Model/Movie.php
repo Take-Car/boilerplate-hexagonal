@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Domain\Model;
 
 /**
- * TODO: remove this file after forking the project
+ * TODO: remove this file after forking the project.
  */
 readonly class Movie
 {

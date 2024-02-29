@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\StreamedJsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 
 /**
- * TODO: remove this file after forking the project
+ * TODO: remove this file after forking the project.
  */
 #[Route('/movie', 'movie_')]
 final class MovieController

@@ -6,7 +6,7 @@ use Domain\Collection\Movies;
 use Domain\Model\Movie;
 
 /**
- * TODO: remove this file after forking the project
+ * TODO: remove this file after forking the project.
  */
 final readonly class Handler
 {
