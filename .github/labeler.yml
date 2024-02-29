@@ -1,13 +1,18 @@
 Dependencies:
-  - 'apps/api/composer.json'
-  - 'apps/api/composer.lock'
+  - changed-files:
+      - 'apps/api/composer.json'
+      - 'apps/api/composer.lock'
 Docker:
-  - '**/*/Dockerfile'
-  - 'docker-compose*.yml'
+  - changed-files:
+      - '**/*/Dockerfile'
+      - 'docker-compose*.yml'
 Documentation:
-  - 'README.md'
-  - 'doc/**/*'
+  - changed-files:
+      - 'README.md'
+      - 'doc/**/*'
 PHP:
-  - '**/*.php'
+  - changed-files:
+      - '**/*.php'
 Test:
-  - 'apps/api/tests/**/*'
+  - changed-files:
+      - 'apps/api/tests/**/*'
