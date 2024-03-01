@@ -1,0 +1,22 @@
+/node_modules
+/.yarn
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# debug
+yarn-debug.log*
+yarn-error.log*
+
+.env
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts

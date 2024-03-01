@@ -29,12 +29,13 @@ tasks:
 
   bootstrap:
     cmds:
-      - docker -l ERROR compose build
+      - cp apps/web/.env.dist apps/web/.env
+      - docker -l ERROR compose -f docker-compose.yml -f docker-compose.tools.yml build
       - docker -l ERROR compose pull
       - task: composer_install
+      - task: yarn_install
 
   composer_install:
-    internal: true
     cmds:
       - task composer -- install --no-interaction --no-progress --no-suggest --no-scripts --prefer-dist
     sources:
@@ -42,6 +43,16 @@ tasks:
       - ./apps/api/composer.lock
     generates:
       - ./apps/api/vendor/**/*
+
+  yarn_install:
+    cmds:
+      - task yarn -- install --frozen-lockfile
+    sources:
+      - ./apps/web/package.json
+      - ./apps/web/yarn.lock
+    generates:
+      - ./apps/web/.yarn/install-state.gz
+      - ./apps/web/node_modules/**/*
 
   symfony:
     desc: Shortcut to run Symfony CLI
@@ -82,3 +93,13 @@ tasks:
     desc: Shortcut to run PHP Spec
     cmds:
       - docker -l ERROR compose -f docker-compose.tools.yml run --rm phpspec {{.CLI_ARGS}}
+
+  yarn:
+    desc: Shortcut to run Yarn CLI
+    cmds:
+      - docker -l ERROR compose -f docker-compose.tools.yml run --rm yarn {{.CLI_ARGS}}
+
+  eslint:
+    desc: Shortcut to run Eslint CLI
+    cmds:
+      - docker -l ERROR compose -f docker-compose.tools.yml run --rm eslint {{.CLI_ARGS}}

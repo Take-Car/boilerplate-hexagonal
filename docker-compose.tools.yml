@@ -66,3 +66,15 @@ services:
       - ./apps/api:/opt/code
     entrypoint: phpspec
     command: run
+
+  yarn:
+    build:
+      context: ./apps/web
+      target: base
+    volumes:
+      - ./apps/web:/app
+    entrypoint: yarn
+
+  eslint:
+    extends: yarn
+    entrypoint: [yarn, lint]

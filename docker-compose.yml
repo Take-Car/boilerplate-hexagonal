@@ -33,7 +33,6 @@ services:
   php:
     build:
       context: ./apps/api
-      dockerfile: Dockerfile
       target: dev
     env_file:
       - ./apps/api/.env
@@ -43,6 +42,15 @@ services:
       database:
         condition: service_healthy
         restart: true
+
+  node:
+    build:
+      context: ./apps/web
+      target: dev
+    env_file:
+      - ./apps/web/.env
+    volumes:
+      - ./apps/web:/app
 
   database:
     build: ./services/mysql
