@@ -13,14 +13,15 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "specs\\": "tests/specs"
+            "Tests\\": "tests"
         }
     },
     "config": {
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
             "symfony/flex": true,
-            "symfony/runtime": true
+            "symfony/runtime": true,
+            "pestphp/pest-plugin": true
         },
         "bin-dir": "bin",
         "optimize-autoloader": true,
@@ -60,19 +61,11 @@
         "symfony/yaml": "7.0.*"
     },
     "require-dev": {
+        "mockery/mockery": "^1.6",
+        "pestphp/pest": "^2.34",
+        "pestphp/pest-plugin-type-coverage": "^2.8",
+        "symfony/http-client": "7.0.*",
         "symfony/stopwatch": "6.4.*",
         "symfony/web-profiler-bundle": "7.0.*"
-    },
-    "scripts": {
-        "auto-scripts": {
-            "assets:install %PUBLIC_DIR%": "symfony-cmd",
-            "cache:clear": "symfony-cmd"
-        },
-        "post-install-cmd": [
-            "@auto-scripts"
-        ],
-        "post-update-cmd": [
-            "@auto-scripts"
-        ]
     }
 }

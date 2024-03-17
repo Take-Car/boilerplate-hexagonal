@@ -1,6 +1,0 @@
-{
-  "require-dev": {
-    "phpspec/phpspec": "7.5.0",
-    "friends-of-phpspec/phpspec-code-coverage": "^6.3"
-  }
-}

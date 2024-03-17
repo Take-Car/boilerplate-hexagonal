@@ -3,15 +3,20 @@ version: '3'
 tasks:
   install:
     desc: Build and start the Docker containers
-    deps:
-      - bootstrap
-      - ssl
+    cmds:
+      - cmd: cp apps/web/.env.dist apps/web/.env
+        ignore_error: true
+      - task: bootstrap
+      - task: ssl
 
   start:
     desc: Start the Docker containers
 
     cmds:
       - docker -l ERROR compose up -d
+      - task: migrations
+        vars:
+          CLI_ARGS: --no-interaction
 
   stop:
     desc: Stop the Docker containers
@@ -29,7 +34,6 @@ tasks:
 
   bootstrap:
     cmds:
-      - cp apps/web/.env.dist apps/web/.env
       - docker -l ERROR compose -f docker-compose.yml -f docker-compose.tools.yml build
       - docker -l ERROR compose pull
       - task: composer_install
@@ -37,7 +41,9 @@ tasks:
 
   composer_install:
     cmds:
-      - task composer -- install --no-interaction --no-progress --no-suggest --no-scripts --prefer-dist
+      - task: composer
+        vars:
+          CLI_ARGS: install --no-interaction --no-progress --prefer-dist
     sources:
       - ./apps/api/composer.json
       - ./apps/api/composer.lock
@@ -46,7 +52,9 @@ tasks:
 
   yarn_install:
     cmds:
-      - task yarn -- install --frozen-lockfile
+      - task: yarn
+        vars:
+          CLI_ARGS: install --frozen-lockfile
     sources:
       - ./apps/web/package.json
       - ./apps/web/yarn.lock
@@ -54,20 +62,15 @@ tasks:
       - ./apps/web/.yarn/install-state.gz
       - ./apps/web/node_modules/**/*
 
-  symfony:
-    desc: Shortcut to run Symfony CLI
-    cmds:
-      - docker -l ERROR compose -f docker-compose.tools.yml run --rm symfony {{.CLI_ARGS}}
-
   composer:
     desc: Shortcut to run Composer CLI
     cmds:
-      - docker -l ERROR compose -f docker-compose.tools.yml run --rm composer {{.CLI_ARGS}}
+      - docker -l ERROR compose run --rm php composer {{.CLI_ARGS}}
 
   console:
     desc: Shortcut to run Symfony console
     cmds:
-      - docker -l ERROR compose -f docker-compose.tools.yml run --rm console {{.CLI_ARGS}}
+      - docker -l ERROR compose run --rm php console {{.CLI_ARGS}}
 
   phpstan:
     desc: Shortcut to run PHPStan
@@ -89,17 +92,27 @@ tasks:
     cmds:
       - docker -l ERROR compose -f docker-compose.tools.yml run --rm rector {{.CLI_ARGS}}
 
-  phpspec:
-    desc: Shortcut to run PHP Spec
+  pest:
+    desc: Shortcut to run Pest
     cmds:
-      - docker -l ERROR compose -f docker-compose.tools.yml run --rm phpspec {{.CLI_ARGS}}
+      - docker -l ERROR compose run --rm php php -d "memory_limit=-1" vendor/pestphp/pest/bin/pest {{.CLI_ARGS}}
 
   yarn:
     desc: Shortcut to run Yarn CLI
     cmds:
-      - docker -l ERROR compose -f docker-compose.tools.yml run --rm yarn {{.CLI_ARGS}}
+      - docker -l ERROR compose run --rm node yarn {{.CLI_ARGS}}
 
   eslint:
     desc: Shortcut to run Eslint CLI
     cmds:
-      - docker -l ERROR compose -f docker-compose.tools.yml run --rm eslint {{.CLI_ARGS}}
+      - docker -l ERROR compose run --rm node eslint {{.CLI_ARGS}}
+
+  migrations:
+    desc: Shortcut to run Doctrine migrations
+    cmds:
+      - task: console
+        vars:
+          CLI_ARGS: doctrine:database:create --if-not-exists {{.CLI_ARGS}}
+      - task: console
+        vars:
+          CLI_ARGS: doctrine:migrations:migrate {{.CLI_ARGS}}

@@ -1,80 +1,41 @@
 services:
-  symfony:
-    build:
-      context: apps/api
-      dockerfile: Dockerfile
-      target: cli
-    env_file:
-      - ./apps/api/.env
-    volumes:
-      - ./apps/api:/app
-    entrypoint: ["symfony"]
-
   composer:
-    extends: symfony
-    entrypoint: ["symfony", "composer"]
-
-  console:
-    extends:
-      service: symfony
-    entrypoint: ["symfony", "console"]
-
-  cs-fixer:
     build:
       context: ./tools
       dockerfile: Dockerfile
-      target: cs-fixer
+      target: base
+    env_file:
+      - ./apps/api/.env
     volumes:
       - ./apps/api:/opt/code
+    entrypoint: composer
+
+  cs-fixer:
+    extends: composer
+    env_file: []
+    build:
+      target: cs-fixer
     entrypoint: php-cs-fixer
     command: check
 
   deptrac:
+    extends: composer
+    env_file: []
     build:
-      context: ./tools
-      dockerfile: Dockerfile
       target: deptrac
-    volumes:
-      - ./apps/api:/opt/code
     entrypoint: deptrac
     command: --report-uncovered
 
   phpstan:
+    extends: composer
+    env_file: []
     build:
-      context: ./tools
-      dockerfile: Dockerfile
       target: phpstan
-    volumes:
-      - ./apps/api:/opt/code
     entrypoint: phpstan
 
   rector:
+    extends: composer
+    env_file: []
     build:
-      context: ./tools
-      dockerfile: Dockerfile
       target: rector
-    volumes:
-      - ./apps/api:/opt/code
     entrypoint: rector --config /opt/rector/rector.php
-
-  phpspec:
-    build:
-      context: ./tools
-      dockerfile: Dockerfile
-      target: phpspec
-    volumes:
-      - ./apps/api:/opt/code
-    entrypoint: phpspec
-    command: run
-
-  yarn:
-    build:
-      context: ./apps/web
-      target: base
-    volumes:
-      - ./apps/web:/app
-    entrypoint: yarn
-
-  eslint:
-    extends: yarn
-    entrypoint: [yarn, lint]
