@@ -56,9 +56,7 @@ services:
     build: ./services/mysql
     restart: unless-stopped
     environment:
-      - MYSQL_RANDOM_ROOT_PASSWORD=yes
-      - MYSQL_USER=user
-      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=app
     ports:
       - 3306:3306

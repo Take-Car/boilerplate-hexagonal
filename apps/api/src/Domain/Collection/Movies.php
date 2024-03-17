@@ -15,6 +15,9 @@ interface Movies
 
     public function remove(Movie $movie): void;
 
+    /**
+     * @throw \Domain\Collection\Exception\EntityNotFoundException
+     */
     public function get(string $uuid): Movie;
 
     /**

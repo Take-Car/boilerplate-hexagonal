@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Domain\Exception;
+namespace Domain\Collection\Exception;
 
 class EntityNotFoundException extends \Exception
 {

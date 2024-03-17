@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Infrastructure\Doctrine\Collection;
 
 use Domain\Collection\Movies as CollectionMovies;
-use Domain\Exception\EntityNotFoundException;
+use Domain\Collection\Exception\EntityNotFoundException;
 use Domain\Model\Movie;
 use Infrastructure\Doctrine\Repository\MovieRepository;
 use Symfony\Component\DependencyInjection\Attribute\AsAlias;

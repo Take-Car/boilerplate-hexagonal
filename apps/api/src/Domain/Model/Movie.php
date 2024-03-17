@@ -7,7 +7,7 @@ namespace Domain\Model;
 /**
  * TODO: remove this file after forking the project.
  */
-readonly class Movie
+class Movie
 {
     public readonly string $uuid;
 
