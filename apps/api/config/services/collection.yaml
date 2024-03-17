@@ -1,0 +1,13 @@
+services:
+  _defaults:
+    public: false
+    autowire: true
+
+  Domain\Collection\:
+    resource: '%kernel.project_dir%/src/Domain/Collection/*.php'
+
+  Infrastructure\Doctrine\Collection\:
+    resource: '%kernel.project_dir%/src/Infrastructure/Doctrine/Collection/*.php'
+
+  Infrastructure\Doctrine\Repository\:
+    resource: '%kernel.project_dir%/src/Infrastructure/Doctrine/Repository/*.php'

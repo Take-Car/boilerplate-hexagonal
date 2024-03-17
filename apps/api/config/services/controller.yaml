@@ -1,0 +1,14 @@
+---
+services:
+  _defaults:
+    public: false
+    autowire: true
+
+  Application\Controller\:
+    resource: '../../src/Application/Controller'
+    tags:
+      - controller.service_arguments
+
+  Application\BusInterface: '@Infrastructure\Messenger\Bus'
+
+  Infrastructure\Messenger\Bus: ~
