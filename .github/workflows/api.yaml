@@ -4,13 +4,50 @@ on:
   push:
     paths:
       - apps/api/**
+      - .github/workflows/api.yaml
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  COMPOSE_FILE: docker-compose.test.yml
+
 jobs:
   code_quality:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        tool: [cs-fixer, phpstan, deptrac, rector]
+
+    env:
+      COMPOSE_FILE: docker-compose.tools.yml
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Task
+        uses: arduino/setup-task@v2
+        with:
+          version: 3.x
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Boostrap test utilities
+        run: docker compose build ${{ matrix.tool }}
+
+      - name: Install dependencies
+        run: docker compose run --rm composer install --no-interaction --no-progress --ignore-platform-reqs
+        if: matrix.tool == 'phpstan'
+
+      - name: Run ${{ matrix.tool }}
+        run: task ${{ matrix.tool }}
+
+  tests:
     runs-on: ubuntu-latest
 
     permissions:
@@ -29,26 +66,15 @@ jobs:
           version: 3.x
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Boostrap
-        run: docker compose -f docker-compose.tools.yml build composer cs-fixer phpstan deptrac rector phpspec
+      - name: Boostrap test utilities
+        run: |
+          cp apps/web/.env.dist apps/web/.env
+          docker compose build php database
+          docker compose up -d database
+          task migrations -- --no-interaction --env=test
 
-      - name: Install dependencies
-        run: task composer_install
-
-      - name: Run PHP CS Fixer
-        run: task cs-fixer
-
-      - name: Run PHPStan
-        run: task phpstan
-
-      - name: Run Deptrac
-        run: task deptrac
-
-      - name: Run Rector
-        run: task rector
-
-      - name: Run PHP Spec
-        run: task phpspec
+      - name: Run Pest tests
+        run: task pest -- --coverage-html=coverage
 
       - name: Setup Pages
         if: github.ref == 'refs/heads/develop'

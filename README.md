@@ -14,11 +14,11 @@ Overall, the hexagonal architecture promotes a modular, clean, and adaptable des
 
 ## Code coverage
 
-### PHP Spec
+### Pest
 
-The coverage of the code is done with [PHPSpec](https://www.phpspec.net/). It is a tool to drive emergent design by specification. It is used to describe the behavior of the code, and it is less concerned with the actual implementation.
+The coverage of the code is done with [Pest](https://pestphp.com/). Pest is a testing framework with a focus on simplicity, meticulously designed to bring back the joy of testing in PHP.
 
-You can find the coverage report at [clementvtrd.github.io/boilerplate-hexagonal/phpspec](https://clementvtrd.github.io/boilerplate-hexagonal/phpspec/index.html).
+You can find the coverage report at [clementvtrd.github.io/boilerplate-hexagonal/coverage](https://clementvtrd.github.io/boilerplate-hexagonal/coverage/index.html).
 
 > Remember to update this link with your actual repository
 
@@ -30,7 +30,7 @@ We will use Docker to make a development environment with 5 services:
 
 - Traefik: as a reverse proxy
 - Nginx + PHP: serves the Symfony API
-- PostgreSQL: to store our data
+- MySQL: to store our data
 - RabbitMQ: messaging queue system (in pair with Symfony Messenger)
 
 ## Installation
@@ -79,7 +79,7 @@ with the following comment: `TODO: remove this file after forking the project`.
 | deptrac  | Shortcut to run Deptrac                                   |
 | cs-fixer | Shortcut to run PHP CS Fixer                              |
 | rector   | Shortcut to run Rector                                    |
-| phpspec  | Shortcut to run PHP Spec                                  |
+| pest     | Shortcut to run Pest                                  |
 
 ## URLs
 

@@ -57,6 +57,7 @@ final class MovieController
             if (($previous = $e->getPrevious()) instanceof EntityNotFoundException) {
                 return new JsonResponse(['error' => $previous->getMessage()], Response::HTTP_NOT_FOUND);
             }
+
             return new JsonResponse(['error' => $e->getMessage()], Response::HTTP_BAD_REQUEST);
         }
 
