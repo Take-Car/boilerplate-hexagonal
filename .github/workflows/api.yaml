@@ -73,20 +73,8 @@ jobs:
           docker compose up -d database
           task migrations -- --no-interaction --env=test
 
+      - name: Ensure type coverage
+        run: task pest -- --type-coverage --min=100
+
       - name: Run Pest tests
-        run: task pest -- --coverage-html=coverage
-
-      - name: Setup Pages
-        if: github.ref == 'refs/heads/develop'
-        uses: actions/configure-pages@v4
-
-      - name: Upload coverages
-        if: github.ref == 'refs/heads/develop'
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: apps/api/coverage
-
-      - name: Deploy to GitHub Pages
-        if: github.ref == 'refs/heads/develop'
-        id: deployment
-        uses: actions/deploy-pages@v4
+        run: task pest -- --coverage --min=80

@@ -95,7 +95,7 @@ tasks:
   pest:
     desc: Shortcut to run Pest
     cmds:
-      - docker -l ERROR compose run --rm php php -d "memory_limit=-1" vendor/pestphp/pest/bin/pest {{.CLI_ARGS}}
+      - docker -l ERROR compose run --rm php vendor/bin/pest {{.CLI_ARGS}}
 
   yarn:
     desc: Shortcut to run Yarn CLI
