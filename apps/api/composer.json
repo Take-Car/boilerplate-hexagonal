@@ -46,7 +46,7 @@
         "php": ">=8.3",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "doctrine/doctrine-bundle": "2.11.*",
+        "doctrine/doctrine-bundle": "2.12.*",
         "doctrine/doctrine-migrations-bundle": "3.3.*",
         "doctrine/orm": "3.1.*",
         "symfony/amqp-messenger": "7.0.*",
