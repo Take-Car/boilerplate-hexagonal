@@ -18,9 +18,7 @@ Overall, the hexagonal architecture promotes a modular, clean, and adaptable des
 
 The coverage of the code is done with [Pest](https://pestphp.com/). Pest is a testing framework with a focus on simplicity, meticulously designed to bring back the joy of testing in PHP.
 
-You can find the coverage report at [clementvtrd.github.io/boilerplate-hexagonal/coverage](https://clementvtrd.github.io/boilerplate-hexagonal/coverage/index.html).
-
-> Remember to update this link with your actual repository
+It ensures the test covering (with at least 80%) and type covering (with 100% type safety) as setted in [API Workflow](/.github/workflows/api.yaml).
 
 ## Stack
 
@@ -34,6 +32,10 @@ We will use Docker to make a development environment with 5 services:
 - RabbitMQ: messaging queue system (in pair with Symfony Messenger)
 
 ## Installation
+
+### Docker
+
+This boilerplate was built around with [Docker Desktop](https://www.docker.com/products/docker-desktop/) and tested with [Orbstack](https://orbstack.dev) (which can replace Docker Desktop on MacOS).
 
 ### Taskfile
 
