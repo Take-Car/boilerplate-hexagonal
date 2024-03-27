@@ -9,7 +9,6 @@ providers:
   docker:
     endpoint: unix:///var/run/docker.sock
     watch: true
-    exposedbydefault: false
 
   file:
     filename: /etc/traefik/dynamic_conf.yaml

@@ -13,7 +13,7 @@ tasks:
     desc: Start the Docker containers
 
     cmds:
-      - docker -l ERROR compose up -d
+      - docker compose up -d
       - task: migrations
         vars:
           CLI_ARGS: --no-interaction
@@ -21,7 +21,7 @@ tasks:
   stop:
     desc: Stop the Docker containers
     cmds:
-      - docker -l ERROR compose down
+      - docker compose down
 
   ssl:
     internal: true
@@ -34,8 +34,8 @@ tasks:
 
   bootstrap:
     cmds:
-      - docker -l ERROR compose -f docker-compose.yml -f docker-compose.tools.yml build
-      - docker -l ERROR compose pull
+      - docker compose -f docker-compose.yml -f docker-compose.tools.yml build
+      - docker compose pull
       - task: composer_install
       - task: yarn_install
 
@@ -65,47 +65,47 @@ tasks:
   composer:
     desc: Shortcut to run Composer CLI
     cmds:
-      - docker -l ERROR compose run --rm php composer {{.CLI_ARGS}}
+      - docker compose run --rm php composer {{.CLI_ARGS}}
 
   console:
     desc: Shortcut to run Symfony console
     cmds:
-      - docker -l ERROR compose run --rm php console {{.CLI_ARGS}}
+      - docker compose run --rm php console {{.CLI_ARGS}}
 
   phpstan:
     desc: Shortcut to run PHPStan
     cmds:
-      - docker -l ERROR compose -f docker-compose.tools.yml run --rm phpstan {{.CLI_ARGS}}
+      - docker compose -f docker-compose.tools.yml run --rm phpstan {{.CLI_ARGS}}
 
   deptrac:
     desc: Shortcut to run Deptrac
     cmds:
-      - docker -l ERROR compose -f docker-compose.tools.yml run --rm deptrac {{.CLI_ARGS}}
+      - docker compose -f docker-compose.tools.yml run --rm deptrac {{.CLI_ARGS}}
 
   cs-fixer:
     desc: Shortcut to run PHP CS Fixer
     cmds:
-      - docker -l ERROR compose -f docker-compose.tools.yml run --rm cs-fixer {{.CLI_ARGS}}
+      - docker compose -f docker-compose.tools.yml run --rm cs-fixer {{.CLI_ARGS}}
 
   rector:
     desc: Shortcut to run Rector
     cmds:
-      - docker -l ERROR compose -f docker-compose.tools.yml run --rm rector {{.CLI_ARGS}}
+      - docker compose -f docker-compose.tools.yml run --rm rector {{.CLI_ARGS}}
 
   pest:
     desc: Shortcut to run Pest
     cmds:
-      - docker -l ERROR compose run --rm php vendor/bin/pest {{.CLI_ARGS}}
+      - docker compose run --rm php vendor/bin/pest {{.CLI_ARGS}}
 
   yarn:
     desc: Shortcut to run Yarn CLI
     cmds:
-      - docker -l ERROR compose run --rm node yarn {{.CLI_ARGS}}
+      - docker compose run --rm node yarn {{.CLI_ARGS}}
 
   eslint:
     desc: Shortcut to run Eslint CLI
     cmds:
-      - docker -l ERROR compose run --rm node eslint {{.CLI_ARGS}}
+      - docker compose run --rm node eslint {{.CLI_ARGS}}
 
   migrations:
     desc: Shortcut to run Doctrine migrations

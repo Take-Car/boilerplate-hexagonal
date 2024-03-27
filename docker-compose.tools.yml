@@ -1,41 +1,29 @@
 services:
-  composer:
+  cs-fixer:
     build:
       context: ./tools
       dockerfile: Dockerfile
-      target: base
-    env_file:
-      - ./apps/api/.env
+      target: cs-fixer
     volumes:
       - ./apps/api:/opt/code
-    entrypoint: composer
-
-  cs-fixer:
-    extends: composer
-    env_file: []
-    build:
-      target: cs-fixer
     entrypoint: php-cs-fixer
     command: check
 
   deptrac:
-    extends: composer
-    env_file: []
+    extends: cs-fixer
     build:
       target: deptrac
     entrypoint: deptrac
     command: --report-uncovered
 
   phpstan:
-    extends: composer
-    env_file: []
+    extends: cs-fixer
     build:
       target: phpstan
     entrypoint: phpstan
 
   rector:
-    extends: composer
-    env_file: []
+    extends: cs-fixer
     build:
       target: rector
     entrypoint: rector --config /opt/rector/rector.php
