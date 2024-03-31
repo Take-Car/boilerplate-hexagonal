@@ -1,8 +1,17 @@
+name: testing
+
 services:
-  cs-fixer:
+  base:
     build:
       context: ./tools
       dockerfile: Dockerfile
+      target: base
+    volumes:
+      - ./apps/api:/opt/code
+
+  cs-fixer:
+    extends: base
+    build:
       target: cs-fixer
     volumes:
       - ./apps/api:/opt/code
@@ -10,20 +19,20 @@ services:
     command: check
 
   deptrac:
-    extends: cs-fixer
+    extends: base
     build:
       target: deptrac
     entrypoint: deptrac
     command: --report-uncovered
 
   phpstan:
-    extends: cs-fixer
+    extends: base
     build:
       target: phpstan
     entrypoint: phpstan
 
   rector:
-    extends: cs-fixer
+    extends: base
     build:
       target: rector
     entrypoint: rector --config /opt/rector/rector.php
