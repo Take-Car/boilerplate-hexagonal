@@ -65,7 +65,7 @@ tasks:
   composer:
     desc: Shortcut to run Composer CLI
     cmds:
-      - docker compose run --rm php composer {{.CLI_ARGS}}
+      - docker compose -f docker-compose.yml run --rm php composer {{.CLI_ARGS}}
 
   console:
     desc: Shortcut to run Symfony console
@@ -75,6 +75,7 @@ tasks:
   phpstan:
     desc: Shortcut to run PHPStan
     cmds:
+      - docker compose -f docker-compose.tools.yml run --rm --entrypoint=composer phpstan install --ignore-platform-reqs
       - docker compose -f docker-compose.tools.yml run --rm phpstan {{.CLI_ARGS}}
 
   deptrac:
@@ -95,7 +96,12 @@ tasks:
   pest:
     desc: Shortcut to run Pest
     cmds:
-      - docker compose run --rm php vendor/bin/pest {{.CLI_ARGS}}
+      - docker compose build php database
+      - docker compose up -d database
+      - task: migrations
+        vars:
+          CLI_ARGS: --no-interaction --env test --no-debug
+      - docker compose run --rm php vendor/bin/pest --coverage --min=80
 
   yarn:
     desc: Shortcut to run Yarn CLI
