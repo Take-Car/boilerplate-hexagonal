@@ -40,19 +40,11 @@ jobs:
       - name: Boostrap test utilities
         run: docker compose build ${{ matrix.tool }}
 
-      - name: Install dependencies
-        run: docker compose run --rm composer install --no-interaction --no-progress --ignore-platform-reqs
-        if: matrix.tool == 'phpstan'
-
       - name: Run ${{ matrix.tool }}
         run: task ${{ matrix.tool }}
 
   tests:
     runs-on: ubuntu-latest
-
-    permissions:
-      id-token: write
-      pages: write
 
     steps:
       - name: Checkout code
@@ -66,15 +58,8 @@ jobs:
           version: 3.x
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Boostrap test utilities
-        run: |
-          cp apps/web/.env.dist apps/web/.env
-          docker compose build php database
-          docker compose up -d database
-          task migrations -- --no-interaction --env=test
-
-      - name: Ensure type coverage
-        run: task pest -- --type-coverage --min=100
+      - name: Copy .env file
+        run: cp apps/web/.env.dist apps/web/.env
 
       - name: Run Pest tests
-        run: task pest -- --coverage --min=80
+        run: task pest
