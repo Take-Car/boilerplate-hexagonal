@@ -39,18 +39,3 @@ jobs:
 
       - name: Run ES Lint
         run: task eslint
-
-      - name: Setup Pages
-        if: github.ref == 'refs/heads/develop'
-        uses: actions/configure-pages@v5
-
-      - name: Upload coverages
-        if: github.ref == 'refs/heads/develop'
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: apps/api/coverage
-
-      - name: Deploy to GitHub Pages
-        if: github.ref == 'refs/heads/develop'
-        id: deployment
-        uses: actions/deploy-pages@v4
