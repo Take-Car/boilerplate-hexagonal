@@ -111,7 +111,7 @@ tasks:
   eslint:
     desc: Shortcut to run Eslint CLI
     cmds:
-      - docker compose run --rm node eslint {{.CLI_ARGS}}
+      - docker compose run --rm node yarn eslint {{.CLI_ARGS}}
 
   migrations:
     desc: Shortcut to run Doctrine migrations
