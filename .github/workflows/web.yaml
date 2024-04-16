@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - apps/web/**
+      - .github/workflows/web.yaml
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
