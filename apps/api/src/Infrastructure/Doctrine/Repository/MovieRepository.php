@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Infrastructure\Doctrine\Repository;
 
 use Doctrine\Persistence\ManagerRegistry;
-use Domain\Model\Movie;
+use Infrastructure\Doctrine\Entity\Movie;
 
 /**
- * @extends AbstractRepository<Movie>
+ * @extends AbstractRepository<\Domain\Model\Movie>
  * TODO: remove this file after forking the project
  */
 class MovieRepository extends AbstractRepository

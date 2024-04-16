@@ -3,7 +3,6 @@
 namespace Domain\Command\Movie\Create;
 
 use Domain\Collection\Movies;
-use Domain\Model\Movie;
 
 /**
  * TODO: remove this file after forking the project.
@@ -16,7 +15,7 @@ final readonly class Handler
 
     public function __invoke(Input $input): void
     {
-        $movie = new Movie(
+        $movie = $this->movies->create(
             $input->title,
             $input->description,
             $input->releaseDate,

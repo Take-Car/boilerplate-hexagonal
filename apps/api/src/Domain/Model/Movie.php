@@ -9,14 +9,16 @@ namespace Domain\Model;
  */
 class Movie
 {
-    public readonly string $uuid;
-
     public function __construct(
-        private string $title,
-        private string $description,
-        private \DateTimeImmutable $releaseDate,
+        protected string $title,
+        protected string $description,
+        protected \DateTimeImmutable $releaseDate,
     ) {
-        $this->uuid = \uuid_create();
+    }
+
+    public function setTitle(string $title): void
+    {
+        $this->title = $title;
     }
 
     public function getTitle(): string
@@ -24,9 +26,19 @@ class Movie
         return $this->title;
     }
 
+    public function setReleaseDate(\DateTimeInterface $releaseDate): void
+    {
+        $this->releaseDate = \DateTimeImmutable::createFromInterface($releaseDate);
+    }
+
     public function getReleaseDate(): \DateTimeImmutable
     {
         return $this->releaseDate;
+    }
+
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
     }
 
     public function getDescription(): string
