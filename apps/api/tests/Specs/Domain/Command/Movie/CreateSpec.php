@@ -6,16 +6,22 @@ use Domain\Command\Movie\Create\Input;
 use Domain\Model\Movie;
 
 test('creates a movie with given informations', function (): void {
-    $input = new Input('The Matrix', 'Welcome to the Real World', new DateTimeImmutable('1999-03-31'));
+    $releaseDate = new DateTimeImmutable('1999-03-31');
+    $input = new Input('The Matrix', 'Welcome to the Real World', $releaseDate);
     $movies = mock(Movies::class);
+    $mock = mock(Movie::class);
     $handler = new Handler($movies);
 
     $movies
+        ->shouldReceive('create')
+        ->with('The Matrix', 'Welcome to the Real World', $releaseDate)
+        ->andReturn($mock)
+        ->once();
+
+    $movies
         ->shouldReceive('add')
-        ->withArgs(fn (Movie $movie) => (bool) expect($movie->getTitle())->toBe('The Matrix')
-            ->and($movie->getDescription())->toBe('Welcome to the Real World')
-            ->and($movie->getReleaseDate()->format('Y-m-d'))->toBe('1999-03-31')
-        );
+        ->withArgs([$mock])
+        ->once();
 
     $handler->__invoke($input);
 });

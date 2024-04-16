@@ -30,6 +30,8 @@ services:
     build:
       target: phpstan
     entrypoint: phpstan
+    env_file:
+      - apps/api/.env
 
   rector:
     extends: base

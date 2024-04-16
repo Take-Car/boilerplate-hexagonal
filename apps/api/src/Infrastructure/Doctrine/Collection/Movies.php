@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Infrastructure\Doctrine\Collection;
 
-use Domain\Collection\Exception\EntityNotFoundException;
-use Domain\Collection\Movies as CollectionMovies;
-use Domain\Model\Movie;
+use Domain;
+use Infrastructure\Doctrine\Entity\Movie;
 use Infrastructure\Doctrine\Repository\MovieRepository;
 use Symfony\Component\DependencyInjection\Attribute\AsAlias;
 
@@ -14,26 +13,32 @@ use Symfony\Component\DependencyInjection\Attribute\AsAlias;
  * TODO: remove this file after forking the project.
  */
 #[AsAlias]
-final readonly class Movies implements CollectionMovies
+final readonly class Movies implements Domain\Collection\Movies
 {
     public function __construct(private MovieRepository $repository)
     {
     }
 
     #[\Override]
-    public function add(Movie $movie): void
+    public function create(string $title, string $description, \DateTimeInterface $releaseDate): Domain\Model\Movie
+    {
+        return new Movie($title, $description, \DateTimeImmutable::createFromInterface($releaseDate));
+    }
+
+    #[\Override]
+    public function add(Domain\Model\Movie $movie): void
     {
         $this->repository->add($movie);
     }
 
     #[\Override]
-    public function remove(Movie $movie): void
+    public function remove(Domain\Model\Movie $movie): void
     {
         $this->repository->remove($movie);
     }
 
     /**
-     * @throws EntityNotFoundException
+     * @throws Domain\Collection\Exception\EntityNotFoundException
      */
     #[\Override]
     public function get(string $uuid): Movie
@@ -41,27 +46,18 @@ final readonly class Movies implements CollectionMovies
         $movie = $this->repository->find($uuid);
 
         if (!$movie instanceof Movie) {
-            throw new EntityNotFoundException(Movie::class, $uuid);
+            throw new Domain\Collection\Exception\EntityNotFoundException(Movie::class, $uuid);
         }
 
         return $movie;
     }
 
     /**
-     * @return iterable<Movie>
+     * @return array<int,Domain\Model\Movie>
      */
     #[\Override]
-    public function all(): iterable
+    public function all(): array
     {
-        /**
-         * @var iterable<Movie> $iterable
-         */
-        $iterable = $this->repository->createQueryBuilder('movie')
-            ->orderBy('movie.releaseDate', 'DESC')
-            ->getQuery()
-            ->toIterable()
-        ;
-
-        return $iterable;
+        return $this->repository->findAll();
     }
 }

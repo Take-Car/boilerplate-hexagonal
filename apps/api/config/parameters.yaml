@@ -1,0 +1,4 @@
+---
+parameters:
+  # doctrine configuration
+  doctrine.orm.metadata.staticphp.class: Doctrine\Persistence\Mapping\Driver\StaticPHPDriver
