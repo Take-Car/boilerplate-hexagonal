@@ -47,20 +47,3 @@ COPY ./cs-fixer/composer.json ./cs-fixer/composer.lock /opt/cs-fixer/
 RUN composer install --no-progress --no-interaction --no-plugins --no-scripts --prefer-dist --no-cache --working-dir=/opt/cs-fixer
 
 ENV PATH="${PATH}:/opt/cs-fixer/vendor/bin"
-
-FROM base AS phpspec
-
-ENV XDEBUG_MODE=coverage
-
-RUN apk add --no-cache gcc g++ make autoconf linux-headers \
-    && pecl install xdebug \
-    && docker-php-ext-enable xdebug \
-    && apk del --no-network gcc g++ make autoconf linux-headers
-
-RUN mkdir -p /opt/phpspec
-
-COPY ./phpspec/composer.json ./phpspec/composer.lock /opt/phpspec/
-
-RUN composer install --no-progress --no-interaction --no-plugins --no-scripts --prefer-dist --no-cache --working-dir=/opt/phpspec
-
-ENV PATH="${PATH}:/opt/phpspec/vendor/bin"

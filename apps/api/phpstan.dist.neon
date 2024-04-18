@@ -1,5 +1,7 @@
 includes:
-	- phpstan-baseline.neon
+    - phpstan-baseline.neon
+    - /opt/phpstan/vendor/phpstan/phpstan-doctrine/extension.neon
+    - /opt/phpstan/vendor/phpstan/phpstan-doctrine/rules.neon
 
 parameters:
     level: max
@@ -7,6 +9,9 @@ parameters:
         - src
         - config
         - public
+    doctrine:
+        ormRepositoryClass: Infrastructure\Doctrine\Repository\AbstractRepository
+        objectManagerLoader: tests/object-manager.php
 
 services:
     - class: Tools\TypeResolver\QueryOutputTypeResolver

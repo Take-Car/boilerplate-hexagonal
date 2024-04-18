@@ -10,9 +10,9 @@ use Domain\Model\Movie;
 final readonly class Output
 {
     /**
-     * @param iterable<Movie> $movies
+     * @param array<Movie> $movies
      */
-    public function __construct(public iterable $movies)
+    public function __construct(public array $movies)
     {
     }
 }
