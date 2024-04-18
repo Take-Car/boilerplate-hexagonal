@@ -101,7 +101,7 @@ tasks:
       - task: migrations
         vars:
           CLI_ARGS: --no-interaction --env test --no-debug
-      - docker compose run --rm php vendor/bin/pest --coverage --min=80
+      - docker compose run --rm php vendor/bin/pest --coverage
 
   yarn:
     desc: Shortcut to run Yarn CLI

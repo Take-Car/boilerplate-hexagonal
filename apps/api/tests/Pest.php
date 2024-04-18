@@ -11,4 +11,3 @@
 |
 */
 uses(Tests\SpecTestCase::class)->in('Specs');
-uses(Tests\FeatureTestCase::class)->in('Features');

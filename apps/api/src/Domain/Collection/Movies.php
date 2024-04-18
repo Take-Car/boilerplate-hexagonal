@@ -11,6 +11,8 @@ use Domain\Model\Movie;
  */
 interface Movies
 {
+    public function create(string $title, string $description, \DateTimeInterface $releaseDate): Movie;
+
     public function add(Movie $movie): void;
 
     public function remove(Movie $movie): void;
@@ -21,7 +23,7 @@ interface Movies
     public function get(string $uuid): Movie;
 
     /**
-     * @return iterable<Movie>
+     * @return array<Movie>
      */
-    public function all(): iterable;
+    public function all(): array;
 }

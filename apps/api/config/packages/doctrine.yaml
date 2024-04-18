@@ -19,10 +19,10 @@ doctrine:
             auto_mapping: true
         mappings:
             Model:
-                type: xml
+                type: staticphp
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/Infrastructure/Doctrine/ORM/Model'
-                prefix: 'Domain\Model'
+                dir: '%kernel.project_dir%/src/Infrastructure/Doctrine/Entity'
+                prefix: 'Infrastructure\Doctrine\Entity'
 
 when@test:
     doctrine:
