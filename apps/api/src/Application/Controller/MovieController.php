@@ -6,10 +6,10 @@ namespace Application\Controller;
 
 use Application\BusInterface;
 use Domain\Collection\Exception\EntityNotFoundException;
-use Domain\Command\Movie\Create;
-use Domain\Command\Movie\Delete;
-use Domain\Query\Movie\All;
-use Domain\Query\Movie\Show;
+use Domain\Message\Command\Movie\Create;
+use Domain\Message\Command\Movie\Delete;
+use Domain\Message\Query\Movie\All;
+use Domain\Message\Query\Movie\Show;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Query\Movie\All;
+namespace Domain\Message\Query\Movie\All;
 
 use Domain\Model\Movie;
 

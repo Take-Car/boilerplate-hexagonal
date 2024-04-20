@@ -1,8 +1,8 @@
 <?php
 
-namespace Domain\Query\Movie\All;
+namespace Domain\Message\Query\Movie\All;
 
-use Domain\Query\QueryInterface;
+use Domain\Message\Query\QueryInterface;
 
 /**
  * TODO: remove this file after forking the project.

@@ -1,8 +1,8 @@
 <?php
 
-namespace Domain\Command\Movie\Delete;
+namespace Domain\Message\Command\Movie\Delete;
 
-use Domain\Command\CommandInterface;
+use Domain\Message\Command\CommandInterface;
 
 /**
  * TODO: remove this file after forking the project.
