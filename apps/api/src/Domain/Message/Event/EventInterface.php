@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Event;
+namespace Domain\Message\Event;
 
 interface EventInterface
 {

@@ -1,8 +1,8 @@
 <?php
 
 use Domain\Collection\Movies;
-use Domain\Command\Movie\Create\Handler;
-use Domain\Command\Movie\Create\Input;
+use Domain\Message\Command\Movie\Create\Handler;
+use Domain\Message\Command\Movie\Create\Input;
 use Domain\Model\Movie;
 
 test('creates a movie with given informations', function (): void {
