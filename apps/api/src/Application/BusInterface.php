@@ -2,9 +2,9 @@
 
 namespace Application;
 
-use Domain\Command\CommandInterface;
-use Domain\Event\EventInterface;
-use Domain\Query\QueryInterface;
+use Domain\Message\Command\CommandInterface;
+use Domain\Message\Event\EventInterface;
+use Domain\Message\Query\QueryInterface;
 
 interface BusInterface
 {

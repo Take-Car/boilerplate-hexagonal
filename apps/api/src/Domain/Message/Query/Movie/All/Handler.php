@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Command\Movie\Delete;
+namespace Domain\Message\Query\Movie\All;
 
 use Domain\Collection\Movies;
 
@@ -13,8 +13,8 @@ final readonly class Handler
     {
     }
 
-    public function __invoke(Input $input): void
+    public function __invoke(Input $input): Output
     {
-        $this->movies->remove($this->movies->get($input->uuid));
+        return new Output($this->movies->all());
     }
 }

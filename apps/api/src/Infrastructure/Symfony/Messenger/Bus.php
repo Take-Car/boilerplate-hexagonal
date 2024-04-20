@@ -1,15 +1,17 @@
 <?php
 
-namespace Infrastructure\Messenger;
+namespace Infrastructure\Symfony\Messenger;
 
 use Application\BusInterface;
-use Domain\Command\CommandInterface;
-use Domain\Event\EventInterface;
-use Domain\Query\QueryInterface;
+use Domain\Message\Command\CommandInterface;
+use Domain\Message\Event\EventInterface;
+use Domain\Message\Query\QueryInterface;
+use Symfony\Component\DependencyInjection\Attribute\AsAlias;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 
+#[AsAlias]
 final readonly class Bus implements BusInterface
 {
     public function __construct(

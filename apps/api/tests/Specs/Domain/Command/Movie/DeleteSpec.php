@@ -1,8 +1,8 @@
 <?php
 
 use Domain\Collection\Movies;
-use Domain\Command\Movie\Delete\Handler;
-use Domain\Command\Movie\Delete\Input;
+use Domain\Message\Command\Movie\Delete\Handler;
+use Domain\Message\Command\Movie\Delete\Input;
 use Domain\Model\Movie;
 
 test('delete the movie by its uuid', function (): void {

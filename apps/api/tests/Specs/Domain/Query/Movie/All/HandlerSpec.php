@@ -1,10 +1,10 @@
 <?php
 
 use Domain\Collection\Movies;
+use Domain\Message\Query\Movie\All\Handler;
+use Domain\Message\Query\Movie\All\Input;
+use Domain\Message\Query\Movie\All\Output;
 use Domain\Model\Movie;
-use Domain\Query\Movie\All\Handler;
-use Domain\Query\Movie\All\Input;
-use Domain\Query\Movie\All\Output;
 
 test('retrieve a movie by its uuid', function (): void {
     $movies = mock(Movies::class);

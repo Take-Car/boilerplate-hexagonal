@@ -96,12 +96,7 @@ tasks:
   pest:
     desc: Shortcut to run Pest
     cmds:
-      - docker compose build php database
-      - docker compose up -d database
-      - task: migrations
-        vars:
-          CLI_ARGS: --no-interaction --env test --no-debug
-      - docker compose run --rm php vendor/bin/pest --coverage
+      - docker compose run --rm --no-deps php vendor/bin/pest
 
   yarn:
     desc: Shortcut to run Yarn CLI

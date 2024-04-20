@@ -1,0 +1,36 @@
+---
+services:
+  _defaults:
+    public: false
+    autowire: true
+
+  ### APPLICATION ###
+
+  Application\:
+    resource: '%kernel.project_dir%/src/Application/*'
+    exclude:
+      - '%kernel.project_dir%/src/Application/Controller/*'
+
+  Application\Controller\:
+    resource: '%kernel.project_dir%/src/Application/Controller/*'
+    tags:
+      - controller.service_arguments
+
+  ### DOMAIN ###
+
+  Domain\Collection\:
+    resource: '%kernel.project_dir%/src/Domain/Collection/*'
+    exclude:
+      - '%kernel.project_dir%/src/Domain/Collection/*/Exception/*'
+
+  Domain\Message\:
+    resource: '%kernel.project_dir%/src/Domain/Message/**/Handler.php'
+    exclude:
+      - '%kernel.project_dir%/src/Domain/Message/*/Exception/*'
+    tags:
+      - messenger.message_handler
+
+  ### INFRASTRUCTURE ###
+
+  Infrastructure\:
+    resource: '%kernel.project_dir%/src/Infrastructure/*'

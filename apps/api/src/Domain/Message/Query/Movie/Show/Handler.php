@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Domain\Query\Movie\Show;
+namespace Domain\Message\Query\Movie\Show;
 
 use Domain\Collection\Movies;
 
