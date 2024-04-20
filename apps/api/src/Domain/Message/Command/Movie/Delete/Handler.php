@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Command\Movie\Create;
+namespace Domain\Message\Command\Movie\Delete;
 
 use Domain\Collection\Movies;
 
@@ -15,12 +15,6 @@ final readonly class Handler
 
     public function __invoke(Input $input): void
     {
-        $movie = $this->movies->create(
-            $input->title,
-            $input->description,
-            $input->releaseDate,
-        );
-
-        $this->movies->add($movie);
+        $this->movies->remove($this->movies->get($input->uuid));
     }
 }

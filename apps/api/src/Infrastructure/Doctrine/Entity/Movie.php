@@ -8,11 +8,13 @@ use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Domain\Model;
 use Symfony\Bridge\Doctrine\Types\UuidType;
+use Symfony\Component\DependencyInjection\Attribute\Exclude;
 use Symfony\Component\Uid\Uuid;
 
 /**
  * TODO: remove this file after forking the project.
  */
+#[Exclude]
 class Movie extends Model\Movie
 {
     private Uuid $uuid;

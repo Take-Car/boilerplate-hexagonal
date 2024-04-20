@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Query;
+namespace Domain\Message\Query;
 
 interface QueryInterface
 {
