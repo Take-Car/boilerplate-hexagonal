@@ -3,6 +3,8 @@ Dependencies:
   - any-glob-to-any-file:
     - 'apps/api/composer.json'
     - 'apps/api/composer.lock'
+    - 'apps/web/package.json'
+    - 'apps/web/yarn.lock'
 Docker:
 - changed-files:
   - any-glob-to-any-file:
