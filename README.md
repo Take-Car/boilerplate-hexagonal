@@ -30,12 +30,13 @@ We will use Docker to make a development environment with 5 services:
 - Nginx + PHP: serves the Symfony API
 - MySQL: to store our data
 - RabbitMQ: messaging queue system (in pair with Symfony Messenger)
+- Node: develop, build and serve NextJS application
 
 ## Installation
 
 ### Docker
 
-This boilerplate was built around with [Docker Desktop](https://www.docker.com/products/docker-desktop/) and tested with [Orbstack](https://orbstack.dev) (which can replace Docker Desktop on MacOS).
+This boilerplate was built around with [Orbstack](https://orbstack.dev) (which can replace Docker Desktop on MacOS).
 
 ### Taskfile
 
@@ -81,10 +82,11 @@ with the following comment: `TODO: remove this file after forking the project`.
 | deptrac  | Shortcut to run Deptrac                                   |
 | cs-fixer | Shortcut to run PHP CS Fixer                              |
 | rector   | Shortcut to run Rector                                    |
-| pest     | Shortcut to run Pest                                  |
+| pest     | Shortcut to run Pest                                      |
 
 ## URLs
 
+- [NextJS frontend](https://app.localhost)
 - [Symfony API](https://api.app.localhost)
 - [Traefik dashboard](https://traefik.app.localhost)
 - [Rabbit MQ monitor](https://rabbitmq.app.localhost)
