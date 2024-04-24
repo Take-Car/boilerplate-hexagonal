@@ -8,7 +8,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @phpstan-template EntityClass of object
+ * @phpstan-template EntityClass of \Infrastructure\Doctrine\Entity\EntityInterface
  *
  * @phpstan-extends ServiceEntityRepository<EntityClass>
  */

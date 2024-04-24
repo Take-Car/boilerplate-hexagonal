@@ -8,8 +8,6 @@ services:
 
   Application\:
     resource: '%kernel.project_dir%/src/Application/*'
-    exclude:
-      - '%kernel.project_dir%/src/Application/Controller/*'
 
   Application\Controller\:
     resource: '%kernel.project_dir%/src/Application/Controller/*'
@@ -21,12 +19,12 @@ services:
   Domain\Collection\:
     resource: '%kernel.project_dir%/src/Domain/Collection/*'
     exclude:
-      - '%kernel.project_dir%/src/Domain/Collection/*/Exception/*'
+      - '%kernel.project_dir%/src/*Exception.php'
 
   Domain\Message\:
     resource: '%kernel.project_dir%/src/Domain/Message/**/Handler.php'
     exclude:
-      - '%kernel.project_dir%/src/Domain/Message/*/Exception/*'
+      - '%kernel.project_dir%/src/*Exception.php'
     tags:
       - messenger.message_handler
 
@@ -34,3 +32,10 @@ services:
 
   Infrastructure\:
     resource: '%kernel.project_dir%/src/Infrastructure/*'
+    exclude:
+      - '%kernel.project_dir%/src/Infrastructure/Doctrine/Entity/*'
+
+  Infrastructure\Doctrine\Repository\:
+    resource: '%kernel.project_dir%/src/Infrastructure/Doctrine/Repository/*'
+    tags:
+      - doctrine.repository_service
