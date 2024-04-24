@@ -38,7 +38,7 @@ final readonly class AuthenticatorController
 
         return new JsonResponse([
             'email' => $currentUser->getEmail(),
-            'token' => sha1($currentUser->getEmail() . $currentUser->getHashedPassword()),
+            'token' => sha1($currentUser->getEmail().$currentUser->getHashedPassword()),
         ]);
     }
 }

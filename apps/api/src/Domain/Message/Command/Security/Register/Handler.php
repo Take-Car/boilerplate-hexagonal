@@ -12,7 +12,7 @@ final readonly class Handler
     {
     }
 
-    public function __invoke(Input $input)
+    public function __invoke(Input $input): void
     {
         if ($this->users->exists($input->email)) {
             throw new Exception\EmailAlreadyExistsException($input->email);

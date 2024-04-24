@@ -19,7 +19,7 @@ final readonly class Users implements Domain\Collection\UsersInterface
 
     public function create(string $email, string $plainPassword): Domain\Model\User
     {
-        $user = new User($email, $plainPassword);
+        $user = new User($email);
         $user->setHashedPassword($this->passwordHasher->hashPassword($user, $plainPassword));
 
         return $user;
@@ -27,11 +27,19 @@ final readonly class Users implements Domain\Collection\UsersInterface
 
     public function add(Domain\Model\User $user): void
     {
+        if (!$user instanceof User) {
+            throw new \RuntimeException('User must be an instance of '.User::class);
+        }
+
         $this->repository->add($user);
     }
 
     public function remove(Domain\Model\User $user): void
     {
+        if (!$user instanceof User) {
+            throw new \RuntimeException('User must be an instance of '.User::class);
+        }
+
         $this->repository->remove($user);
     }
 
