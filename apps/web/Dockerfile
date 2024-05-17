@@ -1,4 +1,4 @@
-FROM node:20.11.1-alpine3.18 AS base
+FROM node:22.2.0-alpine3.19 AS base
 
 RUN corepack enable
 
@@ -24,7 +24,7 @@ RUN yarn build \
   && cp -r .next/static .next/standalone/.next/ \
   && cp -r public .next/standalone/
 
-FROM node:20.11.1-alpine3.18 AS release
+FROM node:22.2.0-alpine3.19 AS release
 
 WORKDIR /app
 
