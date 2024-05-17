@@ -76,7 +76,35 @@ updates:
       time: '06:00'
       timezone: Europe/Paris
 
-  - directory: /tools
+  - directory: /tools/cs-fixer
+    package-ecosystem: docker
+    schedule:
+      interval: daily
+      time: '06:00'
+      timezone: Europe/Paris
+
+  - directory: /tools/deptrac
+    package-ecosystem: docker
+    schedule:
+      interval: daily
+      time: '06:00'
+      timezone: Europe/Paris
+
+  - directory: /tools/phpspec
+    package-ecosystem: docker
+    schedule:
+      interval: daily
+      time: '06:00'
+      timezone: Europe/Paris
+
+  - directory: /tools/phpstan
+    package-ecosystem: docker
+    schedule:
+      interval: daily
+      time: '06:00'
+      timezone: Europe/Paris
+
+  - directory: /tools/rector
     package-ecosystem: docker
     schedule:
       interval: daily
