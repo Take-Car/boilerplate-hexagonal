@@ -1,40 +1,37 @@
 name: testing
 
 services:
-  base:
-    build:
-      context: ./tools
-      dockerfile: Dockerfile
-      target: base
-    volumes:
-      - ./apps/api:/opt/code
 
   cs-fixer:
-    extends: base
-    build:
-      target: cs-fixer
-    volumes:
-      - ./apps/api:/opt/code
+    build: tools/cs-fixer
     entrypoint: php-cs-fixer
     command: check
+    volumes:
+      - ./apps/api:/opt/code
 
   deptrac:
-    extends: base
-    build:
-      target: deptrac
+    build: tools/deptrac
     entrypoint: deptrac
     command: --report-uncovered
+    volumes:
+      - ./apps/api:/opt/code
 
   phpstan:
-    extends: base
-    build:
-      target: phpstan
+    build: tools/phpstan
     entrypoint: phpstan
     env_file:
       - apps/api/.env
+    volumes:
+      - ./apps/api:/opt/code
 
   rector:
-    extends: base
-    build:
-      target: rector
+    build: tools/rector
     entrypoint: rector --config /opt/rector/rector.php
+    volumes:
+      - ./apps/api:/opt/code
+
+  phpspec:
+    build: tools/phpspec
+    entrypoint: phpspec
+    volumes:
+      - ./apps/api:/opt/code
