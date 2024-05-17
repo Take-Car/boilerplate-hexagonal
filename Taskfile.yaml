@@ -93,10 +93,10 @@ tasks:
     cmds:
       - docker compose -f docker-compose.tools.yml run --rm rector {{.CLI_ARGS}}
 
-  pest:
-    desc: Shortcut to run Pest
+  phpspec:
+    desc: Shortcut to run Php Spec
     cmds:
-      - docker compose run --rm --no-deps php vendor/bin/pest
+      - docker compose -f docker-compose.tools.yml run --rm --no-deps phpspec run
 
   yarn:
     desc: Shortcut to run Yarn CLI

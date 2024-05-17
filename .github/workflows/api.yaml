@@ -61,5 +61,5 @@ jobs:
       - name: Copy .env file
         run: cp apps/web/.env.dist apps/web/.env
 
-      - name: Run Pest tests
-        run: task pest
+      - name: Run Php Spec tests
+        run: task phpspec

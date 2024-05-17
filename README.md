@@ -10,15 +10,7 @@ In the hexagonal architecture, the core business logic is independent of the ext
 
 This architecture enables better testability, maintainability, and flexibility. It allows for easy swapping of external components, as long as they adhere to the defined ports' interfaces. Changes in the external systems do not impact the core business logic, making the application more resilient to modifications and evolutions.
 
-Overall, the hexagonal architecture promotes a modular, clean, and adaptable design by separating concerns and dependencies, leading to a more robust and maintainable software system.
-
-## Code coverage
-
-### Pest
-
-The coverage of the code is done with [Pest](https://pestphp.com/). Pest is a testing framework with a focus on simplicity, meticulously designed to bring back the joy of testing in PHP.
-
-It ensures the test covering (with at least 80%) and type covering (with 100% type safety) as setted in [API Workflow](/.github/workflows/api.yaml).
+Overall, the hexagonal architecture promotes a modular, clean, and adaptable design by separating concerns and dependencies, leading to a more robust and maintainable software system..
 
 ## Stack
 
@@ -82,7 +74,7 @@ with the following comment: `TODO: remove this file after forking the project`.
 | deptrac  | Shortcut to run Deptrac                                   |
 | cs-fixer | Shortcut to run PHP CS Fixer                              |
 | rector   | Shortcut to run Rector                                    |
-| pest     | Shortcut to run Pest                                      |
+| phpspec  | Shortcut to run PhpSpec                                   |
 
 ## URLs
 
