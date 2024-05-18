@@ -32,7 +32,7 @@ This boilerplate was built around with [Orbstack](https://orbstack.dev) (which c
 
 ### Taskfile
 
-Rather than using GNU Make, fancy commands shortcuts are writen with [Taskfile](https://taskfile.dev/). You can install it via their website, they also provide a convenient script to install it on Linux based system:
+The project uses [Taskfile](https://taskfile.dev/) to create CLI shortcuts. You can install it via its website, they also provide a convenient script to install it on common systems:
 
 #### Linux
 
@@ -54,11 +54,6 @@ task
 winget install Task.Task # you may need to restart your session
 task
 ```
-
-### Clean the project
-
-After forking the project, you can clean the project from existing entity, migration, etc. by removing all the files
-with the following comment: `TODO: remove this file after forking the project`.
 
 ## Commands
 
