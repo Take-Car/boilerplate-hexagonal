@@ -1,6 +1,6 @@
 FROM node:22.2.0-alpine3.19 AS base
 
-RUN corepack enable
+RUN corepack enable yarn
 
 WORKDIR /app
 
