@@ -65,12 +65,12 @@ tasks:
   composer:
     desc: Shortcut to run Composer CLI
     cmds:
-      - docker compose -f docker-compose.yml run --rm php composer {{.CLI_ARGS}}
+      - docker compose -f docker-compose.yml run --rm api composer {{.CLI_ARGS}}
 
   console:
     desc: Shortcut to run Symfony console
     cmds:
-      - docker compose run --rm php console {{.CLI_ARGS}}
+      - docker compose run --rm api bin/console {{.CLI_ARGS}}
 
   phpstan:
     desc: Shortcut to run PHPStan
@@ -116,4 +116,4 @@ tasks:
           CLI_ARGS: doctrine:database:create --if-not-exists {{.CLI_ARGS}}
       - task: console
         vars:
-          CLI_ARGS: doctrine:migrations:migrate {{.CLI_ARGS}}
+          CLI_ARGS: doctrine:migrations:migrate --allow-no-migration {{.CLI_ARGS}}
