@@ -15,28 +15,32 @@ services:
     volumes:
       - ./certs:/etc/certs:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
+    depends_on:
+      api: { condition: service_healthy }
+      node: { condition: service_started }
 
   api:
     build:
-      context: ./apps/api
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: docker/api/Dockerfile
       target: dev
     env_file:
       - ./apps/api/.env
+    volumes:
+      - ./apps/api:/app
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.api.tls=true"
       - "traefik.http.routers.api.rule=Host(`api.app.localhost`)"
       - "traefik.http.services.api.loadbalancer.server.port=80"
-    volumes:
-      - ./apps/api:/app
     depends_on:
       database: { condition: service_healthy }
 
   node:
     build:
-      context: ./apps/web
+      context: .
+      dockerfile: docker/web/Dockerfile
       target: dev
     env_file:
       - ./apps/web/.env
