@@ -67,6 +67,7 @@ COPY docker/api/php/php-dev.ini /usr/local/etc/php/php.ini
 FROM dev AS test
 
 ENV APP_ENV=test
+ENV APP_DEBUG=0
 
 COPY docker/api/php/php-test.ini /usr/local/etc/php/php.ini
 
