@@ -37,4 +37,9 @@ abstract class AbstractRepository extends ServiceEntityRepository
     {
         $this->getEntityManager()->remove($entity);
     }
+
+    public function clear(): void
+    {
+        $this->getEntityManager()->clear();
+    }
 }

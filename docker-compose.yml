@@ -26,6 +26,8 @@ services:
       target: dev
     env_file:
       - ./apps/api/.env
+    environment:
+      - APP_ENV=prod
     volumes:
       - ./apps/api:/app
     restart: unless-stopped

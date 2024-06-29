@@ -46,9 +46,6 @@ RUN chown -R user:www-data /var/lib/nginx && chmod -R 770 /var/lib/nginx \
 
 USER user:www-data
 
-HEALTHCHECK --interval=60s --timeout=5s \
-    CMD [ "200" = "$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1/ping)" ] || exit 1
-
 CMD ["nginx", "-g", "daemon off;"]
 ENTRYPOINT ["docker-entrypoint.sh"]
 
@@ -84,3 +81,6 @@ COPY --chown=user:www-data docker/api/php/php-prod.ini /usr/local/etc/php/php.in
 
 RUN composer install --no-dev --no-scripts --no-interaction --no-progress \
     && composer dump-autoload --optimize --no-dev --classmap-authoritative
+
+HEALTHCHECK --interval=60s --timeout=5s \
+    CMD [ "200" = "$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1/ping)" ] || exit 1
