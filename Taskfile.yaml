@@ -54,7 +54,7 @@ tasks:
     cmds:
       - task: yarn
         vars:
-          CLI_ARGS: install --frozen-lockfile
+          CLI_ARGS: install --immutable
     sources:
       - ./apps/web/package.json
       - ./apps/web/yarn.lock

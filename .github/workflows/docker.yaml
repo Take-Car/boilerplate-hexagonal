@@ -1,0 +1,32 @@
+name: Docker
+
+on:
+  push:
+    paths:
+      - '**/Dockerfile'
+      - .github/workflows/docker.yaml
+
+jobs:
+  hadolint:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        dockerfile:
+          - apps/api/Dockerfile
+          - apps/web/Dockerfile
+          - services/mysql/Dockerfile
+          - services/nginx/Dockerfile
+          - services/rabbitmq/Dockerfile
+          - services/traefik/Dockerfile
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Lint Dockerfile
+        uses: hadolint/hadolint-action@master
+        with:
+          dockerfile: ${{ matrix.dockerfile }}
