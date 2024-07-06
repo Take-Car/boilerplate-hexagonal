@@ -14,7 +14,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        dockerfile: [docker/api/Dockerfile, docker/web/Dockerfile]
+        dockerfile:
+          - apps/api/Dockerfile
+          - apps/web/Dockerfile
+          - services/mysql/Dockerfile
+          - services/nginx/Dockerfile
+          - services/rabbitmq/Dockerfile
+          - services/traefik/Dockerfile
 
     steps:
       - name: Checkout code
