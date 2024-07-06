@@ -78,15 +78,30 @@ USER user
 
 #####################################
 
+FROM composer AS vendor
+
+ENV APP_ENV=prod
+ENV APP_DEBUG=0
+
+COPY composer.json composer.lock ./
+
+RUN composer install \
+    --no-dev \
+    --no-scripts \
+    --optimize-autoloader \
+    --ignore-platform-reqs
+
+#####################################
+
 FROM base AS prod
 
 ENV APP_ENV=prod
 ENV APP_DEBUG=0
 
-RUN composer install \
-    --no-dev \
-    --no-scripts \
-    --optimize-autoloader
 
 COPY php/php-prod.ini /usr/local/etc/php/php.ini
 COPY . .
+COPY --from=vendor /app/vendor /app/vendor
+
+RUN composer dump-autoload --optimize \
+    && composer check-platform-reqs
