@@ -116,4 +116,4 @@ tasks:
           CLI_ARGS: doctrine:database:create --if-not-exists {{.CLI_ARGS}}
       - task: console
         vars:
-          CLI_ARGS: doctrine:migrations:migrate {{.CLI_ARGS}}
+          CLI_ARGS: doctrine:migrations:migrate --allow-no-migration {{.CLI_ARGS}}
