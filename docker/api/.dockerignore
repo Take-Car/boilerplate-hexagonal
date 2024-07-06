@@ -1,9 +1,0 @@
-*
-
-!bin/
-!config/
-!public/
-!src/
-!composer.json
-!composer.lock
-!symfony.lock
