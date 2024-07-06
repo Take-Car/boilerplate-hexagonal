@@ -1,6 +1,4 @@
-FROM node:22.2.0-alpine3.19 AS local
-
-FROM local AS base
+FROM node:22.2.0-alpine3.19 AS base
 
 RUN corepack enable
 
@@ -14,11 +12,11 @@ FROM base AS build
 
 ENV NODE_ENV=production
 
-COPY apps/web/package.json apps/web/yarn.lock apps/web/.yarnrc.yml ./
+COPY ./package.json ./yarn.lock ./.yarnrc.yml ./
 
-RUN corepack install && yarn install --immutable
+RUN yarn install --frozen-lockfile
 
-COPY apps/web .
+COPY . .
 
 RUN yarn build \
   # Move the static files to a standalone directory
@@ -26,13 +24,11 @@ RUN yarn build \
   && cp -r .next/static .next/standalone/.next/ \
   && cp -r public .next/standalone/
 
-FROM local AS release
+FROM node:22.2.0-alpine3.19 AS release
 
 WORKDIR /app
 
-COPY --from=build --chown=1000:1000 /app/.next/standalone /app/
+COPY --from=build /app/.next/standalone /app/
 
 ENTRYPOINT [ "node" ]
 CMD [ "server.js" ]
-
-USER 1000:1000

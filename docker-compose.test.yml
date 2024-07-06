@@ -1,12 +1,10 @@
 services:
-  api:
+  php:
     build:
       context: ./apps/api
       target: test
     env_file:
       - ./apps/api/.env
-    volumes:
-      - ./apps/api:/app
     depends_on:
       database:
         condition: service_healthy

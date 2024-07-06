@@ -1,6 +1,4 @@
 [![PHP Code Quality](https://github.com/clementvtrd/boilerplate-hexagonal/actions/workflows/api.yaml/badge.svg?branch=develop)](https://github.com/clementvtrd/boilerplate-hexagonal/actions/workflows/api.yaml)
-[![Docker](https://github.com/clementvtrd/boilerplate-hexagonal/actions/workflows/docker.yaml/badge.svg)](https://github.com/clementvtrd/boilerplate-hexagonal/actions/workflows/docker.yaml)
-[![Web Code Quality](https://github.com/clementvtrd/boilerplate-hexagonal/actions/workflows/web.yaml/badge.svg)](https://github.com/clementvtrd/boilerplate-hexagonal/actions/workflows/web.yaml)
 
 # Hexagonal boilerplate
 
