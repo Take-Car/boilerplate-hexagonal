@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "04c5a5bb125af80ec1f4b0767f9761d6",
+    "content-hash": "4152a591d23c3cbe6d574056d79a7c5c",
     "packages": [
         {
             "name": "doctrine/cache",
@@ -3193,16 +3193,16 @@
         },
         {
             "name": "symfony/messenger",
-            "version": "v7.0.9",
+            "version": "v7.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/messenger.git",
-                "reference": "c27e9e7f7e9781ad2555222fc21efe29e72fd31f"
+                "reference": "8cafca5f0fade46acf4a6b32b2d5e495f798a56b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/messenger/zipball/c27e9e7f7e9781ad2555222fc21efe29e72fd31f",
-                "reference": "c27e9e7f7e9781ad2555222fc21efe29e72fd31f",
+                "url": "https://api.github.com/repos/symfony/messenger/zipball/8cafca5f0fade46acf4a6b32b2d5e495f798a56b",
+                "reference": "8cafca5f0fade46acf4a6b32b2d5e495f798a56b",
                 "shasum": ""
             },
             "require": {
@@ -3259,7 +3259,7 @@
             "description": "Helps applications send and receive messages to/from other applications or via message queues",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/messenger/tree/v7.0.9"
+                "source": "https://github.com/symfony/messenger/tree/v7.1.2"
             },
             "funding": [
                 {
@@ -3275,7 +3275,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-06-28T07:59:17+00:00"
+            "time": "2024-06-28T08:00:31+00:00"
         },
         {
             "name": "symfony/polyfill-intl-grapheme",
