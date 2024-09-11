@@ -28,7 +28,7 @@ final class QueryOutputTypeResolver implements DynamicMethodReturnTypeExtension
     public function getTypeFromMethodCall(
         MethodReflection $methodReflection,
         MethodCall $methodCall,
-        Scope $scope
+        Scope $scope,
     ): Type {
         if (0 === \count($methodCall->getArgs())) {
             return new ObjectWithoutClassType();
