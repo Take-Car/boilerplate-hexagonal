@@ -1,4 +1,4 @@
-FROM composer:2.7.8 AS composer
+FROM composer:2.7.9 AS composer
 
 FROM php:8.3-cli-alpine3.17 AS base
 
