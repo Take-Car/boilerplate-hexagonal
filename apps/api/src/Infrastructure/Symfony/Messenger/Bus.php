@@ -3,9 +3,9 @@
 namespace Infrastructure\Symfony\Messenger;
 
 use Application\BusInterface;
-use Domain\Message\Command\CommandInterface;
-use Domain\Message\Event\EventInterface;
-use Domain\Message\Query\QueryInterface;
+use Domain\Message\CommandInterface;
+use Domain\Message\EventInterface;
+use Domain\Message\QueryInterface;
 use Symfony\Component\DependencyInjection\Attribute\AsAlias;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
