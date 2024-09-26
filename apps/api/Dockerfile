@@ -20,11 +20,10 @@ RUN addgroup -g $GID user \
 RUN apk add --no-cache \
     autoconf=2.71-r1 \
     bash=5.2.15-r0 \
-    git=2.38.5-r0 \
+    git=2.39.5-r0 \
     libzip-dev=1.9.2-r2 \
     icu-dev=72.1-r1 \
-    rabbitmq-c-dev=0.11.0-r5 \
-    nginx=1.22.1-r1
+    rabbitmq-c-dev=0.11.0-r5
 
 # hadolint ignore=DL3018,SC2086
 RUN apk add --no-cache --virtual .phpize-deps ${PHPIZE_DEPS} \
