@@ -4,37 +4,37 @@ declare(strict_types=1);
 
 namespace Infrastructure\Doctrine\Repository;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * @phpstan-template EntityClass of object
- *
- * @phpstan-extends ServiceEntityRepository<EntityClass>
  */
-abstract class AbstractRepository extends ServiceEntityRepository
+abstract class AbstractRepository
 {
     /**
-     * @phpstan-param class-string<EntityClass> $entityClass
+     * @var EntityRepository<EntityClass>
      */
-    public function __construct(ManagerRegistry $registry, string $entityClass)
-    {
-        parent::__construct($registry, $entityClass);
-    }
+    protected EntityRepository $repository;
 
     /**
-     * @phpstan-param EntityClass $entity
+     * @param class-string $entityClass
      */
+    public function __construct(
+        private EntityManager $entityManager,
+        string $entityClass
+    )
+    {
+        $this->repository = $this->entityManager->getRepository($entityClass);
+    }
+
     public function add(object $entity): void
     {
-        $this->getEntityManager()->persist($entity);
+        $this->entityManager->persist($entity);
     }
 
-    /**
-     * @phpstan-param EntityClass $entity
-     */
     public function remove(object $entity): void
     {
-        $this->getEntityManager()->remove($entity);
+        $this->entityManager->remove($entity);
     }
 }
