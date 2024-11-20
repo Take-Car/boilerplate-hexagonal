@@ -6,26 +6,20 @@ namespace Infrastructure\Doctrine\Repository;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @phpstan-template EntityClass of object
  */
-abstract class AbstractRepository
+abstract readonly class AbstractRepository
 {
     /**
-     * @var EntityRepository<EntityClass>
-     */
-    protected EntityRepository $repository;
-
-    /**
-     * @param class-string $entityClass
+     * @param class-string<EntityClass> $entityClass
      */
     public function __construct(
         private EntityManager $entityManager,
-        string $entityClass
-    )
-    {
-        $this->repository = $this->entityManager->getRepository($entityClass);
+        private string $entityClass,
+    ) {
     }
 
     public function add(object $entity): void
@@ -36,5 +30,25 @@ abstract class AbstractRepository
     public function remove(object $entity): void
     {
         $this->entityManager->remove($entity);
+    }
+
+    /**
+     * @return EntityRepository<EntityClass>
+     */
+    protected function getRepository(): EntityRepository
+    {
+        /**
+         * @var EntityRepository<EntityClass>
+         */
+        return $this->entityManager->getRepository($this->entityClass);
+    }
+
+    protected function createQueryBuilder(): QueryBuilder
+    {
+        $shortName = (new \ReflectionClass($this->entityClass))->getName();
+
+        return $this->getRepository()
+            ->createQueryBuilder($shortName)
+        ;
     }
 }
