@@ -75,6 +75,8 @@ RUN apk add --no-cache \
 
 USER user
 
+RUN composer install --no-scripts --optimize-autoloader
+
 #####################################
 
 FROM composer AS vendor

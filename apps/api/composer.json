@@ -59,6 +59,9 @@
         "symfony/yaml": "7.2.*"
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "3.67.*",
+        "phpstan/phpstan": "1.12.*",
+        "phpstan/phpstan-doctrine": "1.5.*",
         "symfony/http-client": "7.2.*",
         "symfony/stopwatch": "6.4.*",
         "symfony/web-profiler-bundle": "7.2.*"

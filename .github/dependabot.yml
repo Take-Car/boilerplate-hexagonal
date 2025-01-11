@@ -6,6 +6,7 @@ updates:
       interval: daily
       time: '06:00'
       timezone: Europe/Paris
+
   - package-ecosystem: composer
     directory: /apps/api
     schedule:
@@ -22,30 +23,6 @@ updates:
           - doctrine/*
 
   - package-ecosystem: composer
-    directory: /tools/cs-fixer
-    schedule:
-      interval: daily
-      time: '06:00'
-      timezone: Europe/Paris
-    versioning-strategy: increase
-
-  - package-ecosystem: composer
-    directory: /tools/deptrac
-    schedule:
-      interval: daily
-      time: '06:00'
-      timezone: Europe/Paris
-    versioning-strategy: increase
-
-  - package-ecosystem: composer
-    directory: /tools/phpstan
-    schedule:
-      interval: daily
-      time: '06:00'
-      timezone: Europe/Paris
-    versioning-strategy: increase
-
-  - package-ecosystem: composer
     directory: /tools/rector
     schedule:
       interval: daily
@@ -56,6 +33,13 @@ updates:
   ### DOCKERFILES ###
 
   - directory: /apps/api
+    package-ecosystem: docker
+    schedule:
+      interval: daily
+      time: '06:00'
+      timezone: Europe/Paris
+
+  - directory: /apps/web
     package-ecosystem: docker
     schedule:
       interval: daily
@@ -76,28 +60,14 @@ updates:
       time: '06:00'
       timezone: Europe/Paris
 
-  - directory: /tools/cs-fixer
+  - directory: /services/rabbitmq
     package-ecosystem: docker
     schedule:
       interval: daily
       time: '06:00'
       timezone: Europe/Paris
 
-  - directory: /tools/deptrac
-    package-ecosystem: docker
-    schedule:
-      interval: daily
-      time: '06:00'
-      timezone: Europe/Paris
-
-  - directory: /tools/phpspec
-    package-ecosystem: docker
-    schedule:
-      interval: daily
-      time: '06:00'
-      timezone: Europe/Paris
-
-  - directory: /tools/phpstan
+  - directory: /services/traefik
     package-ecosystem: docker
     schedule:
       interval: daily
