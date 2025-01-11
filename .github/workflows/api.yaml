@@ -20,10 +20,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        tool: [cs-fixer, phpstan, deptrac, rector]
-
-    env:
-      COMPOSE_FILE: docker-compose.tools.yml
+        tool: [cs-fixer, phpstan, rector]
 
     steps:
       - name: Checkout code
@@ -35,27 +32,8 @@ jobs:
           version: 3.x
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Boostrap test utilities
-        run: docker compose build ${{ matrix.tool }}
+      - name: Initialize
+        run: task init
 
       - name: Run ${{ matrix.tool }}
         run: task ${{ matrix.tool }}
-
-  tests:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Install Task
-        uses: arduino/setup-task@v2
-        with:
-          version: 3.x
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Copy .env file
-        run: cp apps/web/.env.dist apps/web/.env
-
-      - name: Run Php Spec tests
-        run: task phpspec

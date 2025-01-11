@@ -1,37 +1,8 @@
-name: testing
+name: tools
 
 services:
-
-  cs-fixer:
-    build: tools/cs-fixer
-    entrypoint: php-cs-fixer
-    command: check
-    volumes:
-      - ./apps/api:/opt/code
-
-  deptrac:
-    build: tools/deptrac
-    entrypoint: deptrac
-    command: --report-uncovered
-    volumes:
-      - ./apps/api:/opt/code
-
-  phpstan:
-    build: tools/phpstan
-    entrypoint: phpstan
-    env_file:
-      - apps/api/.env
-    volumes:
-      - ./apps/api:/opt/code
-
   rector:
     build: tools/rector
     entrypoint: rector --config /opt/rector/rector.php
-    volumes:
-      - ./apps/api:/opt/code
-
-  phpspec:
-    build: tools/phpspec
-    entrypoint: phpspec
     volumes:
       - ./apps/api:/opt/code

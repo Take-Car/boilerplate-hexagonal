@@ -1,6 +1,0 @@
-{
-    "require-dev": {
-        "phpstan/phpstan": "^1.12",
-        "phpstan/phpstan-doctrine": "^1.5"
-    }
-}
