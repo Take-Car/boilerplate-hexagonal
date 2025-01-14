@@ -13,12 +13,13 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "specs\\": "tests/specs"
+            "Tests\\": "tests"
         }
     },
     "config": {
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
+            "pestphp/pest-plugin": true,
             "symfony/flex": true,
             "symfony/runtime": true
         },
@@ -60,6 +61,8 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "3.67.*",
+        "mockery/mockery": "^1.6",
+        "pestphp/pest": "^3.7",
         "phpstan/phpstan": "1.12.*",
         "phpstan/phpstan-doctrine": "1.5.*",
         "symfony/http-client": "7.2.*",
