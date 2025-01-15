@@ -1,3 +1,6 @@
+include:
+  - docker-compose.tools.yml
+
 services:
   php:
     build:
@@ -5,18 +8,3 @@ services:
       target: test
     env_file:
       - ./apps/api/.env
-    depends_on:
-      database:
-        condition: service_healthy
-        restart: true
-
-  database:
-    build: ./services/mysql
-    restart: unless-stopped
-    environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=app
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "user", "-ppassword"]
-      timeout: 20s
-      retries: 10
