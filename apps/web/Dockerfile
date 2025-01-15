@@ -1,4 +1,4 @@
-FROM node:22.2.0-alpine3.19 AS base
+FROM node:23.3.0-alpine3.19 AS base
 
 RUN corepack enable
 ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0
@@ -25,7 +25,7 @@ RUN yarn build \
   && cp -r .next/static .next/standalone/.next/ \
   && cp -r public .next/standalone/
 
-FROM node:22.2.0-alpine3.19 AS release
+FROM node:23.3.0-alpine3.19 AS release
 
 WORKDIR /app
 
