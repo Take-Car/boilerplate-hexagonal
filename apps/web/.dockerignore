@@ -2,11 +2,9 @@
 
 !public
 !src
-!.eslintrc.json
-!.yarnrc.yml
 !next.config.mjs
 !package.json
+!package-lock.json
 !postcss.config.js
 !tailwind.config.ts
 !tsconfig.json
-!yarn.lock

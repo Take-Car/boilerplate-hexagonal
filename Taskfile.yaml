@@ -1,10 +1,5 @@
 version: '3'
 
-output:
-  group:
-    begin: '::group::{{.TASK}}'
-    end: '::endgroup::'
-
 tasks:
 
   install:
@@ -70,7 +65,6 @@ tasks:
       - ./apps/web/package.json
       - ./apps/web/yarn.lock
     generates:
-      - ./apps/web/.yarn/install-state.gz
       - ./apps/web/node_modules/**/*
 
   composer:
@@ -113,11 +107,6 @@ tasks:
     desc: Shortcut to run Yarn CLI
     cmds:
       - docker compose run --rm --no-deps node yarn {{.CLI_ARGS}}
-
-  eslint:
-    desc: Shortcut to run Eslint CLI
-    cmds:
-      - docker compose run --rm --no-deps node yarn eslint {{.CLI_ARGS}}
 
   migrations:
     desc: Shortcut to run Doctrine migrations
