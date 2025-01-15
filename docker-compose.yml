@@ -16,6 +16,18 @@ services:
       - ./certs:/etc/certs:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
+  node:
+    build:
+      context: ./apps/web
+      target: dev
+    volumes:
+      - ./apps/web:/app
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.node.tls=true"
+      - "traefik.http.routers.node.rule=Host(`app.localhost`)"
+      - "traefik.http.services.node.loadbalancer.server.port=3000"
+
   api:
     build:
       context: ./services/nginx
@@ -25,7 +37,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.nginx.tls=true"
-      - "traefik.http.routers.nginx.rule=Host(`api.app.localhost`)"
+      - "traefik.http.routers.nginx.rule=Host(`app.localhost`)&&PathPrefix(`/api`)"
       - "traefik.http.services.nginx.loadbalancer.server.port=80"
     volumes:
       - ./apps/api:/app:ro
@@ -42,20 +54,6 @@ services:
       database:
         condition: service_healthy
         restart: true
-
-  node:
-    build:
-      context: ./apps/web
-      target: dev
-    env_file:
-      - ./apps/web/.env
-    volumes:
-      - ./apps/web:/app
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.node.tls=true"
-      - "traefik.http.routers.node.rule=Host(`app.localhost`)"
-      - "traefik.http.services.node.loadbalancer.server.port=3000"
 
   database:
     build: ./services/mysql
