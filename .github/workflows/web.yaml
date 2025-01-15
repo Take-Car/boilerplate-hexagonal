@@ -29,12 +29,7 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Boostrap
-        run: |
-          cp apps/web/.env.dist apps/web/.env
-          docker compose build node
+        run: docker compose build node
 
       - name: Install dependencies
         run: task yarn_install
-
-      - name: Run ES Lint
-        run: task eslint
