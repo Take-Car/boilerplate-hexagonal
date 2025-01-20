@@ -60,7 +60,7 @@
         "symfony/yaml": "7.2.*"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "3.67.*",
+        "friendsofphp/php-cs-fixer": "3.68.*",
         "mockery/mockery": "^1.6",
         "pestphp/pest": "^3.7",
         "phpstan/phpstan": "1.12.*",
