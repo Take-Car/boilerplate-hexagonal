@@ -49,6 +49,7 @@ final readonly class Bus implements BusInterface
 
         if (!$handledStamps) {
             $className = get_class($envelope->getMessage());
+
             throw new \LogicException("Message {$className} was not handled. Did you forget to add a handler for it?");
         }
 
