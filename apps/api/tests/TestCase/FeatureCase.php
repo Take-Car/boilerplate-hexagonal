@@ -6,5 +6,4 @@ use PHPUnit\Framework\TestCase as BaseTestCase;
 
 abstract class FeatureCase extends BaseTestCase
 {
-    //
 }
