@@ -36,5 +36,9 @@
 
   "eslint.workingDirectories": [
     "apps/web"
-  ]
+  ],
+
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }
 }

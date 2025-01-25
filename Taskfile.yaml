@@ -40,7 +40,7 @@ tasks:
 
   bootstrap:
     cmds:
-      - docker compose -f docker-compose.yml -f docker-compose.tools.yml build
+      - docker compose build
       - docker compose pull
       - task: composer_install
       - task: yarn_install
@@ -94,14 +94,6 @@ tasks:
     cmds:
       - docker compose build php
       - docker compose run --rm --no-deps php vendor/bin/pest {{.CLI_ARGS}}
-
-  rector:
-    desc: Shortcut to run Rector
-    env:
-      COMPOSE_FILE: docker-compose.tools.yml
-    cmds:
-      - docker compose build rector
-      - docker compose run --rm --no-deps rector {{.CLI_ARGS}}
 
   yarn:
     desc: Shortcut to run Yarn CLI

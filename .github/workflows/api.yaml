@@ -20,7 +20,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        tool: [cs-fixer, phpstan, rector]
+        tool: [cs-fixer, phpstan, pest]
 
     steps:
       - name: Checkout code
@@ -37,22 +37,3 @@ jobs:
 
       - name: Run ${{ matrix.tool }}
         run: task ${{ matrix.tool }}
-
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Install Task
-        uses: arduino/setup-task@v2
-        with:
-          version: 3.x
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Initialize
-        run: task init
-
-      - name: Run pest
-        run: task pest

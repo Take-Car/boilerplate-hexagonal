@@ -55,21 +55,9 @@ winget install Task.Task # you may need to restart your session
 task
 ```
 
-## Commands
+---
 
-| Task     | Description                                               |
-|----------|-----------------------------------------------------------|
-| start    | Start the Docker containers detached                      |
-| stop     | Stop the Docker containers                                |
-| install  | Build and pull images, setup SSL and install dependencies |
-| symfony  | Shortcut to interact with Symfony CLI                     |
-| composer | Shortcut to run Composer commands                         |
-| console  | Shortcut to interact with bin/console script              |
-| phpstan  | Shortcut to run PHP Stan                                  |
-| deptrac  | Shortcut to run Deptrac                                   |
-| cs-fixer | Shortcut to run PHP CS Fixer                              |
-| rector   | Shortcut to run Rector                                    |
-| phpspec  | Shortcut to run PhpSpec                                   |
+You can now use `task --list` to show all the available commands
 
 ## URLs
 
