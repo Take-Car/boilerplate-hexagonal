@@ -1,8 +1,0 @@
-name: tools
-
-services:
-  rector:
-    build: tools/rector
-    entrypoint: rector --config /opt/rector/rector.php
-    volumes:
-      - ./apps/api:/opt/code

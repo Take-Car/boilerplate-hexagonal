@@ -21,7 +21,6 @@ jobs:
           - services/nginx/Dockerfile
           - services/rabbitmq/Dockerfile
           - services/traefik/Dockerfile
-          - tools/rector/Dockerfile
 
     steps:
       - name: Checkout code
