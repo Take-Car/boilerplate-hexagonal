@@ -44,5 +44,6 @@
   },
   "yaml.schemas": {
     "https://taskfile.dev/schema.json": "file:///Users/clementvtrd/Projects/clementvtrd/boilerplate-hexagonal/tasks/*.yaml"
-  }
+  },
+  "intelephense.environment.phpVersion": "8.3.0"
 }
