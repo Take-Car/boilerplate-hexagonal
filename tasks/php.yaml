@@ -1,0 +1,58 @@
+version: '3'
+
+tasks:
+  default:
+    - task: php
+
+  build:
+    run: once
+    cmds:
+      - docker compose build php
+    sources: [apps/api/Dockerfile]
+
+  php:
+    desc: Run command within a PHP container
+    deps: [build]
+    cmds: ['docker compose run --rm --no-deps php {{.CLI_ARGS}}']
+
+  phpstan:
+    desc: Shortcut to run PHPStan
+    cmds:
+      - task: php
+        vars:
+          CLI_ARGS: vendor/bin/phpstan {{.CLI_ARGS}}
+
+  cs-fixer:
+    desc: Shortcut to run PHP CS Fixer
+    cmds:
+      - task: php
+        vars:
+          CLI_ARGS: vendor/bin/php-cs-fixer {{.CLI_ARGS}}
+
+  pest:
+    desc: Shortcut to run PHP CS Fixer
+    cmds:
+      - task: php
+        vars:
+          CLI_ARGS: vendor/bin/pest {{.CLI_ARGS}}
+
+  install:
+    cmds:
+      - task: php
+        vars:
+          CLI_ARGS: composer install --no-interaction --no-progress --prefer-dist
+    sources:
+      - ./apps/api/composer.json
+      - ./apps/api/composer.lock
+    generates:
+      - ./apps/api/vendor/**/*
+
+  migrations:
+    desc: Shortcut to run Doctrine migrations
+    cmds:
+      - task: php
+        vars:
+          CLI_ARGS: bin/console doctrine:database:create --if-not-exists
+      - task: php
+        vars:
+          CLI_ARGS: bin/console doctrine:migrations:migrate --allow-no-migration
