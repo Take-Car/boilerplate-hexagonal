@@ -1,4 +1,4 @@
-name: Web Code Quality
+name: Code Quality
 
 on:
   push:
@@ -14,9 +14,10 @@ jobs:
   code_quality:
     runs-on: ubuntu-latest
 
-    permissions:
-      id-token: write
-      pages: write
+    strategy:
+      fail-fast: false
+      matrix:
+        tool: [eslint]
 
     steps:
       - name: Checkout code
@@ -28,8 +29,8 @@ jobs:
           version: 3.x
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Boostrap
-        run: docker compose build node
+      - name: Initialize
+        run: task init
 
-      - name: Install dependencies
-        run: task yarn_install
+      - name: Run ${{ matrix.tool }}
+        run: task node:${{ matrix.tool }}

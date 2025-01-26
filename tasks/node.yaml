@@ -1,0 +1,33 @@
+version: '3'
+
+tasks:
+  default:
+    - task: node
+
+  build:
+    run: once
+    cmds: [docker compose build node]
+    sources: [apps/web/Dockerfile]
+
+  node:
+    desc: Run command within node container
+    deps: [build]
+    cmds: ['docker compose run --rm --no-deps node {{.CLI_ARGS}}']
+
+  install:
+    cmds:
+      - task: node
+        vars:
+          CLI_ARGS: yarn install --immutable
+    sources:
+      - ./apps/web/package.json
+      - ./apps/web/yarn.lock
+    generates:
+      - ./apps/web/node_modules/**/*
+
+  eslint:
+    desc: Shortcut to run ESLint
+    cmds:
+      - task: node
+        vars:
+          CLI_ARGS: yarn eslint
