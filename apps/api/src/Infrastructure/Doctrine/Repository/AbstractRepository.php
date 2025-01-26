@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Infrastructure\Doctrine\Repository;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
@@ -17,7 +17,7 @@ abstract readonly class AbstractRepository
      * @param class-string<EntityClass> $entityClass
      */
     public function __construct(
-        private EntityManager $entityManager,
+        private EntityManagerInterface $entityManager,
         private string $entityClass,
     ) {
     }

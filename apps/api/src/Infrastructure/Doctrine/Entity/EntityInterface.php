@@ -8,5 +8,5 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 
 interface EntityInterface
 {
-    public static function loadMetadata(ClassMetadata $metadata);
+    public static function loadMetadata(ClassMetadata $metadata): void;
 }

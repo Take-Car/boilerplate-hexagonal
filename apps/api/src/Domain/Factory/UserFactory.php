@@ -8,5 +8,5 @@ use Domain\Model\User;
 
 interface UserFactory
 {
-    public function create(string $username, ?string $password): User;
+    public function create(string $username, string $password): User;
 }

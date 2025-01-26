@@ -14,13 +14,26 @@ use Symfony\Component\Uid\Uuid;
 #[AsAlias]
 final readonly class UserEntityFactory implements UserFactory
 {
-    public function __construct(private UserPasswordHasherInterface $passwordHasher) { }
-
-    public function create(string $username, ?string $password): User
+    public function __construct(private UserPasswordHasherInterface $passwordHasher)
     {
+    }
+
+    public function create(string $username, string $password): User
+    {
+        if ('' === $username) {
+            throw new \InvalidArgumentException('The username must not be empty');
+        }
+
         $user = new UserEntity(Uuid::v7());
         $user->username = $username;
-        $user->password = $this->passwordHasher->hashPassword($user, $password);
+
+        $hashedPassword = $this->passwordHasher->hashPassword($user, $password);
+
+        if ('' === $hashedPassword) {
+            throw new \InvalidArgumentException('The password must not be empty');
+        }
+
+        $user->password = $hashedPassword;
 
         return $user;
     }

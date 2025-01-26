@@ -13,9 +13,11 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Uid\Uuid;
 
-final class UserEntity extends User implements EntityInterface, UserInterface, PasswordAuthenticatedUserInterface
+class UserEntity extends User implements EntityInterface, UserInterface, PasswordAuthenticatedUserInterface
 {
-    public function __construct(public readonly Uuid $uuid) {}
+    public function __construct(public readonly Uuid $uuid)
+    {
+    }
 
     public function getRoles(): array
     {
@@ -37,7 +39,7 @@ final class UserEntity extends User implements EntityInterface, UserInterface, P
         return $this->password;
     }
 
-    public static function loadMetadata(ClassMetadata $metadata)
+    public static function loadMetadata(ClassMetadata $metadata): void
     {
         $builder = new ClassMetadataBuilder($metadata);
 

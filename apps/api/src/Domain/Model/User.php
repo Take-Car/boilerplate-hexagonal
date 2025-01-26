@@ -12,7 +12,7 @@ abstract class User
     public string $username;
 
     /**
-     * @var null|non-empty-string
+     * @var non-empty-string|null
      */
     public ?string $password;
 }
