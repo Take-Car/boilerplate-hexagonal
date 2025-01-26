@@ -1,10 +1,11 @@
 *
 
+!.yarnrc.yml
+!eslint.config.mjs
+!next.config.ts
+!package.json
+!postcss.config.mjs
 !public
 !src
-!next.config.mjs
-!package.json
-!package-lock.json
-!postcss.config.js
-!tailwind.config.ts
 !tsconfig.json
+!yarn.lock

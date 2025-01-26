@@ -5,3 +5,8 @@ services:
       target: test
     env_file:
       - ./apps/api/.env
+
+  node:
+    build:
+      context: ./apps/web
+      target: test

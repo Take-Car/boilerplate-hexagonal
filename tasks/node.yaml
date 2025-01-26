@@ -30,4 +30,4 @@ tasks:
     cmds:
       - task: node
         vars:
-          CLI_ARGS: yarn eslint
+          CLI_ARGS: yarn eslint {{.CLI_ARGS}}
