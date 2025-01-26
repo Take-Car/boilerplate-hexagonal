@@ -40,5 +40,8 @@
 
   "files.associations": {
     "*.css": "tailwindcss"
+  },
+  "yaml.schemas": {
+    "https://taskfile.dev/schema.json": "file:///Users/clementvtrd/Projects/clementvtrd/boilerplate-hexagonal/tasks/*.yaml"
   }
 }

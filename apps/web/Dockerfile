@@ -9,6 +9,10 @@ FROM base AS dev
 
 CMD [ "yarn", "dev" ]
 
+FROM base AS test
+
+RUN yarn install --immutable
+
 FROM base AS build
 
 ENV NODE_ENV=production

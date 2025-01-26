@@ -1,4 +1,4 @@
-name: API Code Quality
+name: Code Quality
 
 on:
   push:
@@ -36,4 +36,4 @@ jobs:
         run: task init
 
       - name: Run ${{ matrix.tool }}
-        run: task ${{ matrix.tool }}
+        run: task php:${{ matrix.tool }}
