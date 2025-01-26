@@ -27,7 +27,7 @@ tasks:
     cmds:
       - task: php
         vars:
-          CLI_ARGS: vendor/bin/php-cs-fixer {{.CLI_ARGS}}
+          CLI_ARGS: vendor/bin/php-cs-fixer {{.CLI_ARGS | default "check"}}
 
   pest:
     desc: Shortcut to run PHP CS Fixer
