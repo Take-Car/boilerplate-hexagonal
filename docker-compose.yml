@@ -1,7 +1,21 @@
-include:
-  - docker-compose.services.yml
-
 services:
+  traefik:
+    build: ./services/traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik=true"
+      - "traefik.http.routers.traefik.tls=true"
+      - "traefik.http.services.traefik.loadbalancer.server.port=8080"
+    ports:
+      - 80:80
+      - 443:443
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - ./certs:/etc/certs:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
   node:
     build:
       context: ./apps/web
@@ -40,3 +54,30 @@ services:
       database:
         condition: service_healthy
         restart: true
+
+  database:
+    build: ./services/mysql
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=app
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "user", "-ppassword"]
+      timeout: 20s
+      retries: 10
+
+  rabbitmq:
+    build: ./services/rabbitmq
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.rabbitmq.tls=true"
+      - "traefik.http.routers.rabbitmq.rule=Host(`rabbitmq.app.localhost`)"
+      - "traefik.http.services.rabbitmq.loadbalancer.server.port=15672"
+
+volumes:
+  mysql:

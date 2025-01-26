@@ -39,7 +39,8 @@
   ],
 
   "files.associations": {
-    "*.css": "tailwindcss"
+    "*.css": "tailwindcss",
+    "docker-compose.*.yml": "dockercompose"
   },
   "yaml.schemas": {
     "https://taskfile.dev/schema.json": "file:///Users/clementvtrd/Projects/clementvtrd/boilerplate-hexagonal/tasks/*.yaml"
