@@ -20,7 +20,7 @@ tasks:
     cmds:
       - task: php
         vars:
-          CLI_ARGS: vendor/bin/phpstan {{.CLI_ARGS}}
+          CLI_ARGS: vendor/bin/phpstan --memory-limit=-1 {{.CLI_ARGS}}
 
   cs-fixer:
     desc: Shortcut to run PHP CS Fixer

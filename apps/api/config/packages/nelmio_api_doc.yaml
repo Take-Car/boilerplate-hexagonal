@@ -2,3 +2,12 @@ nelmio_api_doc:
     areas:
         path_patterns:
             - ^(?!/(doc|_error|_wdt|_profiler)) # Accepts all routes except /doc
+    documentation:
+        components:
+            securitySchemes:
+                Bearer:
+                    type: http
+                    scheme: bearer
+                    bearerFormat: JWT
+        security:
+            - Bearer: []
