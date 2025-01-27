@@ -1,0 +1,112 @@
+on:
+  pull_request:
+    paths:
+      - apps/backend
+      - .github/workflows/backend.yaml
+    branches:
+      - main
+      - develop
+  push:
+    paths:
+      - apps/backend
+      - .github/workflows/backend.yaml
+    branches:
+      - main
+      - develop
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  COMPOSE_FILE: docker-compose.test.yml
+
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+
+jobs:
+  hadolint:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Lint Dockerfile
+        uses: hadolint/hadolint-action@master
+        with:
+          dockerfile: apps/api/Dockerfile
+
+  docker:
+    runs-on: ubuntu-24.04
+
+    needs: hadolint
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and export api image
+        uses: docker/build-push-action@v6
+        with:
+          context: apps/api
+          tags: api:${{ github.sha }}
+          outputs: type=docker,dest=${{ runner.temp }}/api-${{ github.sha }}.tar
+          target: test
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-${{ github.sha }}.tar
+          path: ${{ runner.temp }}/api-${{ github.sha }}.tar
+
+  backend:
+    runs-on: ubuntu-24.04
+
+    strategy:
+      fail-fast: false
+      matrix:
+        tool:
+          - cs-check
+          - phpstan
+          - pest:unit
+          - pest:feature
+
+    needs: docker
+
+    env:
+      tag: ${{ github.sha }}
+      COMPOSE_FILE: docker-compose.test.yml
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Task
+        uses: arduino/setup-task@v2
+        with:
+          version: 3.x
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: api-${{ github.sha }}.tar
+          path: ${{ runner.temp }}
+
+      - name: Load image
+        run: |
+          docker load --input ${{ runner.temp }}/api-${{ github.sha }}.tar
+          docker image ls -a
+
+      - name: Run ${{ matrix.tool }}
+        run: |
+          docker image ls -a
+          docker run --env-file apps/api/.env api:${{ github.sha }} composer ${{ matrix.tool }}

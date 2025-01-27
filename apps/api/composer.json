@@ -16,6 +16,12 @@
             "Tests\\": "tests"
         }
     },
+    "scripts": {
+        "cs-check": "php-cs-fixer check --diff",
+        "phpstan": "phpstan analyse --memory-limit=-1",
+        "pest:unit": "pest --group=unit",
+        "pest:feature": "pest --group=feature"
+    },
     "config": {
         "allow-plugins": {
             "composer/package-versions-deprecated": true,

@@ -1,8 +1,11 @@
 services:
   php:
+    image: clementvtrd/boilerplate-hexagonal:api-${tag}
     build:
       context: ./apps/api
       target: test
+      cache_from:
+        - clementvtrd/boilerplate-hexagonal:api-${tag}
     env_file:
       - ./apps/api/.env
 
