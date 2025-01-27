@@ -20,13 +20,15 @@ services:
 
   Domain\Collection\:
     resource: '%kernel.project_dir%/src/Domain/Collection/*'
-    exclude:
-      - '%kernel.project_dir%/src/Domain/Collection/*/Exception/*'
+
+  Domain\Factory\:
+    resource: '%kernel.project_dir%/src/Domain/Factory/*'
 
   Domain\Message\:
-    resource: '%kernel.project_dir%/src/Domain/Message/**/Handler.php'
+    resource: '%kernel.project_dir%/src/Domain/Message/*'
     exclude:
-      - '%kernel.project_dir%/src/Domain/Message/*/Exception/*'
+      - '%kernel.project_dir%/src/Domain/Message/**/Input.php'
+      - '%kernel.project_dir%/src/Domain/Message/**/Output.php'
     tags:
       - messenger.message_handler
 
@@ -34,3 +36,6 @@ services:
 
   Infrastructure\:
     resource: '%kernel.project_dir%/src/Infrastructure/*'
+    exclude:
+      - '%kernel.project_dir%/src/Infrastructure/Doctrine/Entity/*'
+      - '%kernel.project_dir%/src/Infrastructure/Symfony/Kernel.php'

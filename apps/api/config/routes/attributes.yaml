@@ -3,8 +3,6 @@ controllers:
     path: ../../src/Application/Controller/
     namespace: Application\Controller
   type: attribute
-  prefix: /api
-  name_prefix: api_
 
 kernel:
   resource: Infrastructure\Symfony\Kernel

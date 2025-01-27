@@ -4,51 +4,31 @@ declare(strict_types=1);
 
 namespace Infrastructure\Doctrine\Repository;
 
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @phpstan-template EntityClass of object
+ * @template EntityClass of object
+ *
+ * @extends ServiceEntityRepository<EntityClass>
  */
-abstract readonly class AbstractRepository
+abstract class AbstractRepository extends ServiceEntityRepository
 {
     /**
      * @param class-string<EntityClass> $entityClass
      */
     public function __construct(
-        private EntityManager $entityManager,
-        private string $entityClass,
+        ManagerRegistry $managerRegistry,
+        string $entityClass,
     ) {
+        parent::__construct($managerRegistry, $entityClass);
     }
 
-    public function add(object $entity): void
+    public function getQueryBuilder(): QueryBuilder
     {
-        $this->entityManager->persist($entity);
+        return $this->createQueryBuilder($this->getDefaultAlias());
     }
 
-    public function remove(object $entity): void
-    {
-        $this->entityManager->remove($entity);
-    }
-
-    /**
-     * @return EntityRepository<EntityClass>
-     */
-    protected function getRepository(): EntityRepository
-    {
-        /**
-         * @var EntityRepository<EntityClass>
-         */
-        return $this->entityManager->getRepository($this->entityClass);
-    }
-
-    protected function createQueryBuilder(): QueryBuilder
-    {
-        $shortName = (new \ReflectionClass($this->entityClass))->getName();
-
-        return $this->getRepository()
-            ->createQueryBuilder($shortName)
-        ;
-    }
+    abstract public function getDefaultAlias(): string;
 }
