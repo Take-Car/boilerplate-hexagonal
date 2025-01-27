@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Infrastructure\Doctrine\Repository;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Domain\Model\User;
 use Infrastructure\Doctrine\Entity\UserEntity;
@@ -16,12 +15,9 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
  */
 final class UserRepository extends AbstractRepository implements PasswordUpgraderInterface
 {
-    public function __construct(
-        EntityManagerInterface $entityManager,
-        ManagerRegistry $managerRegistry
-    )
+    public function __construct(ManagerRegistry $managerRegistry)
     {
-        parent::__construct($entityManager, $managerRegistry, UserEntity::class);
+        parent::__construct($managerRegistry, UserEntity::class);
     }
 
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void

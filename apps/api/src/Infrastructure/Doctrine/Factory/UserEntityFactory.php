@@ -9,6 +9,7 @@ use Domain;
 use Infrastructure\Doctrine\Entity\UserEntity;
 use Symfony\Component\DependencyInjection\Attribute\AsAlias;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Uid\Uuid;
 
@@ -20,7 +21,7 @@ final readonly class UserEntityFactory implements Application\Factory\UserFactor
     {
     }
 
-    public function create(string $username, string $password): Domain\Model\User&UserInterface
+    public function create(string $username, string $password): Domain\Model\User&UserInterface&PasswordAuthenticatedUserInterface
     {
         if ('' === $username) {
             throw new \InvalidArgumentException('The username must not be empty');

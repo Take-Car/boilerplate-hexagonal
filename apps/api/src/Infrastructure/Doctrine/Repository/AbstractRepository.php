@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Infrastructure\Doctrine\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -20,8 +19,7 @@ abstract class AbstractRepository extends ServiceEntityRepository
      * @param class-string<EntityClass> $entityClass
      */
     public function __construct(
-        private readonly EntityManagerInterface $entityManager,
-        private readonly ManagerRegistry $managerRegistry,
+        ManagerRegistry $managerRegistry,
         string $entityClass,
     ) {
         parent::__construct($managerRegistry, $entityClass);

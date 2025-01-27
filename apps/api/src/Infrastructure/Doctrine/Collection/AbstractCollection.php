@@ -7,6 +7,11 @@ namespace Infrastructure\Doctrine\Collection;
 use Doctrine\ORM\EntityManagerInterface;
 use Domain\Collection\CollectionInterface;
 
+/**
+ * @template T of object
+ *
+ * @implements CollectionInterface<T>
+ */
 abstract readonly class AbstractCollection implements CollectionInterface
 {
     public function __construct(
