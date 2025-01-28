@@ -1,4 +1,7 @@
-[![PHP Code Quality](https://github.com/clementvtrd/boilerplate-hexagonal/actions/workflows/api.yaml/badge.svg?branch=develop)](https://github.com/clementvtrd/boilerplate-hexagonal/actions/workflows/api.yaml)
+[![.github/workflows/backend.yaml](https://github.com/clementvtrd/boilerplate-hexagonal/actions/workflows/backend.yaml/badge.svg)](https://github.com/clementvtrd/boilerplate-hexagonal/actions/workflows/backend.yaml)
+[![.github/workflows/frontend.yaml](https://github.com/clementvtrd/boilerplate-hexagonal/actions/workflows/frontend.yaml/badge.svg)](https://github.com/clementvtrd/boilerplate-hexagonal/actions/workflows/frontend.yaml)
+[![.github/workflows/services.yaml](https://github.com/clementvtrd/boilerplate-hexagonal/actions/workflows/services.yaml/badge.svg)](https://github.com/clementvtrd/boilerplate-hexagonal/actions/workflows/services.yaml)
+[![Dependabot Updates](https://github.com/clementvtrd/boilerplate-hexagonal/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/clementvtrd/boilerplate-hexagonal/actions/workflows/dependabot/dependabot-updates)
 
 # Hexagonal boilerplate
 
