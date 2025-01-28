@@ -51,14 +51,29 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      - name: Download default artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: web-latest.tar
+          path: ${{ runner.temp }}
+        continue-on-error: true
+
+      - name: Load default image
+        run: docker load --input ${{ runner.temp }}/web-latest.tar
+        continue-on-error: true
+
       - name: Build and export web image
         uses: docker/build-push-action@v6
         with:
           context: apps/web
-          tags: web:${{ github.sha }}
+          tags: |
+            web:${{ github.sha }}
+            web:latest
           outputs: type=docker,dest=${{ runner.temp }}/web-${{ github.sha }}.tar
           target: test
-          cache-from: type=gha
+          cache-from: |
+            type=gha
+            web:latest
           cache-to: type=gha,mode=max
 
       - name: Upload artifact
