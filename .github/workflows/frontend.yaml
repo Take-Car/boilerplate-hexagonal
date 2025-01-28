@@ -69,7 +69,9 @@ jobs:
           tags: |
             web:${{ github.sha }}
             web:latest
-          outputs: type=docker,dest=${{ runner.temp }}/web-${{ github.sha }}.tar
+          outputs: |
+            type=docker,dest=${{ runner.temp }}/web-${{ github.sha }}.tar
+            type=docker,dest=${{ runner.temp }}/web-latest.tar
           target: test
           cache-from: |
             type=gha
@@ -81,6 +83,13 @@ jobs:
         with:
           name: web-${{ github.sha }}.tar
           path: ${{ runner.temp }}/web-${{ github.sha }}.tar
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        if: github.ref == 'refs/heads/develop'
+        with:
+          name: web-latest.tar
+          path: ${{ runner.temp }}/web-latest.tar
 
   frontend:
     runs-on: ubuntu-24.04

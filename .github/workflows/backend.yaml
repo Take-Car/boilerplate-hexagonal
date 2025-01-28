@@ -69,7 +69,9 @@ jobs:
           tags: |
             api:${{ github.sha }}
             api:latest
-          outputs: type=docker,dest=${{ runner.temp }}/api-${{ github.sha }}.tar
+          outputs: |
+            type=docker,dest=${{ runner.temp }}/api-${{ github.sha }}.tar
+            type=docker,dest=${{ runner.temp }}/api-latest.tar
           target: test
           cache-from: |
             type=gha
@@ -86,7 +88,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: github.ref == 'refs/heads/develop'
         with:
-          name: api-${{ github.sha }}.tar
+          name: api-latest.tar
           path: ${{ runner.temp }}/api-latest.tar
 
   backend:
