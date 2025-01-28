@@ -75,7 +75,7 @@ RUN apk add --no-cache \
 
 USER user
 
-RUN composer install --no-scripts --optimize-autoloader
+RUN composer install --no-interaction
 
 #####################################
 
@@ -103,6 +103,3 @@ ENV APP_DEBUG=0
 COPY php/php-prod.ini /usr/local/etc/php/php.ini
 COPY . .
 COPY --from=vendor /app/vendor /app/vendor
-
-RUN composer dump-autoload --optimize \
-    && composer check-platform-reqs

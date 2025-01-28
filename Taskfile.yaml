@@ -8,7 +8,6 @@ tasks:
   install:
     desc: Build and start the Docker containers
     cmds:
-      - task: init
       - task: bootstrap
       - task: ssl
 
@@ -21,12 +20,6 @@ tasks:
     desc: Stop the Docker containers
     cmds:
       - docker compose down
-
-  init:
-    desc: Prepare necessary files
-    cmds:
-      - cmd: cp apps/web/.env.dist apps/web/.env
-        ignore_error: true
 
   ssl:
     internal: true
