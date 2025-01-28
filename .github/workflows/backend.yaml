@@ -51,14 +51,29 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      - name: Download default artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: api-latest.tar
+          path: ${{ runner.temp }}
+        continue-on-error: true
+
+      - name: Load default image
+        run: docker load --input ${{ runner.temp }}/api-latest.tar
+        continue-on-error: true
+
       - name: Build and export api image
         uses: docker/build-push-action@v6
         with:
           context: apps/api
-          tags: api:${{ github.sha }}
+          tags: |
+            api:${{ github.sha }}
+            api:latest
           outputs: type=docker,dest=${{ runner.temp }}/api-${{ github.sha }}.tar
           target: test
-          cache-from: type=gha
+          cache-from: |
+            type=gha
+            api:latest
           cache-to: type=gha,mode=max
 
       - name: Upload artifact
@@ -66,6 +81,13 @@ jobs:
         with:
           name: api-${{ github.sha }}.tar
           path: ${{ runner.temp }}/api-${{ github.sha }}.tar
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        if: github.ref == 'refs/heads/develop'
+        with:
+          name: api-${{ github.sha }}.tar
+          path: ${{ runner.temp }}/api-latest.tar
 
   backend:
     runs-on: ubuntu-24.04
