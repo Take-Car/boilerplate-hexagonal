@@ -1,14 +1,14 @@
 on:
   pull_request:
     paths:
-      - apps/backend
+      - apps/api
       - .github/workflows/backend.yaml
     branches:
       - main
       - develop
   push:
     paths:
-      - apps/backend
+      - apps/api
       - .github/workflows/backend.yaml
     branches:
       - main
