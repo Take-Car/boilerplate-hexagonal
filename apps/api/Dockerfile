@@ -11,6 +11,7 @@ WORKDIR /app
 ARG UID=1000
 ARG GID=1000
 
+COPY --from=composer /usr/bin/composer /usr/local/bin/composer
 RUN mkdir -p /app && chown -R $UID:$GID /app
 
 RUN addgroup -g $GID user \
@@ -51,11 +52,10 @@ ENV APP_ENV=dev
 ENV APP_DEBUG=1
 
 COPY php/php-dev.ini /usr/local/etc/php/php.ini
-COPY --from=composer   /usr/bin/composer /usr/local/bin/composer
 
 #####################################
 
-FROM dev AS test
+FROM base AS test
 
 ENV APP_ENV=test
 
@@ -75,22 +75,14 @@ RUN apk add --no-cache \
 
 USER user
 
-RUN composer install --no-interaction
-
-#####################################
-
-FROM composer AS vendor
-
-ENV APP_ENV=prod
-ENV APP_DEBUG=0
-
 COPY composer.json composer.lock ./
 
 RUN composer install \
-    --no-dev \
+    --no-interaction \
     --no-scripts \
-    --optimize-autoloader \
-    --ignore-platform-reqs
+    --optimize-autoloader
+
+COPY . .
 
 #####################################
 
@@ -99,7 +91,17 @@ FROM base AS prod
 ENV APP_ENV=prod
 ENV APP_DEBUG=0
 
+COPY composer.json composer.lock ./
+
+RUN composer install \
+    --no-dev \
+    --no-interaction \
+    --no-scripts \
+    --optimize-autoloader
+
+USER 0
+RUN rm /usr/local/bin/composer
+USER user
 
 COPY php/php-prod.ini /usr/local/etc/php/php.ini
 COPY . .
-COPY --from=vendor /app/vendor /app/vendor
