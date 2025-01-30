@@ -18,9 +18,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-env:
-  COMPOSE_FILE: docker-compose.test.yml
-
 permissions:
   contents: read
   packages: write
@@ -51,45 +48,14 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Download default artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: api-latest.tar
-          path: ${{ runner.temp }}
-        continue-on-error: true
-
-      - name: Load default image
-        run: docker load --input ${{ runner.temp }}/api-latest.tar
-        continue-on-error: true
-
       - name: Build and export api image
         uses: docker/build-push-action@v6
         with:
+          tags: api:test
           context: apps/api
-          tags: |
-            api:${{ github.sha }}
-            api:latest
-          outputs: |
-            type=docker,dest=${{ runner.temp }}/api-${{ github.sha }}.tar
-            type=docker,dest=${{ runner.temp }}/api-latest.tar
           target: test
-          cache-from: |
-            type=gha
-            api:latest
-          cache-to: type=gha,mode=max
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: api-${{ github.sha }}.tar
-          path: ${{ runner.temp }}/api-${{ github.sha }}.tar
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        if: github.ref == 'refs/heads/develop'
-        with:
-          name: api-latest.tar
-          path: ${{ runner.temp }}/api-latest.tar
+          cache-from: type=gha,name=api:test
+          cache-to: type=gha,mode=max,name=api:test-${{ github.ref == 'refs/heads/develop' && github.sha || github.sha }}
 
   backend:
     runs-on: ubuntu-24.04
@@ -105,13 +71,12 @@ jobs:
 
     needs: docker
 
-    env:
-      tag: ${{ github.sha }}
-      COMPOSE_FILE: docker-compose.test.yml
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
       - name: Install Task
         uses: arduino/setup-task@v2
@@ -119,18 +84,17 @@ jobs:
           version: 3.x
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Download artifact
-        uses: actions/download-artifact@v4
+      - name: Prepare api image
+        uses: docker/build-push-action@v6
         with:
-          name: api-${{ github.sha }}.tar
-          path: ${{ runner.temp }}
+          tags: api:test
+          context: apps/api
+          target: test
+          cache-from: type=gha,name=api:test-${{ github.ref == 'refs/heads/develop' && github.sha || github.sha }}
+          load: true
 
-      - name: Load image
-        run: |
-          docker load --input ${{ runner.temp }}/api-${{ github.sha }}.tar
-          docker image ls -a
+      - name: Debug
+        run: docker images
 
       - name: Run ${{ matrix.tool }}
-        run: |
-          docker image ls -a
-          docker run --env-file apps/api/.env api:${{ github.sha }} composer ${{ matrix.tool }}
+        run: docker run --env-file apps/api/.env api:test composer ${{ matrix.tool }}
