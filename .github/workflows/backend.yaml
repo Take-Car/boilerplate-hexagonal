@@ -51,11 +51,10 @@ jobs:
       - name: Build and export api image
         uses: docker/build-push-action@v6
         with:
-          tags: api:test
           context: apps/api
-          target: test
-          cache-from: type=gha,name=api:test
-          cache-to: type=gha,mode=max,name=api:test-${{ github.ref == 'refs/heads/develop' && github.sha || github.sha }}
+          target: ${{ github.ref == 'refs/heads/develop' && 'base' || 'test' }}
+          cache-from: type=gha,name=api:cache-latest
+          cache-to: type=gha,mode=max,name=api:cache-${{ github.ref == 'refs/heads/develop' && 'latest' || github.sha }}
 
   backend:
     runs-on: ubuntu-24.04
@@ -78,23 +77,14 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Install Task
-        uses: arduino/setup-task@v2
-        with:
-          version: 3.x
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Prepare api image
         uses: docker/build-push-action@v6
         with:
           tags: api:test
           context: apps/api
           target: test
-          cache-from: type=gha,name=api:test-${{ github.ref == 'refs/heads/develop' && github.sha || github.sha }}
+          cache-from: type=gha,name=api:cache-${{ github.ref == 'refs/heads/develop' && 'latest' || github.sha }}
           load: true
-
-      - name: Debug
-        run: docker images
 
       - name: Run ${{ matrix.tool }}
         run: docker run --env-file apps/api/.env api:test composer ${{ matrix.tool }}
